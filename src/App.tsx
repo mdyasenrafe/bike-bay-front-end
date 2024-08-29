@@ -6,6 +6,8 @@ function App() {
     <Container>
       <Button color="secondary">Rafi</Button>
       <Text variant="H1">hello this is test text</Text>
+      <Text variant="P1">hello this is test text</Text>
+      <Text variant="P3">hello this is test text</Text>
     </Container>
   );
 }
