@@ -1,10 +1,12 @@
 import React from "react";
+import { Button, Container, Text } from "./components/atoms";
 
 function App() {
   return (
-    <div>
-      <h1>Rafi</h1>
-    </div>
+    <Container>
+      <Button color="secondary">Rafi</Button>
+      <Text variant="H1">hello this is test text</Text>
+    </Container>
   );
 }
 
