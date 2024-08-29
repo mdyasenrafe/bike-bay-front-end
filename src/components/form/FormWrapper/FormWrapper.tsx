@@ -12,7 +12,7 @@ type TFormConfig = {
   resolver?: any;
 };
 type TFormProps = {
-  onSubmit: SubmitHandler<FieldValues>;
+  onSubmit: SubmitHandler<any>;
   children: React.ReactNode;
   resolver?: any;
   defaultValues?: Record<string, any>;
@@ -39,7 +39,7 @@ export const FormWrapper: React.FC<TFormProps> = ({
   const submit: SubmitHandler<FieldValues> = (data) => {
     // console.log("data >", data);
     onSubmit(data);
-    // methods.reset();
+    methods.reset();
   };
 
   return (

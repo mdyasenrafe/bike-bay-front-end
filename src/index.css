@@ -26,3 +26,7 @@ label {
 .text-primary {
   color: #eb4138;
 }
+
+input:focus {
+  box-shadow: none !important;
+}
