@@ -15,8 +15,6 @@ export const Button: React.FC<ButtonProp> = ({
   icon,
   ...props
 }) => {
-  // Apply custom color styles if colorKey is provided
-  console.log(color);
   const style = color
     ? {
         backgroundColor: Colors[color],

@@ -22,3 +22,7 @@ label {
 .font-figtree {
   font-family: "Figtree", sans-serif !important;
 }
+
+.text-primary {
+  color: #eb4138;
+}
