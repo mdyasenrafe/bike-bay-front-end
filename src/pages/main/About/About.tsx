@@ -1,5 +1,6 @@
 import React from "react";
+import { MainLayout } from "../../../components/layouts/MainLayout";
 
 export const About = () => {
-  return <div>About</div>;
+  return <MainLayout>About</MainLayout>;
 };

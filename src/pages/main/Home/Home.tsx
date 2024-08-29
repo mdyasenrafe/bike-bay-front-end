@@ -1,5 +1,11 @@
 import React from "react";
+import { MainLayout } from "../../../components/layouts/MainLayout";
+import { Text } from "../../../components/atoms";
 
 export const Home = () => {
-  return <div>Home</div>;
+  return (
+    <MainLayout>
+      <Text>MainLayout</Text>
+    </MainLayout>
+  );
 };

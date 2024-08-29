@@ -1,15 +1,9 @@
 import React from "react";
-import { Button, Container, Text } from "./components/atoms";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/router";
 
 function App() {
-  return (
-    <Container>
-      <Button color="secondary">Rafi</Button>
-      <Text variant="H1">hello this is test text</Text>
-      <Text variant="P1">hello this is test text</Text>
-      <Text variant="P3">hello this is test text</Text>
-    </Container>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
