@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import { TestimonialsData } from "../../../../../constant";
 import {
@@ -13,19 +13,20 @@ import {
 
 export const Testimonials = () => {
   return (
-    <section className="py-32 testimonial-section">
+    <section className="py-40 testimonial-section">
       <Container>
         <div className="div">
           <Text variant="H1" className="text-center mb-4 text-white">
-            Our Reviews
+            Hear What Our Riders Have to Say!
           </Text>
           <Text
             variant="P3"
             style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
             className="text-white pb-16"
           >
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur
-            ullam eaque odio illo unde quasi culpa deleniti natus sequi! Ipsa!
+            Our bike rental service is revolutionizing the way people explore
+            their surroundings. Don't just take our word for it, see what our
+            satisfied customers have to say!
           </Text>
         </div>
       </Container>
@@ -33,9 +34,6 @@ export const Testimonials = () => {
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -50,10 +48,18 @@ export const Testimonials = () => {
               spaceBetween: 40,
             },
           }}
-          className="mySwiper"
+          className="slider"
+          pagination={{
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay, Pagination]}
         >
           {TestimonialsData.map((testimonal, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="h-full">
               <TestimonialCard testimonial={testimonal} />
             </SwiperSlide>
           ))}
