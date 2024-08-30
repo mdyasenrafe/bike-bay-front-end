@@ -1,6 +1,6 @@
 import React from "react";
 import { MainLayout } from "../../../components/layouts/MainLayout";
-import { Hero, Testimonials, WhyChooseUs } from "./components";
+import { Contact, Hero, Testimonials, WhyChooseUs } from "./components";
 
 export const Home = () => {
   return (
@@ -8,6 +8,7 @@ export const Home = () => {
       <Hero />
       <Testimonials />
       <WhyChooseUs />
+      <Contact />
     </MainLayout>
   );
 };
