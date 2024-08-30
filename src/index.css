@@ -30,3 +30,18 @@ label {
 input:focus {
   box-shadow: none !important;
 }
+
+.testimonial-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.678) 100%, rgba(0, 0, 0, 0.582) 0),
+    url("https://i.postimg.cc/HLXLccjK/image.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #333333;
+}
+
+.testimonial-background-overlay {
+  background-color: #333333;
+  opacity: 0.76;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+}
