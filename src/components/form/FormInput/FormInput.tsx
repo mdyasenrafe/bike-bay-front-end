@@ -18,23 +18,30 @@ export const FormInput: React.FC<TFormInputProps> = React.forwardRef(
       <div style={{ ...defaultStyle, ...divStyle }}>
         <Controller
           name={name}
-          render={({ field, fieldState: { error } }) => (
-            <Form.Item label={label} className="font-poppins mb-0 border-0">
-              <Input
-                {...field}
-                {...props}
-                ref={ref as any}
-                id={name}
-                size="large"
-                className={`font-poppins text-[14px] `}
-              />
-              {error && (
-                <Text variant={"P5"} style={{ color: "red" }} className="mt-2">
-                  {error.message}
-                </Text>
-              )}
-            </Form.Item>
-          )}
+          render={({ field, fieldState: { error } }) => {
+            console.log(error);
+            return (
+              <Form.Item label={label} className="font-poppins mb-0 border-0">
+                <Input
+                  {...field}
+                  {...props}
+                  ref={ref as any}
+                  id={name}
+                  size="large"
+                  className={`font-poppins text-[14px] `}
+                />
+                {error && (
+                  <Text
+                    variant={"P5"}
+                    style={{ color: "red" }}
+                    className="mt-2"
+                  >
+                    {error.message}
+                  </Text>
+                )}
+              </Form.Item>
+            );
+          }}
         />
       </div>
     );
