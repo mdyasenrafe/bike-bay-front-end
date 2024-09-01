@@ -2,10 +2,9 @@ import React from "react";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import { Button, Container, Text } from "../../../components/atoms";
 import { FormInput, FormWrapper } from "../../../components/form";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { signupSchema } from "../../../Schema/AuthSchema";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { signupSchema } from "../../../Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Link } from "react-router-dom";
 
 // Define the custom type based on the schema
