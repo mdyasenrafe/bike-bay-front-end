@@ -2,21 +2,22 @@ import React from "react";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import { Button, Container, Text } from "../../../components/atoms";
 import { FormInput, FormWrapper } from "../../../components/form";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import { signinSchema } from "../../../Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
-
-// Define the custom type based on the schema
-type TSigninValue = {
-  email: string;
-  password: string;
-};
+import { TSigninValue, useLoginMutation } from "../../../redux/features/auth";
+import { toast } from "sonner";
 
 export const Signin = () => {
+  const [login, { isLoading }] = useLoginMutation();
   const onSubmit: SubmitHandler<TSigninValue> = async (data) => {
-    // Handle the form submission
-    console.log(data);
+    try {
+      const res = await login(data).unwrap();
+      toast.success(res?.message);
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -50,6 +51,8 @@ export const Signin = () => {
                 color="primary"
                 htmlType="submit"
                 className="w-full h-[48px] text-[18px] text-white"
+                loading={isLoading}
+                disabled={isLoading}
               >
                 Sign in
               </Button>

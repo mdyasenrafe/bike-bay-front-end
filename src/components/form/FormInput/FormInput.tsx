@@ -19,7 +19,6 @@ export const FormInput: React.FC<TFormInputProps> = React.forwardRef(
         <Controller
           name={name}
           render={({ field, fieldState: { error } }) => {
-            console.log(error);
             return (
               <Form.Item label={label} className="font-poppins mb-0 border-0">
                 <Input
