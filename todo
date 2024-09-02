@@ -1,9 +1,7 @@
-1. needs to complete homepage
-    featured section
-
-
-2. sign up page
-3. sign in page
-
+bike detail page
+after clicking buy now button open modal
+after submit open stripe chat payment gate way
+footer page
 // bugs
 need to update navbar based on user authentication
+

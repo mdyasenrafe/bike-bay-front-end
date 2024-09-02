@@ -9,7 +9,7 @@ export type TError = {
 };
 
 export type TResponse<T> = {
-  data?: T;
+  data: T;
   error: TError;
   meta?: TMeta;
   message: string;

@@ -24,7 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <Fade direction="up" triggerOnce={true}>
-      <div onClick={() => navigate(`/bike-details/${product._id}`)}>
+      <div onClick={() => navigate(`/bike-detail/${product._id}`)}>
         <Card
           hoverable
           cover={

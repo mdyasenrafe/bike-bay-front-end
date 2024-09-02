@@ -1,12 +1,16 @@
 import React from "react";
-import { Button, Container, Text } from "../../../../../components/atoms";
+import {
+  Button,
+  Container,
+  LoadingSpinner,
+  Text,
+} from "../../../../../components/atoms";
 import { useAppSelector } from "../../../../../redux";
 import {
   getProducts,
   useGetProductsQuery,
 } from "../../../../../redux/features/product";
 import { useNavigate } from "react-router-dom";
-import { LoadingSpinner } from "../../../../../components/atoms/LoadingSpinner/LoadingSpinner";
 import { Col, Row } from "antd";
 import { ProductCard } from "../../../../../components/product";
 
