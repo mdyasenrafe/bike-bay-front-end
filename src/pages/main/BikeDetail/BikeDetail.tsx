@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Col, Flex, Rate, Row, Spin } from "antd";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { Col, Row } from "antd";
 import { useGetProductsByIdQuery } from "../../../redux/features/product";
-import { useAppDispatch } from "../../../redux";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import {
   Button,
@@ -13,20 +10,17 @@ import {
   Text,
 } from "../../../components/atoms";
 import { Colors } from "../../../theme";
+import { useModal } from "../../../hooks";
+import { BookingModal } from "./components";
 
 export const BikeDetail = () => {
+  // hooks
   let { productId } = useParams();
   const { data: productData, isLoading } = useGetProductsByIdQuery(
     productId as string
   );
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  let toasterId: any;
-
-  const handleAddToCart = () => {
-    toast.success("Product added to cart!");
-  };
+  const { openModal, isModalOpen, closeModal } = useModal();
 
   return (
     <MainLayout>
@@ -70,7 +64,7 @@ export const BikeDetail = () => {
                   <Button
                     color="primary"
                     className="text-white h-[48px] w-[200px] rounded-full font-poppins text-[16px]"
-                    onClick={handleAddToCart}
+                    onClick={openModal}
                   >
                     Book Now
                   </Button>
@@ -86,6 +80,9 @@ export const BikeDetail = () => {
           </section>
         )}
       </Container>
+      {isModalOpen && (
+        <BookingModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      )}
     </MainLayout>
   );
 };
