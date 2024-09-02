@@ -20,3 +20,12 @@ export type TSigninValue = {
   email: string;
   password: string;
 };
+
+export type TSignupValue = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  address: string;
+  role: "user" | "admin";
+};

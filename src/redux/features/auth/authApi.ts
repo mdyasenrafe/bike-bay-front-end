@@ -1,6 +1,6 @@
 import { baseApi } from "../../../api/baseApi";
 import { TResponse } from "../types";
-import { TSigninValue, TUser } from "./types";
+import { TSigninValue, TSignupValue, TUser } from "./types";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +11,14 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    signup: builder.mutation<TResponse<TUser>, TSignupValue>({
+      query: (data) => ({
+        url: "/auth/signup",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useSignupMutation } = authApi;

@@ -5,25 +5,31 @@ import { FormInput, FormWrapper } from "../../../components/form";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { signupSchema } from "../../../Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
-
-// Define the custom type based on the schema
-export type TSignupValue = {
-  fullName: string;
-  email: string;
-  password: string;
-  phone: string;
-  address: string;
-};
+import { Link, useNavigate } from "react-router-dom";
+import {
+  TSignupValue,
+  addUser,
+  useSignupMutation,
+} from "../../../redux/features/auth";
+import { toast } from "sonner";
+import { useAppDispatch } from "../../../redux";
 
 export const Signup = () => {
-  const { handleSubmit, control } = useForm<TSignupValue>({
-    resolver: zodResolver(signupSchema),
-  });
+  // hooks
+  const [signup, { isLoading }] = useSignupMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<TSignupValue> = async (data) => {
-    // Handle the form submission
-    console.log(data);
+    try {
+      data["role"] = "user";
+      const res = await signup(data).unwrap();
+      dispatch(addUser({ user: res.data, token: res.token }));
+      toast.success(res?.message);
+      navigate("/profile");
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Something went wrong");
+    }
   };
 
   return (
@@ -40,11 +46,11 @@ export const Signup = () => {
               </Text>
             </div>
             <FormWrapper
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={onSubmit}
               resolver={zodResolver(signupSchema)}
             >
               <FormInput
-                name="fullName"
+                name="name"
                 label="Full Name"
                 placeholder="Enter your full name"
               />
@@ -73,6 +79,8 @@ export const Signup = () => {
                 color="primary"
                 htmlType="submit"
                 className="w-full h-[48px] text-[18px] text-white"
+                loading={isLoading}
+                disabled={isLoading}
               >
                 Sign Up
               </Button>
