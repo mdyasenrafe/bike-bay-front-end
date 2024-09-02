@@ -5,16 +5,27 @@ import { FormInput, FormWrapper } from "../../../components/form";
 import { SubmitHandler } from "react-hook-form";
 import { signinSchema } from "../../../Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
-import { TSigninValue, useLoginMutation } from "../../../redux/features/auth";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  TSigninValue,
+  addUser,
+  useLoginMutation,
+} from "../../../redux/features/auth";
 import { toast } from "sonner";
+import { useAppDispatch } from "../../../redux";
 
 export const Signin = () => {
+  //  hooks
   const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<TSigninValue> = async (data) => {
     try {
       const res = await login(data).unwrap();
+      dispatch(addUser({ user: res.data, token: res.token }));
       toast.success(res?.message);
+      navigate("/profile");
     } catch (err: any) {
       toast.error(err?.data?.message || "Something went wrong");
     }

@@ -14,6 +14,7 @@ export type TResponse<T> = {
   meta?: TMeta;
   message: string;
   success: boolean;
+  token?: string;
 };
 
 export type TMeta = {
