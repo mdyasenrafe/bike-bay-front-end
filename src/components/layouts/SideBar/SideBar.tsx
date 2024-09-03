@@ -8,8 +8,9 @@ import { MenuItemType } from "antd/es/menu/interface";
 import { sidebarItemsGenerator, verifyToken } from "../../../utils";
 import { TAppRoute, adminRoutes } from "../../../routes";
 import { Text } from "../../atoms";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { TUser } from "../../../redux/features/auth";
+import Logo from "../../../assets/images/logo.png";
 
 const { Sider } = Layout;
 
@@ -66,7 +67,9 @@ export const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <Text className="text-white">ADU</Text>
+        <NavLink to={"/"}>
+          <img className="h-[50px] py-1 cursor-pointer" src={Logo} alt="Logo" />
+        </NavLink>
       </div>
       <Menu
         theme="dark"

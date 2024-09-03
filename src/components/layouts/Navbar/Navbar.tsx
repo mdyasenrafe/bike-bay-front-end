@@ -31,7 +31,6 @@ export const Navbar = () => {
   }, []);
 
   const navItems = generateNavItems(appRoutes);
-  const isDarkMode = false;
 
   return (
     <React.Fragment>
