@@ -1,5 +1,4 @@
-after clicking buy now button open modal
-after submit open stripe chat payment gate way
+after click pay button then we need to call rental api and need to reduce initial 100 taka and open the payment gateway
 footer page
 // bugs
 need to update navbar based on user authentication

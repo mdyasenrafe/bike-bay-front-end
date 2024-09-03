@@ -1,13 +1,13 @@
-import { DatePicker, Form, Select } from "antd";
+import { DatePicker, Form, Select, TimePicker } from "antd";
 import React from "react";
 import { Controller } from "react-hook-form";
 
-type FormDatePickerProps = {
+type FormTimePickerProps = {
   label: string;
   name: string;
 };
 
-export const FormDatePicker: React.FC<FormDatePickerProps> = ({
+export const FormTimePicker: React.FC<FormTimePickerProps> = ({
   label,
   name,
 }) => {
@@ -16,11 +16,12 @@ export const FormDatePicker: React.FC<FormDatePickerProps> = ({
       name={name}
       render={({ field, fieldState: { error } }) => (
         <Form.Item label={label}>
-          <DatePicker
+          <TimePicker
             {...field}
             style={{ width: "100%" }}
             size={"large"}
             className={`font-poppins text-[14px] `}
+            format="h:mm a"
           />
           {error && <small style={{ color: "red" }}>{error.message}</small>}
         </Form.Item>
