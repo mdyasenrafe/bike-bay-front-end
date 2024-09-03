@@ -60,6 +60,7 @@ export const Navbar = () => {
                 mode="horizontal"
                 items={navItems}
                 selectedKeys={[currentPath]}
+                className="font-figtree"
               />
             </div>
             <div className="w-[20%] lg:flex hidden">
@@ -100,6 +101,7 @@ export const Navbar = () => {
                 mode="inline"
                 items={navItems}
                 selectedKeys={[currentPath]}
+                className="font-figtree"
               />
             </div>
           </div>

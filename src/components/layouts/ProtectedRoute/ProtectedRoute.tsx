@@ -23,7 +23,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   if (role && user?.role !== role) {
     dispatch(logout());
-    return <Navigate to="/sigin" replace={true} />;
+    return <Navigate to="/signin" replace={true} />;
   }
 
   if (!token) {

@@ -2,6 +2,7 @@ import { commonRoutes } from "./commonRoutes";
 import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
 import { TAppRoute } from "./types";
+import { AdminDashboardLayout, ProtectedRoute } from "../components/layouts";
 
 export const appRoutes: TAppRoute[] = [
   ...commonRoutes,
@@ -11,6 +12,11 @@ export const appRoutes: TAppRoute[] = [
     path: "/dashboard/admin",
     isNavItem: false,
     children: adminRoutes,
+    component: (
+      <ProtectedRoute role="admin">
+        <AdminDashboardLayout />
+      </ProtectedRoute>
+    ),
   },
   {
     id: 7,
