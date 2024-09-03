@@ -1,5 +1,6 @@
 import React from "react";
+import { Container } from "../../../../components/atoms";
 
 export const BikeManagement = () => {
-  return <div>BikeManagement</div>;
+  return <Container>BikeManagement</Container>;
 };

@@ -1,5 +1,6 @@
 import React from "react";
+import { Container } from "../../../../components/atoms";
 
 export const Profile = () => {
-  return <div>Profile</div>;
+  return <Container>Profile</Container>;
 };

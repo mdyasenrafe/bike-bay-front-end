@@ -53,3 +53,12 @@ input:focus {
   position: relative !important;
   margin-top: 40px !important;
 }
+
+.ant-menu-title-content {
+  font-size: 16px !important;
+  font-family: "Figtree", sans-serif !important;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-layout
+  .ant-layout-sider-zero-width-trigger {
+  top: 8px !important;
+}

@@ -50,7 +50,7 @@ export const Navbar = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden lg:flex w-[50%]">
+            <div className="hidden lg:flex w-[60%]">
               <Menu
                 style={{
                   width: "100%",
@@ -62,7 +62,7 @@ export const Navbar = () => {
                 className="font-figtree"
               />
             </div>
-            <div className="w-[20%] lg:flex hidden">
+            <div className="w-[10%] lg:flex hidden">
               <DarkMode />
             </div>
             {!isMenuVisible && (
@@ -95,7 +95,7 @@ export const Navbar = () => {
             <HiOutlineX className="text-[30px]" />
           </div>
           <div data-aos="fade-down" className="grid mt-[50px]">
-            <div className="grid gap-5 text-lg">
+            <div>
               <Menu
                 mode="inline"
                 items={navItems}
