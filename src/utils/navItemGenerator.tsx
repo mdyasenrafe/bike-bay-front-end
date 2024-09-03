@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppRoute } from "../routes/appRoutes";
+import { TAppRoute } from "../routes/types";
 
 type NavItem = {
   label: React.ReactNode;
@@ -8,8 +8,8 @@ type NavItem = {
   children?: NavItem[];
 };
 
-export const generateNavItems = (routes: AppRoute[]): NavItem[] => {
-  return routes.reduce((acc: NavItem[], route: AppRoute) => {
+export const generateNavItems = (routes: TAppRoute[]): NavItem[] => {
+  return routes.reduce((acc: NavItem[], route: TAppRoute) => {
     if (route.isNavItem && !route.children) {
       acc.push({
         label: <Link to={route.path}>{route.name}</Link>,

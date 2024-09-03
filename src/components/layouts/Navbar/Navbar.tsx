@@ -4,10 +4,10 @@ import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../../assets/images/logo.png";
 import { Button, Menu } from "antd";
 import { generateNavItems } from "../../../utils";
-import { appRoutes } from "../../../routes/appRoutes";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineX } from "react-icons/hi";
 import { DarkMode } from "./components";
+import { appRoutes } from "../../../routes";
 
 export const Navbar = () => {
   const [isMenuVisible, setMenuVisibility] = useState<boolean>(false);

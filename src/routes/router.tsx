@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { appRoutes, AppRoute } from "./appRoutes";
+import { appRoutes, TAppRoute } from "./";
 
-const convertToRouteConfig = (route: AppRoute) => {
+const convertToRouteConfig = (route: TAppRoute) => {
   const config: any = {
     path: route.path,
     element: route.component,
