@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Container } from "../../atoms";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../../assets/images/logo.png";
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import { generateNavItems } from "../../../utils";
 import { appRoutes } from "../../../routes/appRoutes";
 import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineX } from "react-icons/hi";
+import { DarkMode } from "./components";
 
 export const Navbar = () => {
   const [isMenuVisible, setMenuVisibility] = useState<boolean>(false);
@@ -30,6 +31,7 @@ export const Navbar = () => {
   }, []);
 
   const navItems = generateNavItems(appRoutes);
+  const isDarkMode = false;
 
   return (
     <React.Fragment>
@@ -37,21 +39,22 @@ export const Navbar = () => {
         <div className={` min-w-full transition-all delay-75 ease-in-out py-2`}>
           <div className="flex justify-between items-center w-full">
             <div className="ml-3 w-[30%]">
-              <NavLink to="/" className="flex items-center">
-                <img
-                  className="h-[50px] py-1 cursor-pointer"
-                  src={Logo}
-                  alt="Logo"
-                />
-              </NavLink>
+              <div className="flex items-center">
+                <NavLink to={"/"}>
+                  <img
+                    className="h-[50px] py-1 cursor-pointer"
+                    src={Logo}
+                    alt="Logo"
+                  />
+                </NavLink>
+              </div>
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden lg:flex w-[70%]">
+            <div className="hidden lg:flex w-[50%]">
               <Menu
                 style={{
                   width: "100%",
-                  justifyContent: "end",
                   borderBottom: "0px solid",
                 }}
                 mode="horizontal"
@@ -59,15 +62,19 @@ export const Navbar = () => {
                 selectedKeys={[currentPath]}
               />
             </div>
+            <div className="w-[20%] lg:flex hidden">
+              <DarkMode />
+            </div>
             {!isMenuVisible && (
-              <div
-                aria-label="open menu"
-                onClick={() => setMenuVisibility(true)}
-                className={`${
-                  !isHeaderFixed && "text-black"
-                } outline-none rounded ease-in-out duration-300 focus:ring-gray-600 lg:hidden`}
-              >
-                <AiOutlineMenu className="text-[30px]" />
+              <div className="flex items-center lg:hidden">
+                <DarkMode />
+                <div
+                  aria-label="open menu"
+                  onClick={() => setMenuVisibility(true)}
+                  className="ml-6"
+                >
+                  <AiOutlineMenu className="text-[30px]" />
+                </div>
               </div>
             )}
           </div>

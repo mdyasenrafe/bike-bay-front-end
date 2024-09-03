@@ -13,6 +13,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import productSlice from "./features/product/productSlice";
+import themeSlice from "./features/theme/themeSlice";
 
 const persistConfig = {
   key: "auth",
@@ -23,6 +24,7 @@ const persistedAuthReducer = persistReducer(persistConfig, authSlice);
 
 export const store = configureStore({
   reducer: {
+    themeMode: themeSlice,
     auth: persistedAuthReducer,
     product: productSlice,
     [baseApi.reducerPath]: baseApi.reducer,
