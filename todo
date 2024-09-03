@@ -1,5 +1,6 @@
-after click pay button then we need to call rental api and need to reduce initial 100 taka and open the payment gateway
+1. after click pay button then we need to call rental api and need to reduce initial 100 taka and open the payment gateway
+2. my rentals page desing
+3. return bike page design from admin dashboard
+4. return bike should work from my rentals page
 footer page
-// bugs
-need to update navbar based on user authentication
 
