@@ -1,10 +1,15 @@
 import { Layout, Menu } from "antd";
 import { useAppSelector } from "../../../redux/hooks";
-import { getCurrentUser } from "../../../redux/features/auth/authSlice";
+import {
+  getCurrentUser,
+  useCurrentToken,
+} from "../../../redux/features/auth/authSlice";
 import { MenuItemType } from "antd/es/menu/interface";
-import { sidebarItemsGenerator } from "../../../utils";
+import { sidebarItemsGenerator, verifyToken } from "../../../utils";
 import { TAppRoute, adminRoutes } from "../../../routes";
 import { Text } from "../../atoms";
+import { useLocation } from "react-router-dom";
+import { TUser } from "../../../redux/features/auth";
 
 const { Sider } = Layout;
 
@@ -13,9 +18,18 @@ const userRole = {
 };
 
 export const Sidebar = () => {
-  const user = useAppSelector(getCurrentUser);
-  const role = user?.role;
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const token = useAppSelector(useCurrentToken);
+  let user;
   let sidebarItems;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+
+  let role = user?.role;
 
   switch (role) {
     case userRole.ADMIN:
@@ -57,9 +71,9 @@ export const Sidebar = () => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["4"]}
         items={sidebarItems as MenuItemType[]}
         className="font-figtree"
+        selectedKeys={[currentPath]}
       />
     </Sider>
   );
