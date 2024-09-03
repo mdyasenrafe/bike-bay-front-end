@@ -49,7 +49,9 @@ export const WhyChooseUs = () => {
             <div className="grid grid-cols-3 gap-4 mt-8">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <span className={`text-4xl font-bold ${stat.color}`}>
+                  <span
+                    className={`text-2xl lg:text-4xl font-bold ${stat.color}`}
+                  >
                     <CountUp
                       end={stat.value}
                       suffix={stat.suffix}
