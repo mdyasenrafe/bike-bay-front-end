@@ -62,3 +62,8 @@ input:focus {
   .ant-layout-sider-zero-width-trigger {
   top: 8px !important;
 }
+
+.ant-modal-title {
+  font-family: "Figtree", sans-serif !important;
+  font-size: 24px !important;
+}

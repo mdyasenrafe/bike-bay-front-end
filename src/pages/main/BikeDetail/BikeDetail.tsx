@@ -22,6 +22,8 @@ export const BikeDetail = () => {
 
   const { openModal, isModalOpen, closeModal } = useModal();
 
+  const bookingTitle = `Book Your Ride with ${productData?.data.name}`;
+
   return (
     <MainLayout>
       <Container>
@@ -81,7 +83,11 @@ export const BikeDetail = () => {
         )}
       </Container>
       {isModalOpen && (
-        <BookingModal isModalOpen={isModalOpen} closeModal={closeModal} />
+        <BookingModal
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          title={bookingTitle}
+        />
       )}
     </MainLayout>
   );

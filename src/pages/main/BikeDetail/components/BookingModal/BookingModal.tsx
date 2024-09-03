@@ -11,16 +11,18 @@ import { Button } from "../../../../../components/atoms";
 type BookingModalProps = {
   isModalOpen: true;
   closeModal: () => void;
+  title: string;
 };
 
 export const BookingModal: React.FC<BookingModalProps> = ({
   isModalOpen,
   closeModal,
+  title,
 }) => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {};
   return (
     <Modal
-      title="Booking Modal"
+      title={title}
       isModalOpen={isModalOpen}
       closeModal={closeModal}
       centered
