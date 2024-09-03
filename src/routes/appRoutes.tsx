@@ -1,5 +1,5 @@
 import { Signin, Signup } from "../pages/auth";
-import { About, BikeDetail, Home, Profile } from "../pages/main";
+import { About, BikeDetail, Home } from "../pages/main";
 
 export type AppRoute = {
   id: number;
@@ -30,20 +30,13 @@ export const appRoutes: AppRoute[] = [
     name: "signup",
     path: "/signup",
     component: <Signup />,
-    isNavItem: true,
+    isNavItem: false,
   },
   {
     id: 4,
     name: "signin",
     path: "/signin",
     component: <Signin />,
-    isNavItem: false,
-  },
-  {
-    id: 5,
-    name: "profile",
-    path: "/profile",
-    component: <Profile />,
     isNavItem: false,
   },
   {
