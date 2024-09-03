@@ -23,11 +23,11 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   if (role && user?.role !== role) {
     dispatch(logout());
-    return <Navigate to="/login" replace={true} />;
+    return <Navigate to="/sigin" replace={true} />;
   }
 
   if (!token) {
-    return <Navigate to="/login" replace={true} />;
+    return <Navigate to="/signin" replace={true} />;
   }
 
   return <>{children}</>;
