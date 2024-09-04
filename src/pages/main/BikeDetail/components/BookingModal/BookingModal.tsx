@@ -36,9 +36,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       closeModal={closeModal}
       centered
       width={650}
-      style={{
-        marginTop: "20px",
-      }}
     >
       <FormWrapper onSubmit={onSubmit}>
         <FormDatePicker name="startDate" label="Start Date" />
