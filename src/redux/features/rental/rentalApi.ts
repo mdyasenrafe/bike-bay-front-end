@@ -7,7 +7,7 @@ const rentalApi = baseApi.injectEndpoints({
       query: (rentalData) => ({
         url: "/rentals",
         method: "POST",
-        body: { rentalDetails: rentalData },
+        body: rentalData,
       }),
     }),
   }),
