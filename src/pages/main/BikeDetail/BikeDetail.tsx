@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Col, Row } from "antd";
-import { useGetProductsByIdQuery } from "../../../redux/features/product";
+import {
+  TProduct,
+  useGetProductsByIdQuery,
+} from "../../../redux/features/product";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import {
   Button,
@@ -21,8 +24,6 @@ export const BikeDetail = () => {
   );
 
   const { openModal, isModalOpen, closeModal } = useModal();
-
-  const bookingTitle = `Book Your Ride with ${productData?.data.name}`;
 
   return (
     <MainLayout>
@@ -86,7 +87,7 @@ export const BikeDetail = () => {
         <BookingModal
           isModalOpen={isModalOpen}
           closeModal={closeModal}
-          title={bookingTitle}
+          productData={productData?.data as TProduct}
         />
       )}
     </MainLayout>
