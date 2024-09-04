@@ -11,6 +11,7 @@ import {
   useStripe,
   useElements,
   PaymentElement,
+  Elements,
 } from "@stripe/react-stripe-js";
 import { TProduct } from "../../../../../redux/features/product";
 import {
@@ -20,6 +21,7 @@ import {
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema } from "../../../../../Schema";
+import moment from "moment";
 
 type BookingModalProps = {
   isModalOpen: boolean;
@@ -28,8 +30,8 @@ type BookingModalProps = {
 };
 
 export type TBookingValues = {
-  startDate: string;
-  startTime: string;
+  startDate: Date;
+  startTime: Date;
 };
 
 export const BookingModal: React.FC<BookingModalProps> = ({
@@ -53,12 +55,20 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         toast.error("Stripe.js has not loaded yet. Please try again.");
         return;
       }
-
+      console.log(data);
       if (productData?.isAvailable) {
-        const startDateTime = new Date(`${data.startDate}T${data.startTime}`);
+        // const combinedDateTime = moment(data.startDate)
+        //   .set({
+        //     hour: moment(data.startTime).get("hour"),
+        //     minute: moment(data.startTime).get("minute"),
+        //   })
+        //   .utc()
+        //   .toISOString();
+        const combinedDateTime = new Date().toISOString();
+        console.log(combinedDateTime);
         const rentalData: TRentalRequest = {
           bikeId: productData?._id as string,
-          startTime: startDateTime,
+          startTime: combinedDateTime,
         };
 
         const res = await createRental(rentalData).unwrap();
@@ -80,6 +90,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         toast.warning("The selected bike is currently unavailable.");
       }
     } catch (err: any) {
+      console.log(err);
       toast.error(err?.data?.message || "An error occurred. Please try again.");
     }
   };
@@ -109,7 +120,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           Pay
         </Button>
       </FormWrapper>
-      {clientSecret && <PaymentElement />}
+      {clientSecret && (
+        <Elements stripe={stripe} options={{ clientSecret }}>
+          <PaymentElement />
+        </Elements>
+      )}
     </Modal>
   );
 };
