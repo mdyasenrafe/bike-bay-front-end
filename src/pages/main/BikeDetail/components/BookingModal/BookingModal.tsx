@@ -49,20 +49,28 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   // on submit function
   const onSubmit: SubmitHandler<TBookingValues> = async (data) => {
     try {
+      if (!stripe || !elements) {
+        toast.error("Stripe.js has not loaded yet. Please try again.");
+        return;
+      }
+
       if (productData?.isAvailable) {
-        const startDateTime = new Date(`${data.startTime}T${data.startDate}`);
+        const startDateTime = new Date(`${data.startDate}T${data.startTime}`);
         const rentalData: TRentalRequest = {
           bikeId: productData?._id as string,
           startTime: startDateTime,
         };
+
         const res = await createRental(rentalData).unwrap();
         setClientSecret(res.clientSecret);
+
         const { error } = await stripe.confirmPayment({
           elements,
           confirmParams: {
             return_url: "http://localhost:3000/success",
           },
         });
+
         if (error) {
           toast.error("Payment failed. Please try again.");
         } else {
