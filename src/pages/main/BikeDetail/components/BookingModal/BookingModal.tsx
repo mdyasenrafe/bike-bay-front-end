@@ -14,6 +14,7 @@ import {
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import { TProduct } from "../../../../../redux/features/product";
+import { useCreateRentalMutation } from "../../../../../redux/features/rental";
 
 type BookingModalProps = {
   isModalOpen: boolean;
@@ -27,6 +28,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   productData,
 }) => {
   const bookingTitle = `Book Your Ride with ${productData.name}`;
+
+  const [createRental] = useCreateRentalMutation();
+  const stripe = useStripe();
+  const elements = useElements();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {};
 
   return (

@@ -1,7 +1,6 @@
 export type TRentalRequest = {
   bikeId: string;
   startTime: string;
-  totalCost: number;
 };
 
 export type TRentalResponse = {

@@ -24,7 +24,7 @@ export const Signup = () => {
     try {
       data["role"] = "user";
       const res = await signup(data).unwrap();
-      dispatch(addUser({ user: res.data, token: res.token }));
+      dispatch(addUser({ user: res.data, token: res.token as string }));
       toast.success(res?.message);
       navigate("/profile");
     } catch (err: any) {
