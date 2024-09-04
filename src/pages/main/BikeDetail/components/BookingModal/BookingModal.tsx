@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Modal } from "../../../../../components";
 import { SubmitHandler } from "react-hook-form";
 import {
@@ -22,6 +22,9 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema } from "../../../../../Schema";
 import moment from "moment";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
 // Define types for the form data
 export type TBookingValues = {
@@ -35,55 +38,15 @@ export type BookingModalProps = {
   productData: TProduct;
 };
 
-export const BookingModal: React.FC<BookingModalProps> = ({
-  isModalOpen,
-  closeModal,
-  productData,
-}) => {
-  const bookingTitle = `Book Your Ride with ${productData.name}`;
-
-  // states
-  const [clientSecret, setClientSecret] = useState<string | null>(null);
+const PaymentForm = ({ clientSecret }: { clientSecret: string }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  // hooks
-  const [createRental] = useCreateRentalMutation();
   const stripe = useStripe();
   const elements = useElements();
 
-  // Separate function for creating a rental and generating the clientSecret
-  const createPaymentIntent = async (data: TBookingValues) => {
-    try {
-      const combinedDateTime = moment(data.startDate)
-        .set({
-          hour: moment(data.startTime).get("hour"),
-          minute: moment(data.startTime).get("minute"),
-        })
-        .utc()
-        .toISOString();
-
-      const rentalData: TRentalRequest = {
-        bikeId: productData?._id as string,
-        startTime: combinedDateTime,
-      };
-      // Create rental and get clientSecret
-      const res = await createRental(rentalData).unwrap();
-      setClientSecret(res.clientSecret);
-      return res.clientSecret;
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Failed to create rental or payment intent.");
-      return null;
-    }
-  };
-
-  const onSubmit: SubmitHandler<TBookingValues> = async (data) => {
-    const clientSecret = await createPaymentIntent(data);
-  };
-
-  // Separate function for handling the Stripe payment confirmation
   const handlePayment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!stripe || !elements || !clientSecret) {
       toast.error("Stripe.js has not loaded yet. Please try again.");
       return;
@@ -99,18 +62,82 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         },
       });
 
+      console.log(error);
+
       if (error) {
         toast.error("Payment failed. Please try again.");
       } else {
         toast.success("Payment successful! Your booking is confirmed.");
       }
     } catch (err: any) {
-      console.error(err);
+      console.log(err);
       toast.error("An error occurred during the payment process.");
     } finally {
       setIsLoading(false);
     }
   };
+  return (
+    <form id="payment-form" onSubmit={handlePayment}>
+      <PaymentElement id="payment-element" />
+      <Button
+        color="primary"
+        htmlType="submit"
+        className="w-full h-[48px] text-[18px] text-white"
+        disabled={isLoading}
+        loading={isLoading}
+      >
+        {isLoading ? "Processing..." : "Pay"}
+      </Button>
+    </form>
+  );
+};
+
+export const BookingModal: React.FC<BookingModalProps> = ({
+  isModalOpen,
+  closeModal,
+  productData,
+}) => {
+  const bookingTitle = `Book Your Ride with ${productData.name}`;
+
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
+
+  const [createRental, { isLoading }] = useCreateRentalMutation();
+
+  const createPaymentIntent = async (data: TBookingValues) => {
+    try {
+      const combinedDateTime = moment(data.startDate)
+        .set({
+          hour: moment(data.startTime).get("hour"),
+          minute: moment(data.startTime).get("minute"),
+        })
+        .utc()
+        .toISOString();
+
+      const rentalData: TRentalRequest = {
+        bikeId: productData?._id as string,
+        startTime: combinedDateTime,
+      };
+      const res = await createRental(rentalData).unwrap();
+      setClientSecret(res.clientSecret);
+      return res.clientSecret;
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Failed to create rental or payment intent.");
+      return null;
+    }
+  };
+
+  const onSubmit: SubmitHandler<TBookingValues> = async (data) => {
+    await createPaymentIntent(data);
+  };
+
+  // Memoizing options for Elements to prevent unnecessary re-renders
+  const stripeOptions = useMemo(
+    () => ({
+      clientSecret: clientSecret ?? "", // Ensure it's always a string
+    }),
+    [clientSecret]
+  );
 
   return (
     <Modal
@@ -134,27 +161,16 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             color="primary"
             htmlType="submit"
             className="w-full h-[48px] text-[18px] text-white"
-            disabled={isLoading}
-            loading={isLoading}
           >
-            {isLoading ? "Processing..." : "Pay"}
+            Submit
           </Button>
         </FormWrapper>
       ) : (
-        <Elements stripe={stripe} options={{ clientSecret }}>
-          <form id="payment-form" onSubmit={handlePayment}>
-            <PaymentElement id="payment-element" />
-            <Button
-              color="primary"
-              htmlType="submit"
-              className="w-full h-[48px] text-[18px] text-white"
-              disabled={isLoading}
-              loading={isLoading}
-            >
-              {isLoading ? "Processing..." : "Pay"}
-            </Button>
-          </form>
-        </Elements>
+        clientSecret && (
+          <Elements stripe={stripePromise} options={stripeOptions}>
+            <PaymentForm clientSecret={clientSecret} />
+          </Elements>
+        )
       )}
     </Modal>
   );
