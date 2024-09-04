@@ -52,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </Text>
                 <Text variant={"H4"} className="font-bold my-1">
                   <strong>Price Per Hour:</strong>{" "}
-                  <span className="text-primary">${product.pricePerHour}</span>
+                  <span className="text-primary">৳{product.pricePerHour}</span>
                 </Text>
                 {editOption ? (
                   <div className="flex space-x-2 mt-3">

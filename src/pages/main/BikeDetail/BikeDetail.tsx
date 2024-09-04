@@ -52,7 +52,7 @@ export const BikeDetail = () => {
                     className="mb-2"
                     style={{ color: Colors.primary }}
                   >
-                    ${productData?.data.pricePerHour}
+                    ৳{productData?.data.pricePerHour}
                   </Text>
                 </div>
                 <div>
