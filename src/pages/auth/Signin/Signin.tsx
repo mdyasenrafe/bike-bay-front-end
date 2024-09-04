@@ -23,7 +23,7 @@ export const Signin = () => {
   const onSubmit: SubmitHandler<TSigninValue> = async (data) => {
     try {
       const res = await login(data).unwrap();
-      dispatch(addUser({ user: res.data, token: res.token }));
+      dispatch(addUser({ user: res.data, token: res.token as string }));
       toast.success(res?.message);
       navigate("/home");
     } catch (err: any) {

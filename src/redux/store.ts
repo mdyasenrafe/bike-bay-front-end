@@ -14,6 +14,7 @@ import {
 } from "redux-persist";
 import productSlice from "./features/product/productSlice";
 import themeSlice from "./features/theme/themeSlice";
+import rentalSlice from "./features/rental/rentalSlice";
 
 const persistConfig = {
   key: "auth",
@@ -27,6 +28,7 @@ export const store = configureStore({
     themeMode: themeSlice,
     auth: persistedAuthReducer,
     product: productSlice,
+    rental: rentalSlice,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
