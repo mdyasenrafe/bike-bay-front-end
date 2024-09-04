@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import { Modal } from "../../../../../components";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import {
   FormDatePicker,
   FormTimePicker,
   FormWrapper,
 } from "../../../../../components/form";
 import { Button, Text } from "../../../../../components/atoms";
-import { loadStripe } from "@stripe/stripe-js";
 import {
   useStripe,
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
 import { TProduct } from "../../../../../redux/features/product";
-import { useCreateRentalMutation } from "../../../../../redux/features/rental";
+import {
+  TRentalRequest,
+  useCreateRentalMutation,
+} from "../../../../../redux/features/rental";
+import { toast } from "sonner";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { bookingSchema } from "../../../../../Schema";
 
 type BookingModalProps = {
   isModalOpen: boolean;
   closeModal: () => void;
   productData: TProduct;
+};
+
+export type TBookingValues = {
+  startDate: string;
+  startTime: string;
 };
 
 export const BookingModal: React.FC<BookingModalProps> = ({
@@ -28,11 +38,43 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   productData,
 }) => {
   const bookingTitle = `Book Your Ride with ${productData.name}`;
+  // states
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
 
+  // hooks
   const [createRental] = useCreateRentalMutation();
   const stripe = useStripe();
   const elements = useElements();
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {};
+
+  // on submit function
+  const onSubmit: SubmitHandler<TBookingValues> = async (data) => {
+    try {
+      if (productData?.isAvailable) {
+        const startDateTime = new Date(`${data.startTime}T${data.startDate}`);
+        const rentalData: TRentalRequest = {
+          bikeId: productData?._id as string,
+          startTime: startDateTime,
+        };
+        const res = await createRental(rentalData).unwrap();
+        setClientSecret(res.clientSecret);
+        const { error } = await stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            return_url: "http://localhost:3000/success",
+          },
+        });
+        if (error) {
+          toast.error("Payment failed. Please try again.");
+        } else {
+          toast.success("Payment successful! Your booking is confirmed.");
+        }
+      } else {
+        toast.warning("The selected bike is currently unavailable.");
+      }
+    } catch (err: any) {
+      toast.error(err?.data?.message || "An error occurred. Please try again.");
+    }
+  };
 
   return (
     <Modal
@@ -42,7 +84,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       centered
       width={650}
     >
-      <FormWrapper onSubmit={onSubmit}>
+      <FormWrapper onSubmit={onSubmit} resolver={zodResolver(bookingSchema)}>
         <FormDatePicker name="startDate" label="Start Date" />
         <FormTimePicker name="startTime" label="Start Time" />
 
@@ -59,6 +101,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           Pay
         </Button>
       </FormWrapper>
+      {clientSecret && <PaymentElement />}
     </Modal>
   );
 };

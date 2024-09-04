@@ -1,6 +1,6 @@
 export type TRentalRequest = {
   bikeId: string;
-  startTime: string;
+  startTime: Date;
 };
 
 export type TRentalResponse = {

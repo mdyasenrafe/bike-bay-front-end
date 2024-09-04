@@ -7,12 +7,16 @@ import { Toaster } from "sonner";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
+
 function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Toaster richColors position="top-center" />
-        <RouterProvider router={router} />
+        <Elements stripe={stripePromise}>
+          <RouterProvider router={router} />
+        </Elements>
       </PersistGate>
     </Provider>
   );
