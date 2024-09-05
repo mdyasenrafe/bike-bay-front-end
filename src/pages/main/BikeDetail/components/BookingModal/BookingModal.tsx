@@ -77,7 +77,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const onSubmit: SubmitHandler<TBookingValues> = useCallback(
     async (data) => {
-      await createPaymentIntent(data);
+      if (productData?.isAvailable) {
+        await createPaymentIntent(data);
+      } else {
+        toast.error("This bike is not available at the moment");
+      }
     },
     [createPaymentIntent]
   );
