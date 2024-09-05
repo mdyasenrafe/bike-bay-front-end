@@ -27,7 +27,7 @@ export const PaymentForm = () => {
         const { error } = await stripe.confirmPayment({
           elements,
           confirmParams: {
-            return_url: "http://localhost:3000/success", // Replace with your success URL
+            return_url: "http://localhost:3000/payment-success",
           },
         });
 
@@ -52,7 +52,7 @@ export const PaymentForm = () => {
       <Button
         color="primary"
         htmlType="submit"
-        className="w-full h-[48px] text-[18px] text-white"
+        className="w-full h-[48px] text-[18px] text-white mt-5"
         disabled={isLoading}
         loading={isLoading}
       >

@@ -1,5 +1,5 @@
 import { Signin, Signup } from "../pages/auth";
-import { Home, About, BikeDetail } from "../pages/main";
+import { Home, About, BikeDetail, PaymentSuccess } from "../pages/main";
 
 export const commonRoutes = [
   {
@@ -35,6 +35,13 @@ export const commonRoutes = [
     name: "bike-detail",
     path: "/bike-detail/:productId",
     component: <BikeDetail />,
+    isNavItem: false,
+  },
+  {
+    id: 8,
+    name: "success",
+    path: "/payment-success",
+    component: <PaymentSuccess />,
     isNavItem: false,
   },
 ];
