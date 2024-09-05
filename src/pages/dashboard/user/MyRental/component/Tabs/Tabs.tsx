@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { TActiveTab } from "../types";
+import { Button } from "../../../../../../components/atoms";
 
 type TabsProps = {
   activeTab: TActiveTab;
   setActiveTab: React.Dispatch<React.SetStateAction<TActiveTab>>;
 };
 
+const tabs = [
+  { key: "unpaid", label: "Unpaid" },
+  { key: "paid", label: "Paid" },
+];
+
 const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab }) => {
   return (
     <div>
       <div className="flex justify-center space-x-4 mb-6">
-        <button
-          className={`px-4 py-2 rounded ${
-            activeTab === "unpaid" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setActiveTab("unpaid")}
-        >
-          Unpaid
-        </button>
-        <button
-          className={`px-4 py-2 rounded ${
-            activeTab === "paid" ? "bg-blue-500 text-white" : "bg-gray-200"
-          }`}
-          onClick={() => setActiveTab("paid")}
-        >
-          Paid
-        </button>
+        {tabs.map(({ key, label }) => (
+          <Button
+            key={key}
+            onClick={() => setActiveTab(key as TActiveTab)}
+            color={key === activeTab ? "primary" : "grey"}
+            className=" h-[48px] w-[200px] rounded-full font-poppins text-[16px]"
+          >
+            {label}
+          </Button>
+        ))}
       </div>
     </div>
   );
