@@ -19,6 +19,7 @@ export const FeatureProduct = () => {
     limit: 10,
     page: 1,
     sort: "-createdAt",
+    isAvailable: true,
   });
 
   const featuredProducts = useAppSelector(getProducts);

@@ -78,7 +78,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                     htmlType="submit"
                     className="h-[37px] text-[16px] text-white mt-3 font-poppins"
                   >
-                    Buy Now
+                    Book Now
                   </Button>
                 )}
               </>

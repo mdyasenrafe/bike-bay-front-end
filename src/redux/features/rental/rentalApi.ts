@@ -1,5 +1,8 @@
 import { baseApi } from "../../../api/baseApi";
-import { TRentalRequest, TRentalResponse } from "./types";
+import { TFilters } from "../product";
+import { TQueryParams, TResponse } from "../types";
+import { addRental, setRentals } from "./rentalSlice";
+import { TRental, TRentalRequest, TRentalResponse } from "./types";
 
 const rentalApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -9,8 +12,34 @@ const rentalApi = baseApi.injectEndpoints({
         method: "POST",
         body: rentalData,
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(addRental(data.rental as TRental));
+        } catch (error) {}
+      },
+    }),
+    getAllRentals: builder.query<TResponse<TRental[]>, TQueryParams[]>({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return { url: "rentals", params: params };
+      },
+      onQueryStarted: async (filters, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setRentals(data.data as TRental[]));
+        } catch (error) {
+          console.error("Failed to fetch products:", error);
+        }
+      },
     }),
   }),
 });
 
-export const { useCreateRentalMutation } = rentalApi;
+export const { useCreateRentalMutation, useGetAllRentalsQuery } = rentalApi;

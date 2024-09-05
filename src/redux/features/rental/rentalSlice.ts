@@ -32,6 +32,6 @@ const rentalSlice = createSlice({
 
 export const { addRental, deleteRental, setRentals } = rentalSlice.actions;
 
-export const getRentals = (state: RootState) => state.rental.rentals;
+export const useGetRentals = (state: RootState) => state.rental.rentals;
 
 export default rentalSlice.reducer;

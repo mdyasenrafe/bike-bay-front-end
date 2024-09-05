@@ -26,4 +26,5 @@ export type TFilters = {
   sort?: string;
   limit?: number; // Optional pagination parameter
   page?: number; // Optional pagination parameter
+  isAvailable?: boolean;
 };

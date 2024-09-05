@@ -12,7 +12,7 @@ import {
   useElements,
   PaymentElement,
   Elements,
-} from "@stripe/react-stripe-js"; // Import Elements and types
+} from "@stripe/react-stripe-js";
 import { TProduct } from "../../../../../redux/features/product";
 import {
   TRentalRequest,
@@ -21,12 +21,14 @@ import {
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema } from "../../../../../Schema";
-import moment from "moment";
+import dayjs, { Dayjs } from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { loadStripe } from "@stripe/stripe-js";
+
+dayjs.extend(utc);
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
-// Define types for the form data
 export type TBookingValues = {
   startDate: Date;
   startTime: Date;
@@ -51,11 +53,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const createPaymentIntent = useCallback(
     async (data: TBookingValues) => {
       try {
-        const combinedDateTime = moment(data.startDate)
-          .set({
-            hour: moment(data.startTime).get("hour"),
-            minute: moment(data.startTime).get("minute"),
-          })
+        const combinedDateTime = dayjs(data.startDate)
+          .set("hour", dayjs(data.startTime).hour())
+          .set("minute", dayjs(data.startTime).minute())
           .utc()
           .toISOString();
 
@@ -63,6 +63,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           bikeId: productData._id as string,
           startTime: combinedDateTime,
         };
+
         const res = await createRental(rentalData).unwrap();
         setClientSecret(res.clientSecret);
         return res.clientSecret;
@@ -92,6 +93,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }),
     [clientSecret]
   );
+  const disablePastDates = (currentDate: Dayjs | null): boolean => {
+    return !!currentDate && currentDate.isBefore(dayjs().startOf("day"));
+  };
 
   return (
     <Modal
@@ -103,7 +107,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     >
       {!clientSecret ? (
         <FormWrapper onSubmit={onSubmit} resolver={zodResolver(bookingSchema)}>
-          <FormDatePicker name="startDate" label="Start Date" />
+          <FormDatePicker
+            name="startDate"
+            label="Start Date"
+            disabledDate={disablePastDates}
+          />
           <FormTimePicker name="startTime" label="Start Time" />
 
           <Text variant="P4" className="mb-4 text-orange-600">
