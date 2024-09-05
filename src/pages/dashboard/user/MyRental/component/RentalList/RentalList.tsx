@@ -55,15 +55,15 @@ export const RentalList: React.FC<RentalListProps> = ({
                         <strong>Start Time:</strong>{" "}
                         {formatStartTime(rental.startTime)}
                       </Text>
-                      <p className="text-sm text-gray-500">
+                      <Text variant={"P2"}>
                         <strong>Return Time:</strong>{" "}
                         {rental.returnTime
                           ? dayjs(rental.returnTime).local().fromNow()
                           : "Not yet returned"}
-                      </p>
-                      <p className="text-sm text-gray-500">
+                      </Text>
+                      <Text variant={"P2"}>
                         <strong>Total Cost:</strong> {rental.totalCost}
-                      </p>
+                      </Text>
                     </>
                   }
                 />
