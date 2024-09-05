@@ -2,7 +2,10 @@ import React from "react";
 import { Card, Button, Row, Col } from "antd";
 import { TRental } from "../../../../../../redux/features/rental";
 import { Text } from "../../../../../../components/atoms";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 type RentalListProps = {
   rentals: TRental[];
@@ -13,6 +16,17 @@ export const RentalList: React.FC<RentalListProps> = ({
   rentals,
   showPayButton,
 }) => {
+  const formatStartTime = (startTime: string) => {
+    const localStartTime = dayjs(startTime).local();
+    const now = dayjs();
+
+    if (now.isBefore(localStartTime)) {
+      return `Starts at ${localStartTime.format("h:mm A, MMM D")}`;
+    } else {
+      return localStartTime.fromNow();
+    }
+  };
+
   return (
     <div className="space-y-4">
       {rentals.length === 0 ? (
@@ -39,11 +53,13 @@ export const RentalList: React.FC<RentalListProps> = ({
                     <>
                       <Text variant={"P2"}>
                         <strong>Start Time:</strong>{" "}
-                        {moment(rental.startTime).fromNow()}
+                        {formatStartTime(rental.startTime)}
                       </Text>
                       <p className="text-sm text-gray-500">
                         <strong>Return Time:</strong>{" "}
-                        {rental.returnTime || "Not yet returned"}
+                        {rental.returnTime
+                          ? dayjs(rental.returnTime).local().fromNow()
+                          : "Not yet returned"}
                       </p>
                       <p className="text-sm text-gray-500">
                         <strong>Total Cost:</strong> {rental.totalCost}
