@@ -1,7 +1,7 @@
 import { baseApi } from "../../../api/baseApi";
 import { TResponse } from "../types";
 import { updateUser } from "./authSlice";
-import { TSigninValue, TSignupValue, TUser } from "./types";
+import { TSigninValue, TSignupValue, TUpdateValue, TUser } from "./types";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +19,7 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    update: builder.mutation<TResponse<TUser>, TSignupValue>({
+    update: builder.mutation<TResponse<TUser>, TUpdateValue>({
       query: (data) => ({
         url: "users/me",
         method: "PUT",

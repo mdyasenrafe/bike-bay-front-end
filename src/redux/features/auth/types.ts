@@ -29,3 +29,10 @@ export type TSignupValue = {
   address: string;
   role: "user" | "admin";
 };
+
+export type TUpdateValue = {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+};
