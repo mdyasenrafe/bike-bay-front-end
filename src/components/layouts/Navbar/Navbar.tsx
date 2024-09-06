@@ -34,7 +34,7 @@ export const Navbar = () => {
       <Container>
         <div className={` min-w-full transition-all delay-75 ease-in-out py-2`}>
           <div className="flex justify-between items-center w-full">
-            <div className="ml-3 w-[30%]">
+            <div className="w-[30%]">
               <div className="flex items-center">
                 <NavLink to={"/"}>
                   <img

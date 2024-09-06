@@ -17,14 +17,15 @@ export type TProductsState = {
 
 export type TFilters = {
   searchTerm?: string;
-  category?: string;
   brand?: string;
   priceGte?: number;
   priceLte?: number;
-  rating?: number;
-  price?: string;
+  pricePerHour?: string;
   sort?: string;
-  limit?: number; // Optional pagination parameter
-  page?: number; // Optional pagination parameter
+  limit?: number;
+  page?: number;
   isAvailable?: boolean;
+  model?: string;
 };
+
+export type OptionType = { value: string | boolean; label: string };

@@ -6,7 +6,7 @@ import {
   setProducts,
   updateProduct,
 } from "./productSlice";
-import { TFilters, TProduct } from "./types";
+import { OptionType, TFilters, TProduct } from "./types";
 
 const ProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,6 +22,7 @@ const ProductApi = baseApi.injectEndpoints({
           dispatch(addProduct(data.data as TProduct));
         } catch (error) {}
       },
+      invalidatesTags: ["Products"],
     }),
     getProducts: builder.query<TResponse<TProduct[]>, TFilters | undefined>({
       query: (filters) => {
@@ -30,11 +31,12 @@ const ProductApi = baseApi.injectEndpoints({
           params = Object.keys(filters).reduce((acc, key) => {
             const filterKey = key as keyof TFilters;
             const value = filters[filterKey];
-            if (value !== undefined) {
+            console.log(filterKey, "filterKey", typeof value);
+            if (value !== undefined || !value) {
               if (filterKey === "priceGte") {
-                acc["price[gte]"] = value;
+                acc["pricePerHour[gte]"] = value;
               } else if (filterKey === "priceLte") {
-                acc["price[lte]"] = value;
+                acc["pricePerHour[lte]"] = value;
               } else {
                 acc[filterKey] = value;
               }
@@ -59,7 +61,6 @@ const ProductApi = baseApi.injectEndpoints({
           console.error("Failed to fetch products:", error);
         }
       },
-      providesTags: ["Products"],
     }),
     getProductsById: builder.query<TResponse<TProduct>, string>({
       query: (productId) => ({
@@ -92,6 +93,13 @@ const ProductApi = baseApi.injectEndpoints({
         } catch (err) {}
       },
     }),
+    getBikeBrands: builder.query<TResponse<OptionType[]>, undefined>({
+      query: () => ({
+        url: `/bikes/bike-brands`,
+        method: "GET",
+      }),
+      providesTags: ["Products"],
+    }),
   }),
 });
 
@@ -101,4 +109,5 @@ export const {
   useGetProductsByIdQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useGetBikeBrandsQuery,
 } = ProductApi;
