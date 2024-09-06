@@ -1,4 +1,3 @@
-. my rentals page design
 . return bike page design from admin dashboard
 . return bike should work from my rentals page
 footer page
@@ -6,5 +5,5 @@ footer page
 
 
 bugs:
-booking schema 
 change bike money
+redirect to exact path if user logged in
