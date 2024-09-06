@@ -11,9 +11,9 @@ import {
 } from "antd";
 import React from "react";
 import { AiOutlineBars } from "react-icons/ai";
-import { ProductCard } from "../../../../../components/product";
-import { TProduct } from "../../../../../redux/features/product";
-
+import { LoadingSpinner } from "../../../atoms";
+import { ProductCard } from "../../../product";
+import { TProduct } from "../../../../redux/features/product";
 const { Search } = Input;
 
 type RightSideBarProps = {
@@ -27,6 +27,7 @@ type RightSideBarProps = {
   setPageSize: React.Dispatch<React.SetStateAction<number>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   total: number;
+  editOption?: boolean;
 };
 
 export const RightSideBar: React.FC<RightSideBarProps> = ({
@@ -40,6 +41,7 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
   setPageSize,
   setCurrentPage,
   total,
+  editOption,
 }) => {
   return (
     <div className="col-span-3 border border-[#e2e8f0] rounded-[8px] p-4">
@@ -75,21 +77,12 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
       </div>
 
       {isLoading ? (
-        <div>
-          <Flex
-            align="center"
-            gap="middle"
-            justify="center"
-            className="h-[200px]"
-          >
-            <Spin size="large" />
-          </Flex>
-        </div>
+        <LoadingSpinner />
       ) : (
         <Row gutter={[16, 16]} className="mt-12">
           {products.map((product, index) => (
             <Col key={index} xs={24} sm={12} md={8}>
-              <ProductCard product={product} />
+              <ProductCard product={product} editOption={editOption} />
             </Col>
           ))}
         </Row>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { Input, Radio, Space } from "antd";
 import { FilterLayoutProps } from "../types";
-import { Text } from "../../../../../components/atoms";
-import { TFilters } from "../../../../../redux/features/product";
+import { Text } from "../../../atoms";
+import { TFilters } from "../../../../redux/features/product";
 
 export const FilterLayout: React.FC<FilterLayoutProps> = ({
   item,

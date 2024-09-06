@@ -37,7 +37,7 @@ export const FeatureProduct = () => {
             style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
             className="text-black pb-16"
           >
-            Discover our latest featured products and explore their unique
+            Discover our latest featured bikes and explore their unique
             features.
           </Text>
         </div>

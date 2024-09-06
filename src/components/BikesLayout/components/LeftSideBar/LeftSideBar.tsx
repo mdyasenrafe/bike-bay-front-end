@@ -2,12 +2,12 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FilterLayout } from "../FilterLayout";
 import { LeftSideBarProps, TFilterType } from "../types";
-import { Button, LoadingSpinner } from "../../../../../components/atoms";
 import {
   TFilters,
   useGetBikeBrandsQuery,
-} from "../../../../../redux/features/product";
-import { AvailableData } from "../../../../../constant";
+} from "../../../../redux/features/product";
+import { AvailableData } from "../../../../constant";
+import { Button, LoadingSpinner } from "../../../atoms";
 
 export const LeftSideBar: React.FC<LeftSideBarProps> = ({
   showSideBar,

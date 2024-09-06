@@ -1,4 +1,4 @@
-import { OptionType, TFilters } from "../../../../redux/features/product";
+import { OptionType, TFilters } from "../../../redux/features/product";
 
 export type LeftSideBarProps = {
   showSideBar: boolean;
