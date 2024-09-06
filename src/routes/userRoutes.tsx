@@ -1,4 +1,4 @@
-import { ProtectedRoute } from "../components/layouts";
+import { MainLayout, ProtectedRoute } from "../components/layouts";
 import { Profile } from "../pages/dashboard/shared";
 import { MyRental } from "../pages/dashboard/user";
 import { TAppRoute } from "./types";
@@ -21,7 +21,9 @@ export const userRoutes: TAppRoute[] = [
     path: "/dashboard/user/profile",
     component: (
       <ProtectedRoute role={"user"}>
-        <Profile />
+        <MainLayout>
+          <Profile />
+        </MainLayout>
       </ProtectedRoute>
     ),
     isNavItem: false,
