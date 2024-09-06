@@ -56,7 +56,7 @@ export const FeatureProduct = () => {
         <div className="flex justify-center mt-8">
           <Button
             color="primary"
-            onClick={() => navigate("/products")}
+            onClick={() => navigate("/bikes")}
             className="text-white h-[40px] w-[232px] mt-4"
           >
             See More
