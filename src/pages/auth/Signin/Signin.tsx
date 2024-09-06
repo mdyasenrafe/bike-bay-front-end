@@ -25,7 +25,7 @@ export const Signin = () => {
       const res = await login(data).unwrap();
       dispatch(addUser({ user: res.data, token: res.token as string }));
       toast.success(res?.message);
-      navigate("/home");
+      navigate("/");
     } catch (err: any) {
       toast.error(err?.data?.message || "Something went wrong");
     }
