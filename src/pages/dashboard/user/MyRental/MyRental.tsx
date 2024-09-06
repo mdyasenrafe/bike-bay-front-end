@@ -32,23 +32,26 @@ export const MyRental = () => {
       <Container>
         <div className="pt-10">
           <Text variant="H1" className="text-center mb-4 text-black">
-            Rental Overview
+            Manage Your Rentals
           </Text>
           <Text
             variant="P3"
             style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
             className="text-black pb-16"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            totam atque asperiores placeat aliquid minima harum pariatur iste
-            officia sint?
+            Track and manage your active and completed bike rentals. Make
+            payments, view your booking history, and stay updated on your rental
+            status with ease.
           </Text>
         </div>
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <RentalList rentals={filteredRentals} showPayButton={true} />
+          <RentalList
+            rentals={filteredRentals}
+            showPayButton={activeTab === "paid" ? false : true}
+          />
         )}
       </Container>
     </MainLayout>
