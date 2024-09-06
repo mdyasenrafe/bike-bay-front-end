@@ -26,7 +26,7 @@ export const AdminDashboardLayout = () => {
         >
           <Button>Logout</Button>
         </Header>
-        <Content style={{ margin: "24px 0" }}>
+        <Content style={{ padding: "24px 0", background: "white" }}>
           <div
             style={{
               minHeight: 360,
