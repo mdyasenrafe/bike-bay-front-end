@@ -1,3 +1,4 @@
-export * from "./ContactUsSchema";
-export * from "./AuthSchema";
-export * from "./BookingSchema";
+export * from "./contactUsSchema";
+export * from "./authSchema";
+export * from "./bookingSchema";
+export * from "./productSchema";

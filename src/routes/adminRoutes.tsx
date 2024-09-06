@@ -1,7 +1,9 @@
 import {
   BikeManagement,
   CouponManagement,
+  CreateProduct,
   ReturnBike,
+  UpdateProduct,
   UserManagement,
 } from "../pages/dashboard/admin";
 import { Profile } from "../pages/dashboard/shared";
@@ -55,5 +57,21 @@ export const adminRoutes: TAppRoute[] = [
     component: <CouponManagement />,
     isNavItem: false,
     isSidebar: true,
+  },
+  {
+    id: 6.7,
+    name: "Create Product",
+    path: "/dashboard/admin/create-bike",
+    component: <CreateProduct />,
+    isNavItem: false,
+    isSidebar: false,
+  },
+  {
+    id: 6.7,
+    name: "Update Product",
+    path: "/dashboard/admin/edit/:productId",
+    component: <UpdateProduct />,
+    isNavItem: false,
+    isSidebar: false,
   },
 ];
