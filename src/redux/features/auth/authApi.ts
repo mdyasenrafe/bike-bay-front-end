@@ -1,5 +1,6 @@
 import { baseApi } from "../../../api/baseApi";
 import { TResponse } from "../types";
+import { updateUser } from "./authSlice";
 import { TSigninValue, TSignupValue, TUser } from "./types";
 
 const authApi = baseApi.injectEndpoints({
@@ -18,7 +19,23 @@ const authApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    update: builder.mutation<TResponse<TUser>, TSignupValue>({
+      query: (data) => ({
+        url: "users/me",
+        method: "PUT",
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(updateUser(data?.data as TUser));
+        } catch (error) {
+          console.error("Failed to fetch products:", error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useLoginMutation, useSignupMutation } = authApi;
+export const { useLoginMutation, useSignupMutation, useUpdateMutation } =
+  authApi;

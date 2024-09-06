@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TAuthState, TUser } from "./types";
 import { RootState } from "../../store";
+import userEvent from "@testing-library/user-event";
 
 const initialState: TAuthState = {
   user: null,
@@ -20,10 +21,13 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    updateUser: (state, action: PayloadAction<TUser>) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { addUser, logout } = authSlice.actions;
+export const { addUser, logout, updateUser } = authSlice.actions;
 
 export default authSlice.reducer;
 
