@@ -13,7 +13,7 @@ export const appRoutes: TAppRoute[] = [
     isNavItem: false,
     children: adminRoutes,
     component: (
-      <ProtectedRoute role="admin">
+      <ProtectedRoute roles={["admin"]}>
         <AdminDashboardLayout />
       </ProtectedRoute>
     ),

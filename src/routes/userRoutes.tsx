@@ -9,7 +9,7 @@ export const userRoutes: TAppRoute[] = [
     name: "My Rental",
     path: "/dashboard/user/my-rental",
     component: (
-      <ProtectedRoute role={"user"}>
+      <ProtectedRoute roles={["user", "admin"]}>
         <MyRental />
       </ProtectedRoute>
     ),
@@ -20,7 +20,7 @@ export const userRoutes: TAppRoute[] = [
     name: "Profile",
     path: "/dashboard/user/profile",
     component: (
-      <ProtectedRoute role={"user"}>
+      <ProtectedRoute roles={["user", "admin"]}>
         <MainLayout>
           <Profile />
         </MainLayout>

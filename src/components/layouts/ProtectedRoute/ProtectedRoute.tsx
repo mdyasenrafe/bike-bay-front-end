@@ -6,12 +6,12 @@ import { useAppDispatch, useAppSelector } from "../../../redux";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  role: string | undefined;
+  roles?: ("admin" | "user")[];
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
-  role,
+  roles,
 }) => {
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     user = verifyToken(token) as TUser;
   }
 
-  if (role && user?.role !== role) {
+  if (roles && (!user || !roles.includes(user?.role))) {
     dispatch(logout());
     return <Navigate to="/signin" replace={true} />;
   }
