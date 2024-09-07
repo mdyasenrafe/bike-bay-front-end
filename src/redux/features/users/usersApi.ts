@@ -1,15 +1,21 @@
 import { baseApi } from "../../../api/baseApi";
 import { TUser, updateUser } from "../auth";
-import { TResponse } from "../types";
+import { TQueryParams, TResponse } from "../types";
 import { TUpdateValue } from "./types";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllUsers: builder.query<TResponse<TUser[]>, void>({
-      query: () => ({
-        url: "users",
-        method: "GET",
-      }),
+    getAllUsers: builder.query<TResponse<TUser[]>, TQueryParams[]>({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return { url: "/users", params: params };
+      },
       providesTags: ["Users"],
     }),
     update: builder.mutation<TResponse<TUser>, TUpdateValue>({

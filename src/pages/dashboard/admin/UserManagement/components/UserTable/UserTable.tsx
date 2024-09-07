@@ -2,12 +2,16 @@ import React from "react";
 import { Table, Space } from "antd";
 import { TUser } from "../../../../../../redux/features/auth";
 import { Button } from "../../../../../../components/atoms";
+import { TMeta } from "../../../../../../redux/features/types";
+import { Colors } from "../../../../../../theme";
 
 type UserTableProps = {
   users: TUser[];
   isLoading: boolean;
   onUpdateRole: (user: TUser) => void;
   onDelete: (user: TUser) => void;
+  meta: TMeta | undefined;
+  onTableChange: (pagination: any) => void;
 };
 
 export const UserTable: React.FC<UserTableProps> = ({
@@ -15,6 +19,8 @@ export const UserTable: React.FC<UserTableProps> = ({
   isLoading,
   onUpdateRole,
   onDelete,
+  meta,
+  onTableChange,
 }) => {
   const columns = [
     {
@@ -31,6 +37,15 @@ export const UserTable: React.FC<UserTableProps> = ({
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (status: string) => (
+        <span
+          style={{
+            color: status == "active" ? Colors.green : Colors.red,
+          }}
+        >
+          {status}
+        </span>
+      ),
     },
     {
       title: "Actions",
@@ -56,7 +71,14 @@ export const UserTable: React.FC<UserTableProps> = ({
       columns={columns}
       rowKey="_id"
       loading={isLoading}
-      pagination={{ pageSize: 10 }}
+      pagination={{
+        current: meta?.page || 1,
+        pageSize: meta?.limit || 10,
+        total: meta?.total || 0,
+        showSizeChanger: true,
+        pageSizeOptions: ["10", "20", "50", "100"],
+      }}
+      onChange={onTableChange}
       scroll={{ x: true }}
     />
   );

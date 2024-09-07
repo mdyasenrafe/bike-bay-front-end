@@ -1,6 +1,7 @@
 import React from "react";
-import { Modal, Button, Space } from "antd";
+import { Modal, Space } from "antd";
 import { TUser } from "../../../../../../redux/features/auth";
+import { Button, Text } from "../../../../../../components/atoms";
 
 type ActionModalProps = {
   isModalOpen: boolean;
@@ -25,29 +26,31 @@ export const ActionModal: React.FC<ActionModalProps> = ({
       footer={null}
       centered
     >
-      {actionType === "updateRole" && selectedUser && (
+      {selectedUser && (
         <>
-          <p>
-            Are you sure you want to update the role for {selectedUser.name}?
-          </p>
-          <Space style={{ marginTop: "20px" }}>
-            <Button type="primary" onClick={onConfirm}>
-              Yes
-            </Button>
-            <Button onClick={closeModal}>No</Button>
-          </Space>
-        </>
-      )}
+          {actionType == "updateRole" ? (
+            <Text>
+              Are you sure you want to update the role for {selectedUser.name}?
+            </Text>
+          ) : (
+            <Text variant="H4">
+              Are you sure you want to delete {selectedUser.name}?{" "}
+            </Text>
+          )}
 
-      {actionType === "delete" && selectedUser && (
-        <>
-          <p>Are you sure you want to delete {selectedUser.name}?</p>
-          <Space style={{ marginTop: "20px" }}>
-            <Button type="primary" danger onClick={onConfirm}>
+          <div className="mt-6 flex justify-between">
+            <Button
+              type="primary"
+              danger
+              onClick={onConfirm}
+              className="w-[48%]"
+            >
               Yes
             </Button>
-            <Button onClick={closeModal}>No</Button>
-          </Space>
+            <Button onClick={closeModal} className="w-[48%]">
+              No
+            </Button>
+          </div>
         </>
       )}
     </Modal>
