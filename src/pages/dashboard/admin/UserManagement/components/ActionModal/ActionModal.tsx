@@ -20,7 +20,11 @@ export const ActionModal: React.FC<ActionModalProps> = ({
 }) => {
   return (
     <Modal
-      title={actionType === "updateRole" ? "Update User Role" : "Delete User"}
+      title={
+        actionType === "updateRole"
+          ? "Update User Role to Admin"
+          : "Delete User"
+      }
       open={isModalOpen}
       onCancel={closeModal}
       footer={null}
@@ -28,13 +32,14 @@ export const ActionModal: React.FC<ActionModalProps> = ({
     >
       {selectedUser && (
         <>
-          {actionType == "updateRole" ? (
+          {actionType === "updateRole" ? (
             <Text>
-              Are you sure you want to update the role for {selectedUser.name}?
+              Are you sure you want to update {selectedUser.name}'s role to
+              Admin?
             </Text>
           ) : (
             <Text variant="H4">
-              Are you sure you want to delete {selectedUser.name}?{" "}
+              Are you sure you want to delete {selectedUser.name}?
             </Text>
           )}
 

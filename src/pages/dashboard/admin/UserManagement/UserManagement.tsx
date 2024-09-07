@@ -81,7 +81,19 @@ export const UserManagement: React.FC = () => {
   return (
     <MainLayout>
       <Container>
-        <Text variant="H1">User Management</Text>
+        <div>
+          <Text variant="H1" className="text-center mb-4 text-black">
+            Manage Users
+          </Text>
+          <Text
+            variant="P3"
+            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+            className="text-black pb-16"
+          >
+            View, update, and manage user roles. Soft-delete users or adjust
+            their permissions to maintain control over your platform.
+          </Text>
+        </div>
 
         <UserTable
           users={usersData?.data as TUser[]}
