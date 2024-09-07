@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import {
   TRental,
   useGetAllRentalsQuery,
@@ -10,7 +10,7 @@ import { RentalCostModal, RentalTable } from "./components";
 
 export const RentalLists: React.FC = () => {
   // states
-  const [selectedRental, setSelectedRental] = useState<TRental>();
+  const [selectedRental, setSelectedRental] = useState<TRental | undefined>();
   const [pagination, setPagination] = useState<{
     page: number;
     pageSize: number;
@@ -19,7 +19,7 @@ export const RentalLists: React.FC = () => {
     pageSize: 10,
   });
 
-  //hooks
+  // hooks
   const { data: rentals, isLoading } = useGetAllRentalsQuery([
     {
       value: pagination.page,
@@ -32,10 +32,13 @@ export const RentalLists: React.FC = () => {
   ]);
   const { openModal, isModalOpen, closeModal } = useModal();
 
-  const handleCalculateClick = (rental: TRental) => {
-    setSelectedRental(rental);
-    openModal();
-  };
+  const handleCalculateClick = useCallback(
+    (rental: TRental) => {
+      setSelectedRental(rental);
+      openModal();
+    },
+    [openModal]
+  );
 
   const handleTableChange = useCallback((paginationData: any) => {
     setPagination({
@@ -44,14 +47,20 @@ export const RentalLists: React.FC = () => {
     });
   }, []);
 
+  const rentalsData = useMemo(
+    () => (rentals?.data as TRental[]) || [],
+    [rentals?.data]
+  );
+  const rentalsMeta = useMemo(() => rentals?.meta, [rentals?.meta]);
+
   return (
     <MainLayout>
       <Container>
         <RentalTable
-          rentals={rentals?.data as TRental[]}
+          rentals={rentalsData}
           loading={isLoading}
           handleCalculateClick={handleCalculateClick}
-          meta={rentals?.meta}
+          meta={rentalsMeta}
           onTableChange={handleTableChange}
         />
         <RentalCostModal

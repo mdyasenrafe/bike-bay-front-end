@@ -16,7 +16,6 @@ export const FormDatePicker: React.FC<FormDatePickerProps> = ({
     <Controller
       name={name}
       render={({ field, fieldState: { error } }) => {
-        console.log(error);
         return (
           <Form.Item label={label}>
             <DatePicker

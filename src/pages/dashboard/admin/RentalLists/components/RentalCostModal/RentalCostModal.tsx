@@ -1,3 +1,5 @@
+import React, { useCallback, useMemo } from "react";
+import dayjs from "dayjs";
 import { Modal } from "../../../../../../components";
 import { Button } from "../../../../../../components/atoms";
 import {
@@ -6,6 +8,15 @@ import {
   FormWrapper,
 } from "../../../../../../components/form";
 import { TRental } from "../../../../../../redux/features/rental";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { rentalCostSchema } from "../../../../../../Schema";
+import { toast } from "sonner";
+import { SubmitHandler } from "react-hook-form";
+
+type TRentalCostInput = {
+  endDate: string | Date | dayjs.Dayjs;
+  endTime: string | Date | dayjs.Dayjs;
+};
 
 type RentalCostModalProps = {
   isModalOpen: boolean;
@@ -18,20 +29,37 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
   closeModal,
   selectedRental,
 }) => {
-  const handleCalculate = async (values: {
-    startTime: string;
-    endTime: string;
-  }) => {
-    try {
-      const startTime = new Date(values.startTime).toISOString();
-      const endTime = new Date(values.endTime).toISOString();
-
-      // await calculateRentalCost({ id: selectedRental!, endTime }).unwrap();
-
-      closeModal();
-    } catch (error) {}
-  };
   const startTime = selectedRental?.startTime;
+
+  const handleCalculate: SubmitHandler<TRentalCostInput> = useCallback(
+    (values) => {
+      try {
+        const combinedDateTime = dayjs(values.endDate)
+          .set("hour", dayjs(values.endTime).hour())
+          .set("minute", dayjs(values.endTime).minute())
+          .utc()
+          .toISOString();
+
+        toast.success("Updated successfully");
+
+        closeModal();
+      } catch (error: any) {
+        console.log(error);
+        toast.error(error?.data?.message || "Something went wrong");
+      }
+    },
+    [closeModal]
+  );
+
+  const disabledDate = useCallback(
+    (current: dayjs.Dayjs) => {
+      return current && current.isBefore(dayjs(startTime), "day");
+    },
+    [startTime]
+  );
+
+  const schema = useMemo(() => rentalCostSchema(startTime), [startTime]);
+
   return (
     <Modal
       title="Calculate Rental Cost"
@@ -39,8 +67,12 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
       closeModal={closeModal}
       centered
     >
-      <FormWrapper onSubmit={handleCalculate}>
-        <FormDatePicker name="endDate" label="End Date" />
+      <FormWrapper onSubmit={handleCalculate} resolver={zodResolver(schema)}>
+        <FormDatePicker
+          name="endDate"
+          label="End Date"
+          disabledDate={disabledDate}
+        />
         <FormTimePicker name="endTime" label="End Time" />
         <Button
           color="primary"
