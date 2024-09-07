@@ -57,7 +57,11 @@ export const RentalTable: React.FC<RentalTableProps> = ({
       key: "actions",
       render: (_: any, record: TRental) => (
         <Space>
-          <Button type="primary" onClick={() => handleCalculateClick(record)}>
+          <Button
+            type="primary"
+            onClick={() => handleCalculateClick(record)}
+            disabled={record?.isReturned}
+          >
             Calculate
           </Button>
         </Space>
