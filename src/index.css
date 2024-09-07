@@ -66,3 +66,7 @@ input:focus {
   font-family: "Figtree", sans-serif !important;
   font-size: 24px !important;
 }
+
+.ant-table-cell {
+  font-family: "Poppins", sans-serif !important;
+}

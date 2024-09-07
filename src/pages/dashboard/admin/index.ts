@@ -1,6 +1,6 @@
 export * from "./BikeManagement";
-export * from "./UserManagement";
 export * from "./ReturnBike";
 export * from "./CouponManagement";
 export * from "./UpdateProduct";
 export * from "./CreateProduct";
+export * from "./UserManagement";
