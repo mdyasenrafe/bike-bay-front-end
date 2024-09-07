@@ -5,5 +5,5 @@ footer page
 
 
 bugs:
-change bike money
 redirect to exact path if user logged in
+start time should be same for payment modal
