@@ -33,6 +33,7 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
   selectedRental,
 }) => {
   const [totalCost, setTotalCost] = useState<number | null>(null);
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   // hooks
   const [calculateRentalCost, { isLoading }] = useCalculateRentalCostMutation();
@@ -47,18 +48,19 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
           .utc()
           .toISOString();
 
-        // Assuming you call the API here to calculate the total cost
         const response = await calculateRentalCost({
           rentalId: selectedRental._id as string,
           endTime: combinedDateTime,
         }).unwrap();
 
         const totalCost = response?.totalCost as number;
+        console.log(totalCost);
         setTotalCost(totalCost);
+        setSubmitted(true);
       } catch (error: any) {
         toast.error(error?.data?.message);
-        console.log(error);
-        setTotalCost(null); // Reset total cost in case of an error
+        setTotalCost(null);
+        setSubmitted(false);
       }
     },
     [selectedRental]
@@ -80,7 +82,7 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
       closeModal={closeModal}
       centered
     >
-      {!totalCost ? (
+      {!submitted ? (
         <FormWrapper onSubmit={handleCalculate} resolver={zodResolver(schema)}>
           <FormDatePicker
             name="endDate"
@@ -102,10 +104,10 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
         <div className="text-center">
           <Text variant="P1">
             Total cost calculated successfully: <strong>${totalCost}</strong>.
-            The rental is now available, and the user can pay the pending amount
+            The bike is now available, and the user can pay the pending amount
             from their dashboard.
           </Text>
-          <Button onClick={closeModal} className="w-full mt-6">
+          <Button onClick={closeModal} className="w-full mt-6" color="primary">
             Close
           </Button>
         </div>
