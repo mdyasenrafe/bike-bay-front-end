@@ -13,7 +13,9 @@ import { RentalList } from "./component";
 export const MyRental = () => {
   // states
   const [activeTab, setActiveTab] = useState<TActiveTab>("unpaid");
-  const { data, isLoading } = useGetUserRentalsQuery([]);
+  const { data, isLoading } = useGetUserRentalsQuery([
+    { name: "advancePaymentStatus", value: "paid" },
+  ]);
 
   const rentals = useAppSelector(useGetRentals);
 
