@@ -7,14 +7,10 @@ import {
 } from "../../../../../../../../redux/features/rental";
 import {
   Button,
-  PaymentForm,
+  PaymentSection,
   Text,
 } from "../../../../../../../../components/atoms";
 import { Modal } from "../../../../../../../../components";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
 type PayModalProps = {
   isModalOpen: boolean;
@@ -83,9 +79,7 @@ export const PayModal: React.FC<PayModalProps> = ({
       closeModal={closeModal}
     >
       {clientSecret ? (
-        <Elements stripe={stripePromise} options={stripeOptions}>
-          <PaymentForm />
-        </Elements>
+        <PaymentSection clientSecret={clientSecret} />
       ) : (
         <div className="space-y-6">
           {/* Total Section */}

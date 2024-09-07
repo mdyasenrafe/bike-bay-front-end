@@ -6,7 +6,12 @@ import {
   FormTimePicker,
   FormWrapper,
 } from "../../../../../components/form";
-import { Button, PaymentForm, Text } from "../../../../../components/atoms";
+import {
+  Button,
+  PaymentForm,
+  PaymentSection,
+  Text,
+} from "../../../../../components/atoms";
 import {
   useStripe,
   useElements,
@@ -129,9 +134,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           </Button>
         </FormWrapper>
       ) : (
-        <Elements stripe={stripePromise} options={stripeOptions}>
-          <PaymentForm />
-        </Elements>
+        <PaymentSection clientSecret={clientSecret} />
       )}
     </Modal>
   );
