@@ -2,12 +2,12 @@ import React, { useMemo, useState } from "react";
 import {
   useGetUserRentalsQuery,
   useGetRentals,
+  TRental,
 } from "../../../../redux/features/rental";
 import { TActiveTab } from "./component/types";
 import { MainLayout } from "../../../../components/layouts";
 import { Container, LoadingSpinner, Text } from "../../../../components/atoms";
 import Tabs from "./component/Tabs/Tabs";
-import { useAppSelector } from "../../../../redux";
 import { RentalList } from "./component";
 
 export const MyRental = () => {
@@ -17,10 +17,8 @@ export const MyRental = () => {
     { name: "advancePaymentStatus", value: "paid" },
   ]);
 
-  const rentals = useAppSelector(useGetRentals);
-
   const filteredRentals = useMemo(() => {
-    return rentals.filter((rental) => {
+    return data?.data.filter((rental) => {
       if (activeTab === "paid") {
         return rental.status === "completed";
       } else {
@@ -28,7 +26,7 @@ export const MyRental = () => {
         return rental.status === "booked" || rental.status === "returned";
       }
     });
-  }, [rentals, activeTab]);
+  }, [data?.data, activeTab]);
   return (
     <MainLayout>
       <Container>
@@ -51,7 +49,7 @@ export const MyRental = () => {
           <LoadingSpinner />
         ) : (
           <RentalList
-            rentals={filteredRentals}
+            rentals={filteredRentals as TRental[]}
             showPayButton={activeTab === "paid" ? false : true}
           />
         )}
