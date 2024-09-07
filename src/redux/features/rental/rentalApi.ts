@@ -2,7 +2,12 @@ import { baseApi } from "../../../api/baseApi";
 import { TFilters } from "../product";
 import { TQueryParams, TResponse } from "../types";
 import { addRental, setRentals } from "./rentalSlice";
-import { TRental, TRentalRequest, TRentalResponse } from "./types";
+import {
+  TRental,
+  TRentalCalculateRequest,
+  TRentalRequest,
+  TRentalResponse,
+} from "./types";
 
 const rentalApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -53,10 +58,11 @@ const rentalApi = baseApi.injectEndpoints({
       },
       providesTags: ["Rentals"],
     }),
-    calculateRentalCost: builder.mutation<TRental, { id: string }>({
+    calculateRentalCost: builder.mutation<TRental, TRentalCalculateRequest>({
       query: (data) => ({
-        url: `/rentals/${data.id}/calculate`,
+        url: `/rentals/${data.rentalId}/calculate`,
         method: "PUT",
+        body: { endTime: data.endTime },
       }),
       invalidatesTags: ["Rentals"],
     }),

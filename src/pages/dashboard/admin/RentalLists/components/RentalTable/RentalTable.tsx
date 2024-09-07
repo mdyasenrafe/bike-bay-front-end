@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Button, Space } from "antd";
 import { TRental } from "../../../../../../redux/features/rental";
 import { TMeta } from "../../../../../../redux/features/types";
+import { formatEndTime, formatStartTime } from "../../../../../../utils";
 
 type RentalTableProps = {
   rentals: TRental[];
@@ -43,14 +44,13 @@ export const RentalTable: React.FC<RentalTableProps> = ({
       title: "Start Time",
       dataIndex: "startTime",
       key: "startTime",
-      render: (time: string) => new Date(time).toLocaleString(),
+      render: (time: string) => formatStartTime(time),
     },
     {
       title: "Return Time",
       dataIndex: "returnTime",
       key: "returnTime",
-      render: (time: string) =>
-        time ? new Date(time).toLocaleString() : "Not returned",
+      render: (time: string) => (time ? formatEndTime(time) : "Not returned"),
     },
     {
       title: "Actions",

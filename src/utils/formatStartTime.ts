@@ -7,6 +7,6 @@ export const formatStartTime = (startTime: string) => {
   if (now.isBefore(localStartTime)) {
     return `Starts at ${localStartTime.format("h:mm A, MMM D")}`;
   } else {
-    return localStartTime.fromNow();
+    return localStartTime.format("h:mm A, MMM D");
   }
 };

@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, Button, Row, Col } from "antd";
+import { Card, Row, Col } from "antd";
 import { TRental } from "../../../../../../redux/features/rental";
-import { Text } from "../../../../../../components/atoms";
+import { Button, Text } from "../../../../../../components/atoms";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
+  formatEndTime,
   formatStartTime,
   renderRentalEmptyMessage,
 } from "../../../../../../utils";
@@ -55,8 +56,8 @@ export const RentalList: React.FC<RentalListProps> = ({
                       </Text>
                       <Text variant={"P2"}>
                         <strong>Return Time:</strong>{" "}
-                        {rental.returnTime
-                          ? dayjs(rental.returnTime).local().fromNow()
+                        {rental?.returnTime
+                          ? formatEndTime(rental?.returnTime)
                           : "Not yet returned"}
                       </Text>
                       <Text variant={"P2"}>
@@ -67,13 +68,11 @@ export const RentalList: React.FC<RentalListProps> = ({
                 />
                 {showPayButton && (
                   <Button
-                    type="primary"
-                    className="mt-4"
-                    onClick={() =>
-                      console.log(`Paying for rental ${rental._id}`)
-                    }
+                    color="primary"
+                    className="h-[37px] text-[16px] text-white mt-5 font-poppins w-[138px]"
+                    disabled={!rental?.isReturned}
                   >
-                    Pay
+                    Pay Now
                   </Button>
                 )}
               </Card>

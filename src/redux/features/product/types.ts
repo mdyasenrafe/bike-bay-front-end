@@ -9,6 +9,8 @@ export type TProduct = {
   brand: string;
   thumb: string;
   year: number;
+  updatedAt: string;
+  status: "active" | "inactive";
 };
 
 export type TProductsState = {

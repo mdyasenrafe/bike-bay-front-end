@@ -10,20 +10,31 @@ export type TRentalResponse = {
   rental: TRental;
   clientSecret: string;
 };
+export type TPaymentStatus = "pending" | "succeeded" | "failed";
 
 export type TRental = {
   _id: string;
-  bikeId: TProduct;
   userId: TUser;
-  paymentIntentId: string;
-  paymentStatus: "pending" | "succeeded" | "failed";
+  bikeId: TProduct;
   startTime: string;
-  returnTime: string;
   totalCost: number;
   isReturned: boolean;
+  advancePaymentIntentId: string;
+  advancePaymentStatus: TPaymentStatus;
+  finalPaymentStatus: TPaymentStatus;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
   status: "booked" | "returned" | "completed";
+  paymentStatus: TPaymentStatus;
+  returnTime: string;
 };
 
 export interface TRentalState {
   rentals: TRental[];
 }
+
+export type TRentalCalculateRequest = {
+  rentalId: string;
+  endTime: string;
+};
