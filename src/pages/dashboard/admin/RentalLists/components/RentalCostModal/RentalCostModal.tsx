@@ -53,7 +53,7 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
           endTime: combinedDateTime,
         }).unwrap();
 
-        const totalCost = response?.totalCost as number;
+        const totalCost = response?.data?.totalCost as number;
         console.log(totalCost);
         setTotalCost(totalCost);
         setSubmitted(true);

@@ -44,7 +44,10 @@ const rentalApi = baseApi.injectEndpoints({
       },
       providesTags: ["Rentals"],
     }),
-    calculateRentalCost: builder.mutation<TRental, TRentalCalculateRequest>({
+    calculateRentalCost: builder.mutation<
+      TResponse<TRental>,
+      TRentalCalculateRequest
+    >({
       query: (data) => ({
         url: `/rentals/${data.rentalId}/calculate`,
         method: "PUT",
@@ -52,9 +55,9 @@ const rentalApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Rentals"],
     }),
-    completeRentalCost: builder.mutation<TRental, TRentalCalculateRequest>({
-      query: (data) => ({
-        url: `/rentals/${data.rentalId}/complete-rental`,
+    completeRentalCost: builder.mutation<TRentalResponse, string>({
+      query: (id) => ({
+        url: `/rentals/${id}/complete-rental`,
         method: "PUT",
       }),
       invalidatesTags: ["Rentals"],
