@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import {
-  useGetAllRentalsQuery,
+  useGetUserRentalsQuery,
   useGetRentals,
 } from "../../../../redux/features/rental";
 import { TActiveTab } from "./component/types";
@@ -13,7 +13,7 @@ import { RentalList } from "./component";
 export const MyRental = () => {
   // states
   const [activeTab, setActiveTab] = useState<TActiveTab>("unpaid");
-  const { data, isLoading } = useGetAllRentalsQuery([]);
+  const { data, isLoading } = useGetUserRentalsQuery([]);
 
   const rentals = useAppSelector(useGetRentals);
 

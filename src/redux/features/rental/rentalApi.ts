@@ -19,7 +19,7 @@ const rentalApi = baseApi.injectEndpoints({
         } catch (error) {}
       },
     }),
-    getAllRentals: builder.query<TResponse<TRental[]>, TQueryParams[]>({
+    getUserRentals: builder.query<TResponse<TRental[]>, TQueryParams[]>({
       query: (args) => {
         const params = new URLSearchParams();
         if (args) {
@@ -42,4 +42,4 @@ const rentalApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateRentalMutation, useGetAllRentalsQuery } = rentalApi;
+export const { useCreateRentalMutation, useGetUserRentalsQuery } = rentalApi;
