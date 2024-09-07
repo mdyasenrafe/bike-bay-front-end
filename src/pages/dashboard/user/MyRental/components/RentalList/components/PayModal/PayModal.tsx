@@ -41,10 +41,12 @@ export const PayModal: React.FC<PayModalProps> = ({
   //  hooks
   const [completeRental, { data, isLoading }] = useCompleteRentalCostMutation();
 
-  const totalAfterDiscount = useMemo(
-    () => Math.max(0, rental.totalCost - 100 - discount),
-    [rental.totalCost, discount]
-  );
+  const advancePaymentAmount = 100;
+
+  const totalAfterDiscount = useMemo(() => {
+    const totalCost = rental.totalCost - advancePaymentAmount - discount;
+    return Math.max(0, totalCost);
+  }, [rental.totalCost, discount]);
 
   const handleApplyCoupon = () => {
     const result = applyCoupon(couponCode);
@@ -58,8 +60,8 @@ export const PayModal: React.FC<PayModalProps> = ({
 
   const handlePayment = async () => {
     try {
-      const res = await completeRental(rental?._id).unwrap();
-      setClientSecret(res?.clientSecret);
+      const res = await completeRental(rental._id).unwrap();
+      setClientSecret(res.clientSecret);
     } catch (err: any) {
       toast.error(
         err?.data?.message || "Failed to create rental or payment intent."
@@ -86,12 +88,13 @@ export const PayModal: React.FC<PayModalProps> = ({
         </Elements>
       ) : (
         <div className="space-y-6">
+          {/* Total Section */}
           <div className="p-4 border rounded-lg shadow-sm bg-gray-100 flex justify-between items-center">
             <Text variant="H4" className="text-gray-800">
               Total Amount
             </Text>
             <Text variant="H5" className="font-semibold text-gray-800">
-              ${rental.totalCost - 100}
+              ${rental.totalCost.toFixed(2)}
             </Text>
           </div>
 
@@ -118,9 +121,25 @@ export const PayModal: React.FC<PayModalProps> = ({
           </div>
 
           <Divider />
-
-          {/* Discount and Final Total */}
           <div className="p-4 border rounded-lg shadow-sm bg-gray-100">
+            <div className="flex justify-between items-center">
+              <Text variant="P2" className="text-gray-800">
+                Original Total Cost:
+              </Text>
+              <Text variant="P2" className="font-semibold text-gray-800">
+                ${rental.totalCost.toFixed(2)}
+              </Text>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <Text variant="P2" className="text-gray-800">
+                Advance Payment Deducted:
+              </Text>
+              <Text variant="P2" className="font-semibold text-green-600">
+                - ${advancePaymentAmount.toFixed(2)}
+              </Text>
+            </div>
+
             <div className="flex justify-between items-center">
               <Text variant="P2" className="text-gray-800">
                 Discount Applied:
@@ -129,6 +148,9 @@ export const PayModal: React.FC<PayModalProps> = ({
                 - ${discount.toFixed(2)}
               </Text>
             </div>
+
+            <Divider />
+
             <div className="flex justify-between items-center mt-2">
               <Text variant="H5" className="font-semibold text-gray-800">
                 Final Total:

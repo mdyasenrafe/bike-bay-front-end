@@ -4,7 +4,7 @@ import {
   useGetAllRentalsQuery,
 } from "../../../../redux/features/rental";
 import { MainLayout } from "../../../../components/layouts";
-import { Container } from "../../../../components/atoms";
+import { Container, Text } from "../../../../components/atoms";
 import { useModal } from "../../../../hooks";
 import { RentalCostModal, RentalTable } from "./components";
 
@@ -57,6 +57,20 @@ export const RentalLists: React.FC = () => {
   return (
     <MainLayout>
       <Container>
+        <div>
+          <Text variant="H1" className="text-center mb-4 text-black">
+            Rental Mange
+          </Text>
+          <Text
+            variant="P3"
+            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+            className="text-black pb-16"
+          >
+            As an admin, Lorem ipsum dolor sit amet consectetur adipisicing
+            elit. Corrupti a ipsa debitis iure animi soluta ipsam unde sapiente
+            necessitatibus quod.
+          </Text>
+        </div>
         <RentalTable
           rentals={rentalsData}
           loading={isLoading}
