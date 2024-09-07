@@ -1,17 +1,22 @@
 import React from "react";
 import { Table, Button, Space } from "antd";
 import { TRental } from "../../../../../../redux/features/rental";
+import { TMeta } from "../../../../../../redux/features/types";
 
 type RentalTableProps = {
   rentals: TRental[];
   loading: boolean;
   handleCalculateClick: (rentalId: TRental) => void;
+  meta: TMeta | undefined;
+  onTableChange: (pagination: any) => void;
 };
 
 export const RentalTable: React.FC<RentalTableProps> = ({
   rentals,
   loading,
   handleCalculateClick,
+  meta,
+  onTableChange,
 }) => {
   const columns = [
     {
@@ -66,7 +71,13 @@ export const RentalTable: React.FC<RentalTableProps> = ({
       columns={columns}
       rowKey="_id"
       loading={loading}
-      pagination={{ pageSize: 10 }}
+      pagination={{
+        current: meta?.page || 1,
+        pageSize: meta?.limit || 10,
+        total: meta?.total || 0,
+        showSizeChanger: true,
+        pageSizeOptions: ["10", "20", "50", "100"],
+      }}
       scroll={{ x: "max-content" }}
     />
   );

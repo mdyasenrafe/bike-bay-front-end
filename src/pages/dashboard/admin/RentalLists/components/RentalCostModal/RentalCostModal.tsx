@@ -1,15 +1,22 @@
 import { Modal } from "../../../../../../components";
 import { Button } from "../../../../../../components/atoms";
-import { FormDatePicker, FormWrapper } from "../../../../../../components/form";
+import {
+  FormDatePicker,
+  FormTimePicker,
+  FormWrapper,
+} from "../../../../../../components/form";
+import { TRental } from "../../../../../../redux/features/rental";
 
 type RentalCostModalProps = {
   isModalOpen: boolean;
   closeModal: () => void;
+  selectedRental: TRental;
 };
 
 export const RentalCostModal: React.FC<RentalCostModalProps> = ({
   isModalOpen,
   closeModal,
+  selectedRental,
 }) => {
   const handleCalculate = async (values: {
     startTime: string;
@@ -24,7 +31,7 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
       closeModal();
     } catch (error) {}
   };
-
+  const startTime = selectedRental?.startTime;
   return (
     <Modal
       title="Calculate Rental Cost"
@@ -33,9 +40,14 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
       centered
     >
       <FormWrapper onSubmit={handleCalculate}>
-        <FormDatePicker name="endTime" label="End Time" />
-        <Button type="primary" htmlType="submit">
-          Calculate
+        <FormDatePicker name="endDate" label="End Date" />
+        <FormTimePicker name="endTime" label="End Time" />
+        <Button
+          color="primary"
+          htmlType="submit"
+          className="w-full h-[48px] text-[18px] text-white"
+        >
+          Submit
         </Button>
       </FormWrapper>
     </Modal>

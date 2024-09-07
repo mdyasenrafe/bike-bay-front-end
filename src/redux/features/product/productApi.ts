@@ -53,14 +53,7 @@ const ProductApi = baseApi.injectEndpoints({
 
         return { url: "bikes", params };
       },
-      onQueryStarted: async (filters, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setProducts(data.data as TProduct[]));
-        } catch (error) {
-          console.error("Failed to fetch products:", error);
-        }
-      },
+      providesTags: ["Products"],
     }),
     getProductsById: builder.query<TResponse<TProduct>, string>({
       query: (productId) => ({

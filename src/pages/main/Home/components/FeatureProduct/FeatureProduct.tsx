@@ -22,8 +22,6 @@ export const FeatureProduct = () => {
     isAvailable: true,
   });
 
-  const featuredProducts = useAppSelector(getProducts);
-
   const navigate = useNavigate();
   return (
     <section className="py-40">
@@ -45,7 +43,7 @@ export const FeatureProduct = () => {
           <LoadingSpinner />
         ) : (
           <Row justify="center" gutter={[16, 16]}>
-            {featuredProducts.map((product, index) => (
+            {data?.data?.map((product, index) => (
               <Col key={index} xs={24} sm={12} md={8} lg={6}>
                 <ProductCard product={product} />
               </Col>
