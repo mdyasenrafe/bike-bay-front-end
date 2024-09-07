@@ -29,6 +29,7 @@ export const RentalLists: React.FC = () => {
       value: pagination.pageSize,
       name: "limit",
     },
+    { name: "advancePaymentStatus", value: "paid" },
   ]);
   const { openModal, isModalOpen, closeModal } = useModal();
 
