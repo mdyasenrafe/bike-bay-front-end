@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TAuthState, TUser } from "./types";
 import { RootState } from "../../store";
-import userEvent from "@testing-library/user-event";
 
 const initialState: TAuthState = {
   user: null,

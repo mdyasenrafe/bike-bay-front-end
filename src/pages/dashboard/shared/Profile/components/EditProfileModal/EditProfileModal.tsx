@@ -2,17 +2,16 @@ import React from "react";
 import { FormInput, FormWrapper } from "../../../../../../components/form";
 import { Modal } from "../../../../../../components";
 import { Button } from "../../../../../../components/atoms";
-import {
-  TUpdateValue,
-  TUser,
-  getCurrentUser,
-  useUpdateMutation,
-} from "../../../../../../redux/features/auth";
+import { TUser, getCurrentUser } from "../../../../../../redux/features/auth";
 import { useAppSelector } from "../../../../../../redux";
 import { toast } from "sonner";
 import { SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateUserSchema } from "../../../../../../Schema";
+import {
+  TUpdateValue,
+  useUpdateMutation,
+} from "../../../../../../redux/features/users";
 
 export type EditProfileModalProps = {
   isModalOpen: boolean;

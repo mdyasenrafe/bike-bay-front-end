@@ -5,9 +5,10 @@ export type TUser = {
   password: string;
   phone: string;
   address: string;
-  role: string;
+  role: "user" | "admin";
   createdAt: string;
   updatedAt: string;
+  status: "active" | "deleted";
   __v: number;
 };
 
@@ -28,11 +29,4 @@ export type TSignupValue = {
   phone: string;
   address: string;
   role: "user" | "admin";
-};
-
-export type TUpdateValue = {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
 };
