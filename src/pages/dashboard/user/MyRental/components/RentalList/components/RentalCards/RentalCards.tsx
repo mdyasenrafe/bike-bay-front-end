@@ -1,8 +1,12 @@
 import React, { useCallback } from "react";
-import { Card, Col, Row } from "antd";
+import { Card, Col, Row, Badge, Tooltip } from "antd";
 import { TRental } from "../../../../../../../../redux/features/rental";
 import { Button, Text } from "../../../../../../../../components/atoms";
 import { formatEndTime, formatStartTime } from "../../../../../../../../utils";
+import {
+  CheckCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 
 type RentalCardsProps = {
   rentals: TRental[];
@@ -22,6 +26,19 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
     [onPayClick]
   );
 
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "booked":
+        return <Badge status="default" text="Booked" />;
+      case "returned":
+        return <Badge status="processing" text="Returned" />;
+      case "completed":
+        return <Badge status="success" text="Completed" />;
+      default:
+        return <Badge status="default" text="Unknown" />;
+    }
+  };
+
   return (
     <Row justify="center" gutter={[16, 16]}>
       {rentals.map((rental) => (
@@ -37,6 +54,7 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
             }
             className="border rounded-lg shadow-lg flex flex-col"
           >
+            <div className="mb-3">{getStatusBadge(rental.status)}</div>
             <Card.Meta
               title={<Text variant={"H4"}>{rental.bikeId.name}</Text>}
               description={
@@ -52,7 +70,7 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
                       : "Not yet returned"}
                   </Text>
                   <Text variant={"P2"}>
-                    <strong>Total Cost:</strong> ${rental.totalCost}
+                    <strong>Total Cost:</strong> ${rental.totalCost.toFixed(2)}
                   </Text>
                 </>
               }
@@ -60,7 +78,7 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
             {showPayButton && (
               <Button
                 color="primary"
-                className="mt-5"
+                className="mt-5 w-full text-white"
                 onClick={() => handlePayClick(rental)}
                 disabled={!rental.isReturned}
               >

@@ -52,52 +52,66 @@ export const PayModal: React.FC<PayModalProps> = ({
       isModalOpen={isModalOpen}
       closeModal={closeModal}
     >
-      <div className="flex flex-col space-y-6">
+      <div className="space-y-6">
         {/* Total Section */}
-        <div className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white flex justify-between">
-          <Text variant="H4" className="mb-2 text-gray-800">
+        <div className="p-4 border rounded-lg shadow-sm bg-gray-100 flex justify-between items-center">
+          <Text variant="H4" className="text-gray-800">
             Total Amount
           </Text>
-          <Text variant="H5" className="font-semibold text-gray-600">
+          <Text variant="H5" className="font-semibold text-gray-800">
             ${rental.totalCost.toFixed(2)}
           </Text>
         </div>
 
         {/* Coupon Input Section */}
-        <div className="flex items-center justify-between space-x-4">
-          <Input
-            placeholder="Enter Coupon Code"
-            value={couponCode}
-            onChange={(e) => setCouponCode(e.target.value)}
-            className="flex-1 p-2 border border-gray-300 rounded-lg"
-            allowClear
-          />
-          <Button
-            color="secondary"
-            className="px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
-            onClick={handleApplyCoupon}
-          >
-            Apply
-          </Button>
+        <div className="flex flex-col space-y-2">
+          <Text variant="P2" className="text-gray-500">
+            Have a coupon code? Apply it below.
+          </Text>
+          <div className="flex items-center space-x-4">
+            <Input
+              placeholder="Enter Coupon Code"
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+              className="p-3 border border-gray-300 rounded-md shadow-sm flex-1"
+            />
+            <Button
+              color="secondary"
+              className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              onClick={handleApplyCoupon}
+            >
+              Apply
+            </Button>
+          </div>
         </div>
 
         {/* Divider */}
         <Divider />
 
         {/* Discount and Final Total */}
-        <div className="p-4 border border-gray-300 rounded-lg shadow-sm bg-white">
-          <Text variant="P2" className="mb-2 text-gray-800">
-            Discount Applied: <span className="font-semibold">${discount}</span>
-          </Text>
-          <Text variant="H5" className="font-semibold text-gray-600">
-            Final Total: ${totalAfterDiscount.toFixed(2)}
-          </Text>
+        <div className="p-4 border rounded-lg shadow-sm bg-gray-100">
+          <div className="flex justify-between items-center">
+            <Text variant="P2" className="text-gray-800">
+              Discount Applied:
+            </Text>
+            <Text variant="P2" className="font-semibold text-green-600">
+              - ${discount.toFixed(2)}
+            </Text>
+          </div>
+          <div className="flex justify-between items-center mt-2">
+            <Text variant="H5" className="font-semibold text-gray-800">
+              Final Total:
+            </Text>
+            <Text variant="H5" className="font-semibold text-gray-800">
+              ${totalAfterDiscount.toFixed(2)}
+            </Text>
+          </div>
         </div>
 
         {/* Pay Button */}
         <Button
           color="primary"
-          className="w-full py-3 text-white bg-green-600 rounded-lg hover:bg-green-700"
+          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           onClick={handlePayment}
         >
           Pay ${totalAfterDiscount.toFixed(2)}
