@@ -6,18 +6,7 @@ import {
   FormTimePicker,
   FormWrapper,
 } from "../../../../../components/form";
-import {
-  Button,
-  PaymentForm,
-  PaymentSection,
-  Text,
-} from "../../../../../components/atoms";
-import {
-  useStripe,
-  useElements,
-  PaymentElement,
-  Elements,
-} from "@stripe/react-stripe-js";
+import { Button, PaymentSection, Text } from "../../../../../components/atoms";
 import { TProduct } from "../../../../../redux/features/product";
 import {
   TRentalRequest,
@@ -28,11 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema } from "../../../../../Schema";
 import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { loadStripe } from "@stripe/stripe-js";
-
 dayjs.extend(utc);
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
 export type TBookingValues = {
   startDate: Date;
