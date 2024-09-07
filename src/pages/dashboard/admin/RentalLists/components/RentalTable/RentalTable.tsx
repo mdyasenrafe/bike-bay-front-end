@@ -78,7 +78,8 @@ export const RentalTable: React.FC<RentalTableProps> = ({
         showSizeChanger: true,
         pageSizeOptions: ["10", "20", "50", "100"],
       }}
-      scroll={{ x: "max-content" }}
+      onChange={onTableChange}
+      scroll={{ x: true }}
     />
   );
 };
