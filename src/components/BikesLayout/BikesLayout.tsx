@@ -29,6 +29,7 @@ export const BikesLayout: React.FC<BikesLayoutProps> = ({ editOption }) => {
     ...filters,
     page: currentPage,
     limit: pageSize,
+    status: "active",
   });
 
   const handleSearch = (value: string) => {

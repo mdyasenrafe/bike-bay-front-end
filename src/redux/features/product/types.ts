@@ -26,6 +26,7 @@ export type TFilters = {
   page?: number;
   isAvailable?: boolean;
   model?: string;
+  status?: "active" | "inactive";
 };
 
 export type OptionType = { value: string | boolean; label: string };

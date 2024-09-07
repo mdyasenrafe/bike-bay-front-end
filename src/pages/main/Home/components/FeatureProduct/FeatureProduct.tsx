@@ -20,6 +20,7 @@ export const FeatureProduct = () => {
     page: 1,
     sort: "-createdAt",
     isAvailable: true,
+    status: "active",
   });
 
   const navigate = useNavigate();
