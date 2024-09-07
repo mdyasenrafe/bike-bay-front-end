@@ -2,7 +2,7 @@ import {
   BikeManagement,
   CouponManagement,
   CreateProduct,
-  ReturnBike,
+  RentalLists,
   UpdateProduct,
   UserManagement,
 } from "../pages/dashboard/admin";
@@ -45,8 +45,8 @@ export const adminRoutes: TAppRoute[] = [
   {
     id: 6.5,
     name: "Rental Lists",
-    path: "/dashboard/admin/return-bike",
-    component: <ReturnBike />,
+    path: "/dashboard/admin/rental-lists",
+    component: <RentalLists />,
     isNavItem: false,
     isSidebar: true,
   },

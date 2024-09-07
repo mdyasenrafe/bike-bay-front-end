@@ -27,10 +27,19 @@ const rentalSlice = createSlice({
     setRentals: (state, action: PayloadAction<TRental[]>) => {
       state.rentals = action.payload;
     },
+    updateRental: (state, action: PayloadAction<TRental>) => {
+      const index = state.rentals.findIndex(
+        (rental) => rental._id === action.payload._id
+      );
+      if (index !== -1) {
+        state.rentals[index] = action.payload;
+      }
+    },
   },
 });
 
-export const { addRental, deleteRental, setRentals } = rentalSlice.actions;
+export const { addRental, deleteRental, setRentals, updateRental } =
+  rentalSlice.actions;
 
 export const useGetRentals = (state: RootState) => state.rental.rentals;
 

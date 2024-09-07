@@ -30,6 +30,7 @@ const rentalApi = baseApi.injectEndpoints({
 
         return { url: "rentals", params: params };
       },
+      providesTags: ["Rentals"],
       onQueryStarted: async (filters, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
@@ -39,7 +40,32 @@ const rentalApi = baseApi.injectEndpoints({
         }
       },
     }),
+    getAllRentals: builder.query<TResponse<TRental[]>, TQueryParams[]>({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return { url: "/rentals/get-all-rentals", params: params };
+      },
+      providesTags: ["Rentals"],
+    }),
+    calculateRentalCost: builder.mutation<TRental, { id: string }>({
+      query: (data) => ({
+        url: `/rentals/${data.id}/calculate`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Rentals"],
+    }),
   }),
 });
 
-export const { useCreateRentalMutation, useGetUserRentalsQuery } = rentalApi;
+export const {
+  useCreateRentalMutation,
+  useGetUserRentalsQuery,
+  useGetAllRentalsQuery,
+  useCalculateRentalCostMutation,
+} = rentalApi;

@@ -1,4 +1,3 @@
-import React from "react";
 import { CiLight } from "react-icons/ci";
 import { IoMoonOutline } from "react-icons/io5";
 import {
