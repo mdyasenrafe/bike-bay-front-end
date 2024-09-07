@@ -5,6 +5,13 @@ import { TUpdateValue } from "./types";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query<TResponse<TUser[]>, void>({
+      query: () => ({
+        url: "users",
+        method: "GET",
+      }),
+      providesTags: ["Users"],
+    }),
     update: builder.mutation<TResponse<TUser>, TUpdateValue>({
       query: (data) => ({
         url: "users/me",
@@ -16,11 +23,30 @@ const userApi = baseApi.injectEndpoints({
           const { data } = await queryFulfilled;
           dispatch(updateUser(data?.data as TUser));
         } catch (error) {
-          console.error("Failed to fetch products:", error);
+          console.error("Failed to update user:", error);
         }
       },
+    }),
+    updateRole: builder.mutation<TResponse<TUser>, string>({
+      query: (id) => ({
+        url: `users/role-update/${id}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    softDeleteUser: builder.mutation<TResponse<TUser>, string>({
+      query: (id) => ({
+        url: `users/change-status/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Users"],
     }),
   }),
 });
 
-export const { useUpdateMutation } = userApi;
+export const {
+  useGetAllUsersQuery,
+  useUpdateMutation,
+  useUpdateRoleMutation,
+  useSoftDeleteUserMutation,
+} = userApi;
