@@ -1,17 +1,17 @@
 import React from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Space } from "antd";
 import { TRental } from "../../../../../../redux/features/rental";
 
-interface RentalTableProps {
+type RentalTableProps = {
   rentals: TRental[];
   loading: boolean;
-  onCalculateClick: (rentalId: string) => void;
-}
+  handleCalculateClick: (rentalId: TRental) => void;
+};
 
 export const RentalTable: React.FC<RentalTableProps> = ({
   rentals,
   loading,
-  onCalculateClick,
+  handleCalculateClick,
 }) => {
   const columns = [
     {
@@ -50,10 +50,12 @@ export const RentalTable: React.FC<RentalTableProps> = ({
     {
       title: "Actions",
       key: "actions",
-      render: (_: any, record: any) => (
-        <Button type="primary" onClick={() => onCalculateClick(record._id)}>
-          Calculate
-        </Button>
+      render: (_: any, record: TRental) => (
+        <Space>
+          <Button type="primary" onClick={() => handleCalculateClick(record)}>
+            Calculate
+          </Button>
+        </Space>
       ),
     },
   ];

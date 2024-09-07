@@ -52,7 +52,6 @@ export const UserManagement: React.FC = () => {
     [openModal]
   );
 
-  // Single handler for both update role and soft delete actions
   const handleConfirmAction = useCallback(async () => {
     if (selectedUser) {
       try {
@@ -70,7 +69,6 @@ export const UserManagement: React.FC = () => {
     }
   }, [selectedUser, actionType, updateRole, softDeleteUser, closeModal]);
 
-  // Handle pagination changes in the table
   const handleTableChange = useCallback((paginationData: any) => {
     setPagination({
       page: paginationData.current,
