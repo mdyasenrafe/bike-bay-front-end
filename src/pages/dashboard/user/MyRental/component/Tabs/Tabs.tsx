@@ -21,7 +21,9 @@ const Tabs: React.FC<TabsProps> = ({ activeTab, setActiveTab }) => {
             key={key}
             onClick={() => setActiveTab(key as TActiveTab)}
             color={key === activeTab ? "primary" : "grey"}
-            className=" h-[48px] w-[200px] rounded-full font-poppins text-[16px]"
+            className={`h-[48px] w-[200px] rounded-full font-poppins text-[16px] ${
+              key === activeTab ? "text-white" : "text-black"
+            }`}
           >
             {label}
           </Button>
