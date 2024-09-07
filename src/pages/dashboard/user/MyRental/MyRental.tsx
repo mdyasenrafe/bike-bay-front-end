@@ -4,11 +4,11 @@ import {
   useGetRentals,
   TRental,
 } from "../../../../redux/features/rental";
-import { TActiveTab } from "./component/types";
+import { TActiveTab } from "./components/types";
 import { MainLayout } from "../../../../components/layouts";
 import { Container, LoadingSpinner, Text } from "../../../../components/atoms";
-import Tabs from "./component/Tabs/Tabs";
-import { RentalList } from "./component";
+import Tabs from "./components/Tabs/Tabs";
+import { RentalList } from "./components";
 
 export const MyRental = () => {
   // states

@@ -52,6 +52,13 @@ const rentalApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Rentals"],
     }),
+    completeRentalCost: builder.mutation<TRental, TRentalCalculateRequest>({
+      query: (data) => ({
+        url: `/rentals/${data.rentalId}/complete-rental`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Rentals"],
+    }),
   }),
 });
 
@@ -60,4 +67,5 @@ export const {
   useGetUserRentalsQuery,
   useGetAllRentalsQuery,
   useCalculateRentalCostMutation,
+  useCompleteRentalCostMutation,
 } = rentalApi;
