@@ -1,9 +1,8 @@
-. return bike page design from admin dashboard
-. return bike should work from my rentals page
-footer page
-
+compare mode
+darm mode feature need to work
 
 
 bugs:
 redirect to exact path if user logged in
 start time should be same for payment modal
+need to fixed stripe decimal issues
