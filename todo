@@ -5,4 +5,4 @@ darm mode feature need to work
 bugs:
 redirect to exact path if user logged in
 start time should be same for payment modal
-need to fixed stripe decimal issues
+need to work delete coupon
