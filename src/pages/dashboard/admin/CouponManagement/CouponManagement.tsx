@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import { useGetCouponsQuery } from "../../../../redux/features/coupon";
 import { useModal } from "../../../../hooks";
 import { TCoupon } from "../../../../redux/features/coupon/types";
 import { CreateCouponModal, DeleteCouponModal } from "./components";
 import { Colors } from "../../../../theme";
+import { MainLayout } from "../../../../components/layouts";
+import { Button, Container, Text } from "../../../../components/atoms";
+import { FaPlus } from "react-icons/fa";
 
 export const CouponManagement: React.FC = () => {
   const [pagination, setPagination] = useState<{
@@ -86,36 +89,63 @@ export const CouponManagement: React.FC = () => {
   ];
 
   return (
-    <div className="p-8 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-semibold mb-6">Coupon Management</h1>
+    <MainLayout>
+      <Container>
+        <div>
+          <div className="mt-6">
+            <Text variant="H2" className="text-center mb-4 text-black">
+              Manage BikeBay Coupons
+            </Text>
+            <Text
+              variant="P3"
+              style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+              className="text-black pb-16"
+            >
+              Here you can view, create, update, and manage all discount coupons
+              available in the BikeBay system. Keep track of active and inactive
+              coupons and handle promotions easily.
+            </Text>
+          </div>
 
-      <Button type="primary" onClick={openModal}>
-        Create Coupon
-      </Button>
+          <div className="text-end mb-6">
+            <Button
+              color="primary"
+              icon={<FaPlus />}
+              size="large"
+              className="text-white"
+              onClick={openModal}
+            >
+              Create New Coupon
+            </Button>
+          </div>
+          <Table
+            className="mt-6"
+            columns={columns}
+            dataSource={coupons?.data}
+            rowKey="code"
+            loading={isLoading || isFetching}
+            pagination={{
+              current: coupons?.meta?.page || 1,
+              pageSize: coupons?.meta?.limit || 10,
+              total: coupons?.meta?.total || 0,
+              showSizeChanger: true,
+              pageSizeOptions: ["10", "20", "50", "100"],
+            }}
+            scroll={{ x: true }}
+          />
 
-      <Table
-        className="mt-6"
-        columns={columns}
-        dataSource={coupons?.data}
-        rowKey="code"
-        loading={isLoading || isFetching}
-        pagination={{
-          current: coupons?.meta?.page || 1,
-          pageSize: coupons?.meta?.limit || 10,
-          total: coupons?.meta?.total || 0,
-          showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "50", "100"],
-        }}
-        scroll={{ x: true }}
-      />
+          <CreateCouponModal
+            isModalOpen={isModalOpen}
+            closeModal={closeModal}
+          />
 
-      <CreateCouponModal isModalOpen={isModalOpen} closeModal={closeModal} />
-
-      <DeleteCouponModal
-        isModalOpen={isDeleteModalOpen}
-        closeModal={closeDeleteModal}
-        coupon={selectedCoupon}
-      />
-    </div>
+          <DeleteCouponModal
+            isModalOpen={isDeleteModalOpen}
+            closeModal={closeDeleteModal}
+            coupon={selectedCoupon}
+          />
+        </div>
+      </Container>
+    </MainLayout>
   );
 };
