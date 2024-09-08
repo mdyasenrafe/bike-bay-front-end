@@ -20,6 +20,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const onEdit = (event: SyntheticEvent, id: string) => {
     event.stopPropagation();
+    navigate(`/dashboard/admin/edit/${id}`);
   };
 
   return (
