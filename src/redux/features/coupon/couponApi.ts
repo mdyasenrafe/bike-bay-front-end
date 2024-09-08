@@ -1,5 +1,5 @@
 import { baseApi } from "../../../api/baseApi";
-import { TResponse } from "../types";
+import { TQueryParams, TResponse } from "../types";
 import {
   TCoupon,
   TCouponRequest,
@@ -27,8 +27,17 @@ export const couponApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    getCoupons: builder.query<TResponse<TCoupon[]>, void>({
-      query: () => "/coupons",
+    getCoupons: builder.query<TResponse<TCoupon[]>, TQueryParams[]>({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+
+        return { url: "/coupons", params: params };
+      },
       providesTags: ["Coupons"],
     }),
   }),

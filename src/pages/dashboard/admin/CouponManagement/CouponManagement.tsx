@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Table } from "antd";
 import { useGetCouponsQuery } from "../../../../redux/features/coupon";
 import { useModal } from "../../../../hooks";
@@ -6,7 +6,28 @@ import { TCoupon } from "../../../../redux/features/coupon/types";
 import { CreateCouponModal, DeleteCouponModal } from "./components";
 
 export const CouponManagement: React.FC = () => {
-  const { data: coupons, isLoading, isFetching } = useGetCouponsQuery();
+  const [pagination, setPagination] = useState<{
+    page: number;
+    pageSize: number;
+  }>({
+    page: 1,
+    pageSize: 10,
+  });
+
+  const {
+    data: coupons,
+    isLoading,
+    isFetching,
+  } = useGetCouponsQuery([
+    {
+      value: pagination.page,
+      name: "page",
+    },
+    {
+      value: pagination.pageSize,
+      name: "limit",
+    },
+  ]);
   const { isModalOpen, openModal, closeModal } = useModal();
   const {
     isModalOpen: isDeleteModalOpen,
@@ -69,7 +90,14 @@ export const CouponManagement: React.FC = () => {
         dataSource={coupons?.data}
         rowKey="code"
         loading={isLoading || isFetching}
-        pagination={{ pageSize: 10 }}
+        pagination={{
+          current: coupons?.meta?.page || 1,
+          pageSize: coupons?.meta?.limit || 10,
+          total: coupons?.meta?.total || 0,
+          showSizeChanger: true,
+          pageSizeOptions: ["10", "20", "50", "100"],
+        }}
+        scroll={{ x: true }}
       />
 
       <CreateCouponModal isModalOpen={isModalOpen} closeModal={closeModal} />

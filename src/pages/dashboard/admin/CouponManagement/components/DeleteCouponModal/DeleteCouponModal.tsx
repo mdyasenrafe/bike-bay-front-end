@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 import { TCoupon } from "../../../../../../redux/features/coupon/types";
+import { Text } from "../../../../../../components/atoms";
 
 type DeleteCouponModalProps = {
   isModalOpen: boolean;
@@ -23,8 +24,11 @@ export const DeleteCouponModal: React.FC<DeleteCouponModalProps> = ({
       open={isModalOpen}
       onCancel={closeModal}
       footer={null}
+      centered
     >
-      <p>Are you sure you want to delete the coupon "{coupon?.code}"?</p>
+      <Text variant="P4">
+        Are you sure you want to delete the coupon "{coupon?.code}"?
+      </Text>
       <div className="flex justify-end mt-4">
         <Button className="mr-2" onClick={closeModal}>
           Cancel
