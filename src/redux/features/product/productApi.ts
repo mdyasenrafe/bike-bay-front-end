@@ -12,7 +12,7 @@ const ProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createProduct: builder.mutation<TResponse<TProduct>, Partial<TProduct>>({
       query: (newProduct) => ({
-        url: "/bikes/create",
+        url: "/bikes",
         method: "POST",
         body: newProduct,
       }),

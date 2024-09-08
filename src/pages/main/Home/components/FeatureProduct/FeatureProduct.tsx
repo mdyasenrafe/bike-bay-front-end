@@ -45,7 +45,7 @@ export const FeatureProduct = () => {
         ) : (
           <Row justify="center" gutter={[16, 16]}>
             {data?.data?.map((product, index) => (
-              <Col key={index} xs={24} sm={12} md={8} lg={6}>
+              <Col key={product._id} xs={24} sm={12} md={12} lg={8} xl={6}>
                 <ProductCard product={product} />
               </Col>
             ))}

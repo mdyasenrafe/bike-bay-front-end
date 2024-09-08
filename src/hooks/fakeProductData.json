@@ -1,0 +1,130 @@
+[
+
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d1703501c"
+      },
+      "name": "Ducati Panigale V2",
+      "description": "The Ducati Panigale V2 is a stunning middleweight superbike that combines exhilarating performance with refined handling. Powered by a 955cc Superquadro V-twin engine, it delivers a thrilling ride with a distinctive Ducati sound. The bike's race-inspired design, advanced electronics, and fully adjustable suspension contribute to its exceptional performance on both the road and the track. With its sleek bodywork and sophisticated technology, the Panigale V2 is a favorite among those who crave a high-performance, stylish motorcycle.",
+      "pricePerHour": 350,
+      "isAvailable": false,
+      "cc": 955,
+      "model": "Panigale V2",
+      "brand": "Ducati",
+      "thumb": "https://i.ibb.co/8X1vPsh/image.png",
+      "year": 2024
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d1703501d"
+      },
+      "name": "Honda CRF1100L Africa Twin",
+      "description": "The Honda CRF1100L Africa Twin is a versatile adventure motorcycle built to tackle any terrain with ease. Equipped with a 1084cc parallel-twin engine, it provides ample power and torque for off-road and on-road adventures. The bike features a long-travel suspension, advanced traction control, and multiple riding modes to handle diverse conditions. Its rugged design, including a tall windscreen, long-travel suspension, and large fuel tank, makes it ideal for long-distance touring and exploring challenging landscapes.",
+      "pricePerHour": 300,
+      "isAvailable": true,
+      "cc": 1084,
+      "model": "CRF1100L Africa Twin",
+      "brand": "Honda",
+      "thumb": "https://i.ibb.co/vxZ1frR/image.png",
+      "year": 2023
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d1703501e"
+      },
+      "name": "Suzuki V-Strom 650",
+      "description": "The Suzuki V-Strom 650 is a reliable and capable adventure touring bike that excels in both on-road and off-road conditions. Powered by a 645cc V-twin engine, it delivers a smooth and responsive performance. The bike's comfortable ergonomics, large windscreen, and adjustable suspension make it well-suited for long-distance journeys. With its durable build and versatile nature, the V-Strom 650 is a popular choice for riders seeking a dependable companion for adventure and touring.",
+      "pricePerHour": 220,
+      "isAvailable": false,
+      "cc": 645,
+      "model": "V-Strom 650",
+      "brand": "Suzuki",
+      "thumb": "https://i.ibb.co/N1sKJPp/image.png",
+      "year": 2023
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d1703501f"
+      },
+      "name": "Royal Enfield Interceptor 650",
+      "description": "The Royal Enfield Interceptor 650 is a retro-styled motorcycle that offers a blend of classic design and modern performance. With its 648cc parallel-twin engine, it provides a relaxed and enjoyable riding experience. The bike features vintage-inspired styling with a modern twist, including a comfortable seat, classic round headlamp, and quality components. Its smooth ride, stylish looks, and accessible performance make it a great choice for those who appreciate retro aesthetics and straightforward riding enjoyment.",
+      "pricePerHour": 200,
+      "isAvailable": true,
+      "cc": 648,
+      "model": "Interceptor 650",
+      "brand": "Royal Enfield",
+      "thumb": "https://i.ibb.co/3dwnK0W/image.png",
+      "year": 2024
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d17035020"
+      },
+      "name": "Triumph Tiger 900",
+      "description": "The Triumph Tiger 900 is a versatile adventure bike designed for both on-road and off-road adventures. Featuring a 888cc triple engine, it offers a powerful and smooth ride with excellent torque and acceleration. The bike's advanced electronics, adjustable suspension, and comfortable ergonomics make it well-suited for long journeys and varied terrain. Its distinctive design, with a prominent beak and high-quality build, reflects Triumph's commitment to performance and durability in the adventure motorcycle segment.",
+      "pricePerHour": 320,
+      "isAvailable": true,
+      "cc": 888,
+      "model": "Tiger 900",
+      "brand": "Triumph",
+      "thumb": "https://i.ibb.co/smH8g4C/image.png",
+      "year": 2024
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d17035021"
+      },
+      "name": "KTM RC 390",
+      "description": "The KTM RC 390 is a sportbike that delivers thrilling performance and precise handling. Equipped with a 373cc single-cylinder engine, it offers impressive power and responsiveness. The bike's aerodynamic fairing, aggressive styling, and advanced features like a quick-shifter and ride-by-wire technology contribute to its sporty character. Its lightweight chassis and race-inspired design make it a top choice for riders looking for an exciting and engaging ride on both track and road.",
+      "pricePerHour": 180,
+      "isAvailable": false,
+      "cc": 373,
+      "model": "RC 390",
+      "brand": "KTM",
+      "thumb": "https://i.ibb.co/4RrhVRv/image.png",
+      "year": 2023
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d17035022"
+      },
+      "name": "Yamaha YZF-R3",
+      "description": "The Yamaha YZF-R3 is a sporty and accessible entry-level motorcycle that offers an exciting riding experience. It features a 321cc parallel-twin engine that delivers smooth power and agile handling. The bike's aggressive design, including a sleek fairing and dual LED headlights, gives it a dynamic appearance. Its lightweight frame and comfortable riding position make it suitable for new riders as well as experienced riders looking for a fun and nimble machine. With its blend of performance and style, the YZF-R3 is a popular choice in the entry-level sportbike market.",
+      "pricePerHour": 140,
+      "isAvailable": true,
+      "cc": 321,
+      "model": "YZF-R3",
+      "brand": "Yamaha",
+      "thumb": "https://i.ibb.co/4M3G7sM/image.png",
+      "year": 2022
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d17035023"
+      },
+      "name": "Harley-Davidson Road King",
+      "description": "The Harley-Davidson Road King is a classic touring motorcycle that combines traditional styling with modern comfort and performance. It features a 1746cc Milwaukee-Eight V-twin engine, delivering ample power and a smooth ride. The Road King is equipped with touring essentials such as a comfortable seat, large windscreen, and saddlebags. Its timeless design, including chrome accents and iconic Harley-Davidson details, makes it a favorite among long-distance riders seeking a blend of style and practicality.",
+      "pricePerHour": 350,
+      "isAvailable": true,
+      "cc": 1746,
+      "model": "Road King",
+      "brand": "Harley-Davidson",
+      "thumb": "https://i.ibb.co/jV0kB9T/image.png",
+      "year": 2024
+    },
+    {
+      "_id": {
+        "$oid": "66da340fd654d44d17035024"
+      },
+      "name": "BMW R 1250 GS",
+      "description": "The BMW R 1250 GS is a flagship adventure motorcycle known for its robust performance and advanced technology. Powered by a 1254cc boxer twin engine, it provides exceptional torque and smooth power delivery. The bike's advanced electronics, including dynamic traction control, electronic suspension adjustment, and multiple riding modes, ensure a comfortable and controlled ride. Its rugged design, including a tall windscreen, long-travel suspension, and large fuel tank, makes it ideal for long-distance touring and off-road adventures.",
+      "pricePerHour": 400,
+      "isAvailable": true,
+      "cc": 1254,
+      "model": "R 1250 GS",
+      "brand": "BMW",
+      "thumb": "https://i.ibb.co/4FT3rx6/image.png",
+      "year": 2023
+    }
+  ]
+  

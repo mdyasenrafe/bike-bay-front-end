@@ -4,6 +4,7 @@ import { FormInput, FormTextArea, FormWrapper } from "../form";
 import { Button } from "../atoms";
 import { TProduct } from "../../redux/features/product";
 import { FormUpload } from "../form/FormUpload";
+import { createProductSchema } from "../../Schema";
 
 interface ProductFormProps {
   initialProductValues: Partial<TProduct>;
@@ -17,16 +18,23 @@ export const ProductForm: React.FC<ProductFormProps> = ({
   isLoading,
 }) => {
   return (
-    <FormWrapper onSubmit={onSubmit} defaultValues={initialProductValues}>
+    <FormWrapper
+      onSubmit={onSubmit}
+      defaultValues={initialProductValues}
+      resolver={zodResolver(createProductSchema)}
+    >
       <FormInput type="text" name="name" label="Bike Name" />
       <FormTextArea name="description" label="Description" />
-      <FormInput type="number" name="pricePerHour" label="Price Per Hour" />
-      <FormInput type="number" name="cc" label="CC" />
+      <FormInput type="string" name="pricePerHour" label="Price Per Hour" />
+      <FormInput type="string" name="cc" label="CC" />
       <FormInput type="text" name="model" label="Model" />
       <FormInput type="text" name="brand" label="Brand" />
-      <FormInput type="number" name="year" label="Year" />
-      <FormUpload name="thumb" />
-
+      <FormInput type="string" name="year" label="Year" />
+      <FormUpload
+        name="thumb"
+        label="Upload Product Image"
+        defaultValue={[initialProductValues?.thumb as string]}
+      />
       <Button
         color="primary"
         htmlType="submit"
