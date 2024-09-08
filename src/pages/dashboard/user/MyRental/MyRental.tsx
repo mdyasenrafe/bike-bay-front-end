@@ -15,6 +15,7 @@ export const MyRental = () => {
   const [activeTab, setActiveTab] = useState<TActiveTab>("unpaid");
   const { data, isLoading } = useGetUserRentalsQuery([
     { name: "advancePaymentStatus", value: "paid" },
+    { name: "sort", value: "-startTime" },
   ]);
 
   const filteredRentals = useMemo(() => {
