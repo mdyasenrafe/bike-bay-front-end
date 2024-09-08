@@ -4,6 +4,7 @@ import { useGetCouponsQuery } from "../../../../redux/features/coupon";
 import { useModal } from "../../../../hooks";
 import { TCoupon } from "../../../../redux/features/coupon/types";
 import { CreateCouponModal, DeleteCouponModal } from "./components";
+import { Colors } from "../../../../theme";
 
 export const CouponManagement: React.FC = () => {
   const [pagination, setPagination] = useState<{
@@ -63,7 +64,15 @@ export const CouponManagement: React.FC = () => {
       title: "Status",
       dataIndex: "isActive",
       key: "isActive",
-      render: (isActive: boolean) => (isActive ? "Active" : "Inactive"),
+      render: (status: boolean) => (
+        <span
+          style={{
+            color: status ? Colors.green : Colors.red,
+          }}
+        >
+          {status ? "Active" : "Inactive"}
+        </span>
+      ),
     },
     {
       title: "Actions",
