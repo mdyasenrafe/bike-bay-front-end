@@ -4,3 +4,4 @@ export * from "./UpdateProduct";
 export * from "./CreateProduct";
 export * from "./UserManagement";
 export * from "./RentalLists";
+export * from "./EditProduct";

@@ -67,7 +67,7 @@ export const adminRoutes: TAppRoute[] = [
     isSidebar: false,
   },
   {
-    id: 6.7,
+    id: 6.8,
     name: "Update Product",
     path: "/dashboard/admin/edit/:productId",
     component: <UpdateProduct />,
