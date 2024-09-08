@@ -59,16 +59,17 @@ export const RentalLists: React.FC = () => {
       <Container>
         <div>
           <Text variant="H1" className="text-center mb-4 text-black">
-            Rental Mange
+            Rental Management Dashboard
           </Text>
           <Text
             variant="P3"
             style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
             className="text-black pb-16"
           >
-            As an admin, Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Corrupti a ipsa debitis iure animi soluta ipsam unde sapiente
-            necessitatibus quod.
+            Welcome to the admin rental management dashboard. Here, you can view
+            and manage all rentals, calculate rental costs, and track payment
+            statuses for rentals. Ensure smooth operations by keeping up-to-date
+            with all ongoing and upcoming bookings.
           </Text>
         </div>
         <RentalTable
