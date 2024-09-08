@@ -6,6 +6,8 @@ import { TProduct } from "../../../redux/features/product";
 import { useNavigate } from "react-router-dom";
 import { Button, Text } from "../../atoms";
 import { truncateText } from "../../../utils";
+import { useModal } from "../../../hooks";
+import { DeleteModal } from "./components";
 
 interface ProductCardProps {
   product: TProduct;
@@ -16,13 +18,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   editOption,
 }) => {
+  // hooks
   const navigate = useNavigate();
+  const { openModal, isModalOpen, closeModal } = useModal();
 
+  // functions
   const onEdit = (event: SyntheticEvent, id: string) => {
     event.stopPropagation();
     navigate(`/dashboard/admin/edit/${id}`);
   };
-
+  const onDelete = (event: SyntheticEvent, id: string) => {
+    event.stopPropagation();
+    openModal();
+  };
   return (
     <Fade direction="up" triggerOnce={true}>
       <div onClick={() => navigate(`/bike-detail/${product._id}`)}>
@@ -69,6 +77,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                       color="danger"
                       htmlType="button"
                       className="h-[37px] text-[16px] text-white mt-3 font-poppins"
+                      onClick={(e) => onDelete(e, product._id)}
                     >
                       Delete
                     </Button>
@@ -87,6 +96,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           />
         </Card>
       </div>
+      <DeleteModal
+        product={product}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+      />
     </Fade>
   );
 };
