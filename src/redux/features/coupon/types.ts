@@ -19,5 +19,4 @@ export type TCouponRequest = {
   code: string;
   discountType: "percentage" | "fixed";
   discountValue: number;
-  isActive?: boolean;
 };

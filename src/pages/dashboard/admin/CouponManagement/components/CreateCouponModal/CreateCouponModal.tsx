@@ -8,6 +8,9 @@ import {
   FormWrapper,
 } from "../../../../../../components/form";
 import { Button } from "../../../../../../components/atoms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createCouponSchema } from "../../../../../../Schema";
+import { toast } from "sonner";
 
 type CreateCouponModalProps = {
   isModalOpen: boolean;
@@ -21,9 +24,13 @@ export const CreateCouponModal: React.FC<CreateCouponModalProps> = ({
   const [createCoupon, { isLoading }] = useCreateCouponMutation();
 
   const handleSubmit = async (data: TCouponRequest) => {
-    await createCoupon(data);
-
-    closeModal();
+    try {
+      await createCoupon(data).unwrap();
+      toast.success("Coupon created successfully!");
+      closeModal();
+    } catch (error: any) {
+      toast.error(error?.data?.message);
+    }
   };
 
   return (
@@ -35,7 +42,7 @@ export const CreateCouponModal: React.FC<CreateCouponModalProps> = ({
     >
       <FormWrapper
         onSubmit={handleSubmit}
-        defaultValues={{ discountType: "percentage", isActive: true }}
+        resolver={zodResolver(createCouponSchema)}
       >
         <FormInput name="code" label="Coupon Code" />
         <FormSelect
