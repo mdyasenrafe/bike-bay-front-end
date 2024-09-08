@@ -5,11 +5,7 @@ import {
   LoadingSpinner,
   Text,
 } from "../../../../../components/atoms";
-import { useAppSelector } from "../../../../../redux";
-import {
-  getProducts,
-  useGetProductsQuery,
-} from "../../../../../redux/features/product";
+import { useGetProductsQuery } from "../../../../../redux/features/product";
 import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import { ProductCard } from "../../../../../components/product";

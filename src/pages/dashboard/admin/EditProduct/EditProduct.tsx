@@ -6,7 +6,7 @@ import {
   useUpdateProductMutation,
 } from "../../../../redux/features/product";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, LoadingSpinner } from "../../../../components/atoms";
+import { Container, LoadingSpinner, Text } from "../../../../components/atoms";
 import { MainLayout } from "../../../../components/layouts";
 import { ProductForm } from "../../../../components";
 import { SubmitHandler } from "react-hook-form";
@@ -40,7 +40,7 @@ export const EditProduct = () => {
         year: Number(data?.year),
       };
       const res = await editProduct(bodyData);
-      toast.success("Product updated succesfully");
+      toast.success("Product updated successfully");
       navigate("/dashboard/admin/bike-management");
     } catch (err: any) {
       toast.error(err?.data?.message || "Something went wrong");
@@ -50,13 +50,27 @@ export const EditProduct = () => {
   return (
     <MainLayout>
       <Container>
+        <div>
+          <Text variant="H1" className="text-center mb-4 text-black">
+            Edit Bike Information
+          </Text>
+          <Text
+            variant="P3"
+            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+            className="text-black pb-16"
+          >
+            Update the details of the bike including name, model, price, and
+            other specifications. Ensure that the information provided is
+            accurate for the best user experience.
+          </Text>
+        </div>
         {isLoading ? (
           <LoadingSpinner />
         ) : (
           <ProductForm
             initialProductValues={ProductData?.data as TProduct}
             onSubmit={onSubmit}
-            isLoading={false}
+            isLoading={imageLoading || editLoading}
           />
         )}
       </Container>

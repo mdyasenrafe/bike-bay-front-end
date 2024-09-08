@@ -16,12 +16,6 @@ const ProductApi = baseApi.injectEndpoints({
         method: "POST",
         body: newProduct,
       }),
-      async onQueryStarted(_id, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(addProduct(data.data as TProduct));
-        } catch (error) {}
-      },
       invalidatesTags: ["Products"],
     }),
     getProducts: builder.query<TResponse<TProduct[]>, TFilters | undefined>({
@@ -67,24 +61,14 @@ const ProductApi = baseApi.injectEndpoints({
         method: "PUT",
         body: payload,
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(updateProduct(data.data as TProduct));
-        } catch (err) {}
-      },
+      invalidatesTags: ["Products"],
     }),
     deleteProduct: builder.mutation<TResponse<TProduct>, string>({
       query: (productId) => ({
         url: `/bikes/${productId}`,
         method: "DELETE",
       }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(deleteProduct(data?.data?._id as string));
-        } catch (err) {}
-      },
+      invalidatesTags: ["Products"],
     }),
     getBikeBrands: builder.query<TResponse<OptionType[]>, undefined>({
       query: () => ({
