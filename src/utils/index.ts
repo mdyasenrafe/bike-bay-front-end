@@ -5,3 +5,4 @@ export * from "./sidebarItemsGenerator";
 export * from "./formatStartTime";
 export * from "./renderRentalEmptyMessage";
 export * from "./formatEndTime";
+export * from "./pathUtils";
