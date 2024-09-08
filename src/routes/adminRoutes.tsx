@@ -1,10 +1,10 @@
 import {
   BikeManagement,
-  CouponManagement,
   CreateProduct,
   EditProduct,
   RentalLists,
   UserManagement,
+  CouponManagement,
 } from "../pages/dashboard/admin";
 import { Profile } from "../pages/dashboard/shared";
 import { TAppRoute } from "./types";
