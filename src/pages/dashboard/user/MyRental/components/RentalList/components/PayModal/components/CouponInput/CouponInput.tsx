@@ -3,20 +3,18 @@ import { Input } from "antd";
 import { Button, Text } from "../../../../../../../../../../components/atoms";
 
 type CouponInputProps = {
-  onApplyCoupon: (couponCode: string) => void;
+  onApplyCoupon: () => void;
   isCouponLoading: boolean;
+  couponCode: string;
+  setCouponCode: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const CouponInput: React.FC<CouponInputProps> = ({
   onApplyCoupon,
   isCouponLoading,
+  couponCode,
+  setCouponCode,
 }) => {
-  const [couponCode, setCouponCode] = useState<string>("");
-
-  const handleApplyCoupon = () => {
-    onApplyCoupon(couponCode);
-  };
-
   return (
     <div className="flex flex-col space-y-2">
       <Text variant="P2" className="text-gray-500">
@@ -32,7 +30,7 @@ export const CouponInput: React.FC<CouponInputProps> = ({
         <Button
           color="secondary"
           className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-          onClick={handleApplyCoupon}
+          onClick={onApplyCoupon}
           loading={isCouponLoading}
           disabled={isCouponLoading}
         >

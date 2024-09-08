@@ -31,41 +31,42 @@ export const PayModal: React.FC<PayModalProps> = ({
   const [completeRental, { isLoading }] = useCompleteRentalCostMutation();
   const [validateCoupon, { isLoading: isCouponLoading }] =
     useValidateCouponMutation();
+  const [couponCode, setCouponCode] = useState<string>("");
 
   const advancePaymentAmount = 100;
 
-  const handleApplyCoupon = useCallback(
-    async (couponCode: string) => {
-      try {
-        const response = await validateCoupon({
-          couponCode,
-          totalAmount: rental.totalCost,
-        }).unwrap();
+  const handleApplyCoupon = useCallback(async () => {
+    try {
+      const response = await validateCoupon({
+        couponCode,
+        totalAmount: rental.totalCost,
+      }).unwrap();
 
-        if (response?.data.discount > 0) {
-          setDiscount(response?.data?.discount);
-          setTotalText(response?.data?.finalAmount);
-          toast.success("Coupon applied successfully!");
-        } else {
-          toast.error("Coupon did not apply any discount.");
-        }
-      } catch (error: any) {
-        toast.error(error?.data?.message || "Invalid coupon code.");
+      if (response?.data.discount > 0) {
+        setDiscount(response?.data?.discount);
+        setTotalText(response?.data?.finalAmount);
+        toast.success("Coupon applied successfully!");
+      } else {
+        toast.error("Coupon did not apply any discount.");
       }
-    },
-    [rental.totalCost, validateCoupon]
-  );
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Invalid coupon code.");
+    }
+  }, [rental.totalCost, validateCoupon, couponCode]);
 
   const handlePayment = useCallback(async () => {
     try {
-      const res = await completeRental(rental._id).unwrap();
+      const res = await completeRental({
+        id: rental?._id,
+        couponCode,
+      }).unwrap();
       setClientSecret(res.clientSecret);
     } catch (err: any) {
       toast.error(
         err?.data?.message || "Failed to create rental or payment intent."
       );
     }
-  }, [completeRental, rental._id]);
+  }, [completeRental, rental._id, couponCode]);
 
   return (
     <Modal
@@ -82,6 +83,8 @@ export const PayModal: React.FC<PayModalProps> = ({
           <CouponInput
             onApplyCoupon={handleApplyCoupon}
             isCouponLoading={isCouponLoading}
+            couponCode={couponCode}
+            setCouponCode={setCouponCode}
           />
 
           <Divider />

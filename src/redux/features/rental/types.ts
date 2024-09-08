@@ -38,3 +38,8 @@ export type TRentalCalculateRequest = {
   rentalId: string;
   endTime: string;
 };
+
+export type TCompleteRequest = {
+  couponCode?: string;
+  id: string;
+};

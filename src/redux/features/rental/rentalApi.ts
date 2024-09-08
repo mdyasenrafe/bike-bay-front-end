@@ -2,6 +2,7 @@ import { baseApi } from "../../../api/baseApi";
 import { TFilters } from "../product";
 import { TQueryParams, TResponse } from "../types";
 import {
+  TCompleteRequest,
   TRental,
   TRentalCalculateRequest,
   TRentalRequest,
@@ -55,9 +56,9 @@ const rentalApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Rentals"],
     }),
-    completeRentalCost: builder.mutation<TRentalResponse, string>({
-      query: (id) => ({
-        url: `/rentals/${id}/complete-rental`,
+    completeRentalCost: builder.mutation<TRentalResponse, TCompleteRequest>({
+      query: (data) => ({
+        url: `/rentals/${data?.id}/complete-rental?couponCode=${data.couponCode}`,
         method: "PUT",
       }),
       invalidatesTags: ["Rentals"],

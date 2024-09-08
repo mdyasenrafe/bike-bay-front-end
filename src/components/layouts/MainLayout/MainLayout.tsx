@@ -15,7 +15,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const location = useLocation();
 
   const routesWithoutNavbar = adminRoutes.map((route) => route.path);
-  console.log(routesWithoutNavbar);
 
   const shouldHideNavbar = routesWithoutNavbar.some((routePath) =>
     doesPathMatch(routePath, location.pathname)
