@@ -3,8 +3,8 @@ import { TQueryParams, TResponse } from "../types";
 import {
   TCoupon,
   TCouponRequest,
+  TValidateCoupon,
   TValidateCouponRequest,
-  TValidateCouponResponse,
 } from "./types";
 
 export const couponApi = baseApi.injectEndpoints({
@@ -18,7 +18,7 @@ export const couponApi = baseApi.injectEndpoints({
       invalidatesTags: ["Coupons"],
     }),
     validateCoupon: builder.mutation<
-      TValidateCouponResponse,
+      TResponse<TValidateCoupon>,
       TValidateCouponRequest
     >({
       query: (data) => ({

@@ -5,7 +5,7 @@ export type TCoupon = {
   isActive: boolean;
 };
 
-export type TValidateCouponResponse = {
+export type TValidateCoupon = {
   discount: number;
   finalAmount: number;
 };
