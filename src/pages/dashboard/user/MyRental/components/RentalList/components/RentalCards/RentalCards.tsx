@@ -2,11 +2,17 @@ import React, { useCallback } from "react";
 import { Card, Col, Row, Badge, Tooltip } from "antd";
 import { TRental } from "../../../../../../../../redux/features/rental";
 import { Button, Text } from "../../../../../../../../components/atoms";
-import { formatEndTime, formatStartTime } from "../../../../../../../../utils";
+import {
+  formatEndTime,
+  formatStartTime,
+  getDuration,
+  getTimeAgo,
+} from "../../../../../../../../utils";
 import {
   CheckCircleOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
+import dayjs from "dayjs";
 
 type RentalCardsProps = {
   rentals: TRental[];
@@ -59,17 +65,33 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
               title={<Text variant={"H4"}>{rental.bikeId.name}</Text>}
               description={
                 <>
-                  <Text variant={"P2"}>
+                  <Text variant={"P2"} className="mb-1">
+                    {rental?.isReturned ? (
+                      <>
+                        <strong>Usage Time:</strong>{" "}
+                        {getDuration(
+                          rental.startTime,
+                          rental.returnTime || dayjs().toISOString()
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <strong>Booked:</strong> {getTimeAgo(rental.startTime)}
+                      </>
+                    )}
+                  </Text>
+
+                  <Text variant={"P2"} className="mb-1">
                     <strong>Start Time:</strong>{" "}
                     {formatStartTime(rental?.startTime)}
                   </Text>
-                  <Text variant={"P2"}>
+                  <Text variant={"P2"} className="mb-1">
                     <strong>Return Time:</strong>{" "}
                     {rental.returnTime
                       ? formatEndTime(rental?.returnTime)
                       : "Not yet returned"}
                   </Text>
-                  <Text variant={"P2"}>
+                  <Text variant={"P2"} className="mb-1">
                     <strong>Total Cost:</strong> ${rental.totalCost.toFixed(2)}
                   </Text>
                 </>
