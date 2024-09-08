@@ -1,6 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { message } from "antd";
-import { Container, Text } from "../../../../components/atoms";
+import {
+  AdminSectionHeader,
+  Container,
+  Text,
+} from "../../../../components/atoms";
 import { MainLayout } from "../../../../components/layouts";
 import {
   useGetAllUsersQuery,
@@ -79,19 +83,11 @@ export const UserManagement: React.FC = () => {
   return (
     <MainLayout>
       <Container>
-        <div>
-          <Text variant="H1" className="text-center mb-4 text-black">
-            Manage Users
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-black pb-16"
-          >
-            View, update, and manage user roles. Soft-delete users or adjust
-            their permissions to maintain control over your platform.
-          </Text>
-        </div>
+        <AdminSectionHeader
+          title="Manage Users"
+          description="View, update, and manage user roles. Soft-delete users or adjust
+            their permissions to maintain control over your platform."
+        />
 
         <UserTable
           users={usersData?.data as TUser[]}

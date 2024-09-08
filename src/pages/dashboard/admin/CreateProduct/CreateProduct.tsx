@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { MainLayout } from "../../../../components/layouts";
-import { Container, Text } from "../../../../components/atoms";
+import {
+  AdminSectionHeader,
+  Container,
+  Text,
+} from "../../../../components/atoms";
 import { ProductForm } from "../../../../components";
 import {
   TProduct,
@@ -50,21 +54,14 @@ export const CreateProduct = () => {
   return (
     <MainLayout>
       <Container>
-        <div>
-          <Text variant="H1" className="text-center mb-4 text-black">
-            Add a New Bike to BikeBay
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-black pb-16"
-          >
-            Add detailed information about the bike including the model, brand,
+        <AdminSectionHeader
+          title="Add a New Bike to BikeBay"
+          description="Add detailed information about the bike including the model, brand,
             price per hour, and more. Ensure that all details are accurate for
             the best customer experience. Don't forget to upload a clear image
-            of the bike.
-          </Text>
-        </div>
+            of the bike."
+        />
+
         <ProductForm
           initialProductValues={{}}
           onSubmit={onSubmit}

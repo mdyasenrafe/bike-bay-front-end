@@ -6,7 +6,12 @@ import {
   useUpdateProductMutation,
 } from "../../../../redux/features/product";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, LoadingSpinner, Text } from "../../../../components/atoms";
+import {
+  AdminSectionHeader,
+  Container,
+  LoadingSpinner,
+  Text,
+} from "../../../../components/atoms";
 import { MainLayout } from "../../../../components/layouts";
 import { ProductForm } from "../../../../components";
 import { SubmitHandler } from "react-hook-form";
@@ -50,20 +55,13 @@ export const EditProduct = () => {
   return (
     <MainLayout>
       <Container>
-        <div>
-          <Text variant="H1" className="text-center mb-4 text-black">
-            Edit Bike Information
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-black pb-16"
-          >
-            Update the details of the bike including name, model, price, and
-            other specifications. Ensure that the information provided is
-            accurate for the best user experience.
-          </Text>
-        </div>
+        <AdminSectionHeader
+          title="Edit Bike Information"
+          description="Update the details of the bike including name, model, price, and
+          other specifications. Ensure that the information provided is
+          accurate for the best user experience."
+        />
+
         {isLoading ? (
           <LoadingSpinner />
         ) : (

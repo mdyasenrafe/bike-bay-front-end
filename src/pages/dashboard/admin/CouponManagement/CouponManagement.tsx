@@ -6,7 +6,12 @@ import { TCoupon } from "../../../../redux/features/coupon/types";
 import { CreateCouponModal, DeleteCouponModal } from "./components";
 import { Colors } from "../../../../theme";
 import { MainLayout } from "../../../../components/layouts";
-import { Button, Container, Text } from "../../../../components/atoms";
+import {
+  AdminSectionHeader,
+  Button,
+  Container,
+  Text,
+} from "../../../../components/atoms";
 import { FaPlus } from "react-icons/fa";
 
 export const CouponManagement: React.FC = () => {
@@ -92,20 +97,12 @@ export const CouponManagement: React.FC = () => {
     <MainLayout>
       <Container>
         <div>
-          <div className="mt-6">
-            <Text variant="H2" className="text-center mb-4 text-black">
-              Manage BikeBay Coupons
-            </Text>
-            <Text
-              variant="P3"
-              style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-              className="text-black pb-16"
-            >
-              Here you can view, create, update, and manage all discount coupons
+          <AdminSectionHeader
+            title="Manage BikeBay Coupons"
+            description="  Here you can view, create, update, and manage all discount coupons
               available in the BikeBay system. Keep track of active and inactive
-              coupons and handle promotions easily.
-            </Text>
-          </div>
+              coupons and handle promotions easily."
+          />
 
           <div className="text-end mb-6">
             <Button
