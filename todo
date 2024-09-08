@@ -6,3 +6,4 @@ bugs:
 redirect to exact path if user logged in
 start time should be same for payment modal
 need to work delete coupon
+admin can't retun future date on rental cost modal (calculator modal)
