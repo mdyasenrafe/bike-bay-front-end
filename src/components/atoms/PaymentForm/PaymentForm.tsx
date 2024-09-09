@@ -27,7 +27,8 @@ export const PaymentForm = () => {
         const { error } = await stripe.confirmPayment({
           elements,
           confirmParams: {
-            return_url: "http://localhost:3000/dashboard/user/my-rental",
+            return_url:
+              "https://bike-bay-front-end.vercel.app/dashboard/user/my-rental",
           },
         });
 

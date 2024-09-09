@@ -21,11 +21,11 @@ export const Profile = () => {
           <Card className="mb-6 shadow-lg border rounded-lg p-6">
             <Text
               variant="H1"
-              className="leading-[3rem] lg:leading-[4.75rem] dark:text-black"
+              className="leading-[3rem] lg:leading-[4.75rem] dark:!text-black"
             >
               Welcome, {user?.name}!
             </Text>
-            <Text variant="P2" className="mt-2 text-gray-600 dark:text-black">
+            <Text variant="P2" className="mt-2 text-gray-600 dark:!text-black">
               We're glad to have you back. Below are your profile details. Feel
               free to edit any information by clicking the button below.
             </Text>

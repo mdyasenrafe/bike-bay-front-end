@@ -12,9 +12,10 @@ SportsHub offers an easy and enjoyable shopping experience for customers, and po
 
 
 ## Features
-1. **Browse Products:** Users can browse a wide range of sporting goods and view detailed product information.
-2. **Search and Filter:** Users can search for specific products and filter results by category, price, brand, and rating.
-3. **Admin Management:**  Admins can manage bikes, users, and rental returns with advanced controls.
+1. **Authentication:** Secure user sign-up, login, and role-based access controls for users and admins.
+2. **Bike Listing & Filtering:** Displays a comprehensive list of available bikes with the ability to filter by brand, model, and availability, making it easy to find the perfect bike.
+3. **Rental Management:** Rental Management: A user-friendly booking process with advanced payments, rental confirmation, and a rental history system divided into Paid and Unpaid rentals.
+4. **Admin Management:**  Admins can manage bikes, users, and rental returns with advanced controls.
 4. **Gamified Coupons:**  Spin-the-wheel feature for discounts, seamlessly integrated with the booking system.
 4. **Responsive Design:** Fully optimized for mobile, tablet, and desktop users with clean UI/UX principles.
         
