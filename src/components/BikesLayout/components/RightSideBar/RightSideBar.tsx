@@ -30,6 +30,7 @@ type RightSideBarProps = {
   editOption?: boolean;
   compareMode?: boolean;
   handleCompareSelect?: (id: string) => void;
+  searchTerm?: string;
 };
 
 export const RightSideBar: React.FC<RightSideBarProps> = ({
@@ -46,6 +47,7 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
   editOption,
   compareMode = false,
   handleCompareSelect,
+  searchTerm,
 }) => {
   return (
     <div className="col-span-3 border border-[#e2e8f0] rounded-[8px] p-4">
@@ -55,6 +57,7 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
             placeholder="Search bike or model name"
             onSearch={handleSearch}
             enterButton
+            defaultValue={searchTerm}
           />
         </div>
 

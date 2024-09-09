@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/product";
 import { MainLayout } from "../layouts";
 import { Container } from "../atoms";
+import { useSearchParams } from "react-router-dom";
 
 type BikesLayoutProps = {
   editOption?: boolean;
@@ -19,9 +20,10 @@ export const BikesLayout: React.FC<BikesLayoutProps> = ({
   compareMode = false,
   handleCompareSelect,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [pageSize, setPageSize] = useState(10);
   const [tempFilters, setTempFilters] = useState<TFilters>({
-    searchTerm: undefined,
+    searchTerm: searchParams.get("search") || undefined,
     brand: undefined,
     priceGte: undefined,
     priceLte: undefined,
@@ -57,6 +59,7 @@ export const BikesLayout: React.FC<BikesLayoutProps> = ({
       priceLte: undefined,
       model: undefined,
     });
+    setSearchParams("");
   };
 
   useEffect(() => {
@@ -102,6 +105,7 @@ export const BikesLayout: React.FC<BikesLayoutProps> = ({
           editOption={editOption}
           compareMode={compareMode}
           handleCompareSelect={handleCompareSelect}
+          searchTerm={filters?.searchTerm}
         />
       </div>
     </section>

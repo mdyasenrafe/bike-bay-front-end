@@ -4,14 +4,16 @@ import HeroImage from "../../../../../assets/images/hero_section.png";
 import { Button, Container, Text } from "../../../../../components/atoms";
 import { FormInput, FormWrapper } from "../../../../../components/form";
 import { SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 type SearchFormData = {
   searchQuery: string;
 };
 
 export const Hero = () => {
+  const navigate = useNavigate();
   const handleSearch: SubmitHandler<SearchFormData> = async (data) => {
-    console.log(data);
+    navigate(`/bikes?search=${encodeURIComponent(data.searchQuery)}`);
   };
 
   return (
