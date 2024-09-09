@@ -92,7 +92,7 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
                       : "Not yet returned"}
                   </Text>
                   <Text variant={"P2"} className="mb-1">
-                    <strong>Total Cost:</strong> ${rental.totalCost.toFixed(2)}
+                    <strong>Total Cost:</strong> ৳{rental.totalCost.toFixed(2)}
                   </Text>
                 </>
               }

@@ -14,7 +14,7 @@ export const TotalAmountDisplay: React.FC<TotalAmountDisplayProps> = ({
         Total Amount
       </Text>
       <Text variant="H5" className="font-semibold text-gray-800">
-        ${totalCost.toFixed(2)}
+        ৳{totalCost.toFixed(2)}
       </Text>
     </div>
   );

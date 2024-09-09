@@ -103,7 +103,7 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
       ) : (
         <div className="text-center">
           <Text variant="P1">
-            Total cost calculated successfully: <strong>${totalCost}</strong>.
+            Total cost calculated successfully: <strong>৳{totalCost}</strong>.
             The bike is now available, and the user can pay the pending amount
             from their dashboard.
           </Text>

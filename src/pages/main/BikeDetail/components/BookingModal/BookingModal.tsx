@@ -105,8 +105,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           <FormTimePicker name="startTime" label="Start Time" />
 
           <Text variant="P4" className="mb-4 text-orange-600">
-            *Please note that a non-refundable advance payment of $1 is required
-            to confirm your booking.
+            *Please note that a non-refundable advance payment of ৳100 is
+            required to confirm your booking.
           </Text>
 
           <Button

@@ -22,7 +22,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
           Original Total Cost:
         </Text>
         <Text variant="P2" className="font-semibold text-gray-800">
-          ${totalCost}
+          ৳ {totalCost}
         </Text>
       </div>
 
@@ -40,7 +40,7 @@ export const PaymentSummary: React.FC<PaymentSummaryProps> = ({
           Discount Applied:
         </Text>
         <Text variant="P2" className="font-semibold text-green-600">
-          - ${discount}
+          - ৳{discount}
         </Text>
       </div>
 

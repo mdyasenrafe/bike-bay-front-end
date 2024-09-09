@@ -103,7 +103,7 @@ export const PayModal: React.FC<PayModalProps> = ({
             loading={isLoading}
             disabled={isLoading}
           >
-            Pay ${totalText}
+            Pay ৳{totalText}
           </Button>
         </div>
       )}
