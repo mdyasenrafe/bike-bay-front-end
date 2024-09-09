@@ -73,7 +73,6 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
     return (
       <>
         {!isMobile ? (
-          // Table layout for desktop views
           <Table
             columns={columns}
             dataSource={data}
@@ -81,7 +80,6 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
             loading={isLoading}
           />
         ) : (
-          // Card layout for mobile views
           <Row gutter={[16, 16]} className="mt-4">
             {selectedBikes.map((bike) => (
               <Col key={bike._id} xs={24}>

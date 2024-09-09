@@ -7,6 +7,7 @@ import {
 } from "../../../redux/features/product";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import {
+  AuthModal,
   Button,
   Container,
   LoadingSpinner,
@@ -15,6 +16,9 @@ import {
 import { Colors } from "../../../theme";
 import { useModal } from "../../../hooks";
 import { BookingModal } from "./components";
+import { useCurrentToken } from "../../../redux/features/auth";
+import { useAppSelector } from "../../../redux";
+import { Modal } from "../../../components";
 
 export const BikeDetail = () => {
   // hooks
@@ -24,13 +28,24 @@ export const BikeDetail = () => {
   );
   const navigate = useNavigate();
   const { openModal, isModalOpen, closeModal } = useModal();
+  const {
+    isModalOpen: isAuthModalOpen,
+    openModal: openAuthModal,
+    closeModal: closeAuthModal,
+  } = useModal(); // For auth modal
 
-  // Check if the bike is available
   const isAvailable = productData?.data?.isAvailable;
+  const token = useAppSelector(useCurrentToken); // Token to check if user is logged in
 
-  // Function to handle comparison
+  const handleBookNow = () => {
+    if (!token) {
+      openAuthModal(); // Open the auth modal if the user is not logged in
+    } else {
+      openModal(); // Open the booking modal if the user is logged in
+    }
+  };
+
   const handleCompare = () => {
-    // Navigate to comparison page with the selected bike
     navigate(`/compare-bikes?bikeId=${productData?.data._id}`);
   };
 
@@ -43,7 +58,7 @@ export const BikeDetail = () => {
           <section>
             <Row className="bg-white border border-[#E1E1E1] rounded-lg p-4">
               <Col xs={24} md={12}>
-                <div className="h-[400px] md:h-[600px] flex ">
+                <div className="h-[400px] md:h-[600px] flex">
                   <img
                     src={productData?.data.thumb}
                     className="rounded-lg h-full lg:w-[90%]"
@@ -84,7 +99,7 @@ export const BikeDetail = () => {
                   <Button
                     color="primary"
                     className="text-white h-[48px] w-[200px] rounded-full font-poppins text-[16px]"
-                    onClick={openModal}
+                    onClick={handleBookNow} // Call the handleBookNow function
                     disabled={!isAvailable}
                   >
                     {isAvailable ? "Book Now" : "Unavailable"}
@@ -103,7 +118,8 @@ export const BikeDetail = () => {
                 </Row>
               </Col>
             </Row>
-            <div className="bg-white border border-[#E1E1E1] rounded-lg p-4 mt-8 ">
+
+            <div className="bg-white border border-[#E1E1E1] rounded-lg p-4 mt-8">
               <Text variant={"H4"}>Description</Text>
               <Text variant={"P4"} className="mt-2">
                 {productData?.data.description}
@@ -112,11 +128,20 @@ export const BikeDetail = () => {
           </section>
         )}
       </Container>
+
+      {/* Booking Modal */}
       {isModalOpen && (
         <BookingModal
           isModalOpen={isModalOpen}
           closeModal={closeModal}
           productData={productData?.data as TProduct}
+        />
+      )}
+
+      {isAuthModalOpen && (
+        <AuthModal
+          closeAuthModal={closeAuthModal}
+          isAuthModalOpen={isAuthModalOpen}
         />
       )}
     </MainLayout>

@@ -6,3 +6,4 @@ export * from "./LoadingSpinner";
 export * from "./PaymentForm";
 export * from "./PaymentSection";
 export * from "./AdminSectionHeader";
+export * from "./AuthModal";
