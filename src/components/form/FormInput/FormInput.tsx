@@ -20,7 +20,10 @@ export const FormInput: React.FC<TFormInputProps> = React.forwardRef(
           name={name}
           render={({ field, fieldState: { error } }) => {
             return (
-              <Form.Item label={label} className="font-poppins mb-0 border-0">
+              <Form.Item
+                label={<Text variant="P2">{label}</Text>}
+                className="font-poppins mb-0 border-0"
+              >
                 <Input
                   {...field}
                   {...props}

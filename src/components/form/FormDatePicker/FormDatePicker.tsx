@@ -1,6 +1,7 @@
 import { DatePicker, DatePickerProps, Form, Select } from "antd";
 import React from "react";
 import { Controller } from "react-hook-form";
+import { Text } from "../../atoms";
 
 type FormDatePickerProps = {
   label: string;
@@ -17,7 +18,7 @@ export const FormDatePicker: React.FC<FormDatePickerProps> = ({
       name={name}
       render={({ field, fieldState: { error } }) => {
         return (
-          <Form.Item label={label}>
+          <Form.Item label={<Text variant="P2">{label}</Text>}>
             <DatePicker
               {...field}
               {...props}

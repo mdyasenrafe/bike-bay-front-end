@@ -89,7 +89,7 @@ export const FormUpload: React.FC<TFormUploadProps> = React.forwardRef(
           control={control}
           render={({ field, fieldState: { error } }) => (
             <Form.Item
-              label={label}
+              label={<Text variant="P2">{label}</Text>}
               help={
                 error && (
                   <Text variant={"P6"} style={{ color: "red" }}>

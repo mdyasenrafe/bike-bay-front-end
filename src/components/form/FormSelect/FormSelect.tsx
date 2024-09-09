@@ -18,7 +18,7 @@ export const FormSelect: React.FC<TFormSelectProps> = React.forwardRef(
         control={control}
         render={({ field, fieldState: { error } }) => {
           return (
-            <Form.Item label={label}>
+            <Form.Item label={<Text variant="P2">{label}</Text>}>
               <Select
                 style={{ width: "100%", fontSize: 14 }}
                 {...field}

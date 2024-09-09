@@ -1,6 +1,7 @@
 import { DatePicker, Form, Select, TimePicker } from "antd";
 import React from "react";
 import { Controller } from "react-hook-form";
+import { Text } from "../../atoms";
 
 type FormTimePickerProps = {
   label: string;
@@ -15,7 +16,7 @@ export const FormTimePicker: React.FC<FormTimePickerProps> = ({
     <Controller
       name={name}
       render={({ field, fieldState: { error } }) => (
-        <Form.Item label={label}>
+        <Form.Item label={<Text variant="P2">{label}</Text>}>
           <TimePicker
             {...field}
             style={{ width: "100%" }}
