@@ -62,10 +62,14 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
           >
             <div className="mb-3">{getStatusBadge(rental.status)}</div>
             <Card.Meta
-              title={<Text variant={"H4"}>{rental.bikeId.name}</Text>}
+              title={
+                <Text variant={"H4"} className="dark:!text-black">
+                  {rental.bikeId.name}
+                </Text>
+              }
               description={
                 <>
-                  <Text variant={"P2"} className="mb-1">
+                  <Text variant={"P2"} className="mb-1 dark:!text-black">
                     {rental?.isReturned ? (
                       <>
                         <strong>Usage Time:</strong>{" "}
@@ -81,17 +85,17 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
                     )}
                   </Text>
 
-                  <Text variant={"P2"} className="mb-1">
+                  <Text variant={"P2"} className="mb-1 dark:!text-black">
                     <strong>Start Time:</strong>{" "}
                     {formatStartTime(rental?.startTime)}
                   </Text>
-                  <Text variant={"P2"} className="mb-1">
+                  <Text variant={"P2"} className="mb-1 dark:!text-black">
                     <strong>Return Time:</strong>{" "}
                     {rental.returnTime
                       ? formatEndTime(rental?.returnTime)
                       : "Not yet returned"}
                   </Text>
-                  <Text variant={"P2"} className="mb-1">
+                  <Text variant={"P2"} className="mb-1 dark:!text-black">
                     <strong>Total Cost:</strong> ৳{rental.totalCost.toFixed(2)}
                   </Text>
                 </>

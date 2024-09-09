@@ -35,9 +35,10 @@ export const DeleteCouponModal: React.FC<DeleteCouponModalProps> = ({
       footer={null}
       centered
     >
-      <Text variant="P4">
+      <Text variant="P4" className="dark:text-blue-50">
         Are you sure you want to delete the coupon "{coupon?.code}"?
       </Text>
+
       <div className="flex justify-end mt-4">
         <Button className="mr-2" onClick={closeModal}>
           Cancel

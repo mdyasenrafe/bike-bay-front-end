@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Table } from "antd";
 import { useGetCouponsQuery } from "../../../../redux/features/coupon";
 import { useModal } from "../../../../hooks";
@@ -86,12 +86,22 @@ export const CouponManagement: React.FC = () => {
       title: "Actions",
       key: "actions",
       render: (coupon: TCoupon) => (
-        <Button onClick={() => handleDeleteCoupon(coupon)} danger>
+        <Button
+          onClick={() => handleDeleteCoupon(coupon)}
+          danger
+          disabled={!coupon?.isActive}
+        >
           Delete
         </Button>
       ),
     },
   ];
+  const handleTableChange = useCallback((paginationData: any) => {
+    setPagination({
+      page: paginationData.current,
+      pageSize: paginationData.pageSize,
+    });
+  }, []);
 
   return (
     <MainLayout>
@@ -129,6 +139,7 @@ export const CouponManagement: React.FC = () => {
               pageSizeOptions: ["10", "20", "50", "100"],
             }}
             scroll={{ x: true }}
+            onChange={handleTableChange}
           />
 
           <CreateCouponModal

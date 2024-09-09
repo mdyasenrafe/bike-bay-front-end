@@ -21,9 +21,7 @@ export const userRoutes: TAppRoute[] = [
     path: "/dashboard/user/profile",
     component: (
       <ProtectedRoute roles={["user", "admin"]}>
-        <MainLayout>
-          <Profile />
-        </MainLayout>
+        <Profile />
       </ProtectedRoute>
     ),
     isNavItem: false,
