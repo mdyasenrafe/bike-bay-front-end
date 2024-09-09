@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../redux";
 import { useLocation } from "react-router-dom";
 import { adminRoutes } from "../../../routes";
 import { doesPathMatch } from "../../../utils/pathUtils";
+import { Footer } from "../Footer";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <React.Fragment>
         <div>{children}</div>
       </React.Fragment>
+      {!shouldHideNavbar && <Footer />}
     </section>
   );
 };
