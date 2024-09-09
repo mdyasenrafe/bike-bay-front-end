@@ -24,7 +24,7 @@ export const AdminDashboardLayout = () => {
             alignItems: "center",
           }}
         >
-          <Button>Logout</Button>
+          <Button onClick={handleLogout}>Logout</Button>
         </Header>
         <Content style={{ padding: "24px 0", background: "white" }}>
           <div
