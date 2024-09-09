@@ -20,7 +20,6 @@ export const CompareProduct = () => {
   const queryParams = new URLSearchParams(location.search);
   const initialBikeId = queryParams.get("bikeId");
 
-  // Fetch bike data based on the selected bikeIdToFetch
   const {
     data: bikeData,
     isLoading: isBikeLoading,
@@ -29,14 +28,12 @@ export const CompareProduct = () => {
     skip: !bikeIdToFetch || selectedBikeIds.includes(bikeIdToFetch),
   });
 
-  // Add the initial bike from query param to comparison
   useEffect(() => {
     if (initialBikeId && !selectedBikeIds.includes(initialBikeId)) {
-      setBikeIdToFetch(initialBikeId); // Set the bike to fetch its data
+      setBikeIdToFetch(initialBikeId);
     }
   }, [initialBikeId, selectedBikeIds]);
 
-  // Add fetched bike data to the list
   useEffect(() => {
     if (bikeData?.data && !selectedBikeIds.includes(bikeData.data._id)) {
       setSelectedBikes((prevBikes) => [
@@ -44,11 +41,10 @@ export const CompareProduct = () => {
         bikeData.data as TProduct,
       ]);
       setSelectedBikeIds((prevIds) => [...prevIds, bikeData.data._id]);
-      setBikeIdToFetch(""); // Reset bikeIdToFetch to avoid refetching
+      setBikeIdToFetch("");
     }
   }, [bikeData, selectedBikeIds]);
 
-  // Handle bike selection
   const handleBikeSelect = useCallback(
     (bikeId: string) => {
       if (selectedBikeIds.length >= 3) {
@@ -62,22 +58,17 @@ export const CompareProduct = () => {
       }
 
       setBikeIdToFetch(bikeId);
-      toast.success("Bike is added to the comparison.");
     },
     [selectedBikeIds]
   );
 
-  const removeBikeFromComparison = useCallback(
-    (bikeId: string) => {
-      setSelectedBikes((prevBikes) =>
-        prevBikes.filter((bike) => bike._id !== bikeId)
-      );
-      setSelectedBikeIds((prevIds) => prevIds.filter((id) => id !== bikeId));
-      toast.success("Bike is removed to the comparison.");
-      setBikeIdToFetch("");
-    },
-    [selectedBikes, bikeIdToFetch]
-  );
+  const removeBikeFromComparison = useCallback((bikeId: string) => {
+    setSelectedBikes((prevBikes) =>
+      prevBikes.filter((bike) => bike._id !== bikeId)
+    );
+    setSelectedBikeIds((prevIds) => prevIds.filter((id) => id !== bikeId));
+    toast.success("Bike is removed from the comparison.");
+  }, []);
 
   return (
     <MainLayout>

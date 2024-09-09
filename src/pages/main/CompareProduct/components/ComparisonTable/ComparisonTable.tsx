@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
-import { Table, Button, Row, Col } from "antd";
+import { Table, Button, Row, Col, Card } from "antd";
 import { TProduct } from "../../../../../redux/features/product";
+import { useMediaQuery } from "react-responsive";
 
 interface ComparisonTableProps {
   selectedBikes: TProduct[];
@@ -11,7 +12,9 @@ interface ComparisonTableProps {
 
 export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
   ({ selectedBikes, removeBikeFromComparison, isLoading, initialBikeId }) => {
-    console.log(initialBikeId);
+    // Check if the user is using a small screen (mobile view)
+    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
     const columns = useMemo(
       () => [
         {
@@ -69,27 +72,68 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
 
     return (
       <>
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={false}
-          loading={isLoading}
-        />
-        <Row className="mt-4 text-center">
-          {selectedBikes.map((bike) => (
-            <Col key={bike._id} span={8}>
-              <Button
-                key={bike._id}
-                color="danger"
-                onClick={() => removeBikeFromComparison(bike._id)}
-                className="mx-2"
-                disabled={bike?._id === initialBikeId}
-              >
-                Remove {bike?.name}
-              </Button>
-            </Col>
-          ))}
-        </Row>
+        {!isMobile ? (
+          // Table layout for desktop views
+          <Table
+            columns={columns}
+            dataSource={data}
+            pagination={false}
+            loading={isLoading}
+          />
+        ) : (
+          // Card layout for mobile views
+          <Row gutter={[16, 16]} className="mt-4">
+            {selectedBikes.map((bike) => (
+              <Col key={bike._id} xs={24}>
+                <Card
+                  title={bike.name}
+                  extra={
+                    <Button
+                      onClick={() => removeBikeFromComparison(bike._id)}
+                      disabled={bike._id === initialBikeId}
+                      type="primary"
+                      danger
+                    >
+                      Remove
+                    </Button>
+                  }
+                >
+                  <p>
+                    <strong>Price Per Hour:</strong> ৳{bike.pricePerHour}
+                  </p>
+                  <p>
+                    <strong>Model:</strong> {bike.model}
+                  </p>
+                  <p>
+                    <strong>Brand:</strong> {bike.brand}
+                  </p>
+                  <p>
+                    <strong>Availability:</strong>{" "}
+                    {bike.isAvailable ? "Available" : "Unavailable"}
+                  </p>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+
+        {!isMobile && (
+          <Row className="mt-4 text-center">
+            {selectedBikes.map((bike) => (
+              <Col key={bike._id} xs={8}>
+                <Button
+                  key={bike._id}
+                  color="danger"
+                  onClick={() => removeBikeFromComparison(bike._id)}
+                  className="mx-2"
+                  disabled={bike?._id === initialBikeId}
+                >
+                  Remove {bike?.name}
+                </Button>
+              </Col>
+            ))}
+          </Row>
+        )}
       </>
     );
   }
