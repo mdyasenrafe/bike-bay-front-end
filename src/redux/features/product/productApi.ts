@@ -25,7 +25,6 @@ const ProductApi = baseApi.injectEndpoints({
           params = Object.keys(filters).reduce((acc, key) => {
             const filterKey = key as keyof TFilters;
             const value = filters[filterKey];
-            console.log(filterKey, "filterKey", typeof value);
             if (value !== undefined || !value) {
               if (filterKey === "priceGte") {
                 acc["pricePerHour[gte]"] = value;
