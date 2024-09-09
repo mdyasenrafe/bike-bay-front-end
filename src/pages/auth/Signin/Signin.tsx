@@ -5,7 +5,7 @@ import { FormInput, FormWrapper } from "../../../components/form";
 import { SubmitHandler } from "react-hook-form";
 import { signinSchema } from "../../../Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   TSigninValue,
   addUser,
@@ -19,13 +19,15 @@ export const Signin = () => {
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmit: SubmitHandler<TSigninValue> = async (data) => {
     try {
       const res = await login(data).unwrap();
       dispatch(addUser({ user: res.data, token: res.token as string }));
       toast.success(res?.message);
-      navigate("/");
+      const redirectUrl = location.state?.from?.pathname || "/";
+      navigate(redirectUrl);
     } catch (err: any) {
       toast.error(err?.data?.message || "Something went wrong");
     }

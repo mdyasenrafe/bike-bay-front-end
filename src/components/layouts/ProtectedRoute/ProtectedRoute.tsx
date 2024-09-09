@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { verifyToken } from "../../../utils/verifyToken";
 import { TUser, logout, useCurrentToken } from "../../../redux/features/auth";
 import { useAppDispatch, useAppSelector } from "../../../redux";
@@ -13,6 +13,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   roles,
 }) => {
+  const location = useLocation();
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
   let user;
@@ -27,7 +28,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   if (!token) {
-    return <Navigate to="/signin" replace={true} />;
+    return <Navigate to="/signin" replace={true} state={{ from: location }} />;
   }
 
   return <>{children}</>;
