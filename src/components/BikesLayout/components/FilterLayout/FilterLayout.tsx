@@ -40,7 +40,9 @@ export const FilterLayout: React.FC<FilterLayoutProps> = ({
         >
           <Space direction="vertical">
             {item?.options.map((item) => (
-              <Radio value={item.value}>{item.label}</Radio>
+              <Radio value={item.value}>
+                <Text>{item.label}</Text>
+              </Radio>
             ))}
           </Space>
         </Radio.Group>

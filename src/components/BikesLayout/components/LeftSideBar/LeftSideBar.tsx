@@ -7,7 +7,7 @@ import {
   useGetBikeBrandsQuery,
 } from "../../../../redux/features/product";
 import { AvailableData } from "../../../../constant";
-import { Button, LoadingSpinner } from "../../../atoms";
+import { Button, LoadingSpinner, Text } from "../../../atoms";
 
 export const LeftSideBar: React.FC<LeftSideBarProps> = ({
   showSideBar,
@@ -54,10 +54,12 @@ export const LeftSideBar: React.FC<LeftSideBarProps> = ({
         showSideBar
           ? "inline col-span-1 fixed top-0 left-0 z-30 w-full h-screen overflow-y-auto transition-transform bg-white pt-4"
           : "hidden"
-      } md:inline `}
+      } md:inline`}
     >
       <div className="flex justify-between mx-4 md:mx-0">
-        <h1 className="text-2xl font-bold mb-4 ">Filter by </h1>
+        <Text variant="H3" className="mb-4 ">
+          Filter by{" "}
+        </Text>
         <AiOutlineClose
           onClick={() => setShowSideBar(false)}
           className="text-2xl cursor-pointer md:hidden"
