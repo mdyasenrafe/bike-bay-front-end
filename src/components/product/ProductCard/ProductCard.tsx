@@ -11,11 +11,15 @@ import { DeleteModal } from "./components";
 interface ProductCardProps {
   product: TProduct;
   editOption?: boolean;
+  compareMode?: boolean;
+  handleCompareSelect?: (id: string) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   editOption,
+  compareMode,
+  handleCompareSelect,
 }) => {
   // hooks
   const navigate = useNavigate();
@@ -34,6 +38,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   // Check if the bike is available
   const isAvailable = product.isAvailable;
+
+  // Handle compare selection
+  const onCompareSelect = (event: SyntheticEvent, id: string) => {
+    event.stopPropagation();
+    if (handleCompareSelect) {
+      handleCompareSelect(id);
+    }
+  };
 
   return (
     <Fade direction="up" triggerOnce={true}>
@@ -81,7 +93,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                     </div>
                   )}
 
-                  {editOption ? (
+                  {compareMode ? (
+                    <Button
+                      color="primary"
+                      htmlType="button"
+                      className="w-full h-[37px] text-[16px] text-white mt-3 font-poppins"
+                      onClick={(e) => onCompareSelect(e, product._id)}
+                    >
+                      Add to Compare
+                    </Button>
+                  ) : editOption ? (
                     <div className="flex space-x-2 mt-3">
                       <Button
                         color="primary"

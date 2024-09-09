@@ -28,6 +28,8 @@ type RightSideBarProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   total: number;
   editOption?: boolean;
+  compareMode?: boolean;
+  handleCompareSelect?: (id: string) => void;
 };
 
 export const RightSideBar: React.FC<RightSideBarProps> = ({
@@ -42,6 +44,8 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
   setCurrentPage,
   total,
   editOption,
+  compareMode = false,
+  handleCompareSelect,
 }) => {
   return (
     <div className="col-span-3 border border-[#e2e8f0] rounded-[8px] p-4">
@@ -82,7 +86,12 @@ export const RightSideBar: React.FC<RightSideBarProps> = ({
         <Row gutter={[16, 16]} className="mt-12">
           {products.map((product, index) => (
             <Col key={index} xs={24} sm={12} md={8}>
-              <ProductCard product={product} editOption={editOption} />
+              <ProductCard
+                product={product}
+                editOption={editOption}
+                compareMode={compareMode}
+                handleCompareSelect={handleCompareSelect}
+              />
             </Col>
           ))}
         </Row>

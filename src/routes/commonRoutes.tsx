@@ -1,5 +1,6 @@
 import { Signin, Signup } from "../pages/auth";
 import { Home, About, BikeDetail, PaymentSuccess, Bikes } from "../pages/main";
+import { CompareProduct } from "../pages/main/CompareProduct";
 
 export const commonRoutes = [
   {
@@ -50,5 +51,12 @@ export const commonRoutes = [
     path: "/bikes",
     component: <Bikes />,
     isNavItem: true,
+  },
+  {
+    id: 10,
+    name: "Compare Bikes",
+    path: "/compare-bikes",
+    component: <CompareProduct />,
+    isNavItem: false,
   },
 ];

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { Col, Row } from "antd";
 import {
   TProduct,
@@ -22,12 +22,17 @@ export const BikeDetail = () => {
   const { data: productData, isLoading } = useGetProductsByIdQuery(
     productId as string
   );
-
+  const navigate = useNavigate();
   const { openModal, isModalOpen, closeModal } = useModal();
-  console.log(productData?.data);
 
   // Check if the bike is available
   const isAvailable = productData?.data?.isAvailable;
+
+  // Function to handle comparison
+  const handleCompare = () => {
+    // Navigate to comparison page with the selected bike
+    navigate(`/compare-bikes?bikeId=${productData?.data._id}`);
+  };
 
   return (
     <MainLayout>
@@ -83,6 +88,17 @@ export const BikeDetail = () => {
                     disabled={!isAvailable}
                   >
                     {isAvailable ? "Book Now" : "Unavailable"}
+                  </Button>
+                </Row>
+
+                {/* Compare Button */}
+                <Row className="mt-4">
+                  <Button
+                    color="secondary"
+                    className="text-white h-[48px] w-[200px] rounded-full font-poppins text-[16px]"
+                    onClick={handleCompare}
+                  >
+                    Compare
                   </Button>
                 </Row>
               </Col>

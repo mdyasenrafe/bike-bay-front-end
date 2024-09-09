@@ -10,9 +10,15 @@ import { Container } from "../atoms";
 
 type BikesLayoutProps = {
   editOption?: boolean;
+  compareMode?: boolean;
+  handleCompareSelect?: (bikeId: string) => void;
 };
 
-export const BikesLayout: React.FC<BikesLayoutProps> = ({ editOption }) => {
+export const BikesLayout: React.FC<BikesLayoutProps> = ({
+  editOption,
+  compareMode = false,
+  handleCompareSelect,
+}) => {
   const [pageSize, setPageSize] = useState(10);
   const [tempFilters, setTempFilters] = useState<TFilters>({
     searchTerm: undefined,
@@ -94,6 +100,8 @@ export const BikesLayout: React.FC<BikesLayoutProps> = ({ editOption }) => {
           setCurrentPage={setCurrentPage}
           setPageSize={setPageSize}
           editOption={editOption}
+          compareMode={compareMode}
+          handleCompareSelect={handleCompareSelect}
         />
       </div>
     </section>
