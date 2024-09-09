@@ -3,6 +3,7 @@ import { adminRoutes } from "./adminRoutes";
 import { userRoutes } from "./userRoutes";
 import { TAppRoute } from "./types";
 import { AdminDashboardLayout, ProtectedRoute } from "../components/layouts";
+import { NotFound } from "../pages";
 
 export const appRoutes: TAppRoute[] = [
   ...commonRoutes,
@@ -24,5 +25,12 @@ export const appRoutes: TAppRoute[] = [
     path: "/dashboard/user",
     isNavItem: false,
     children: userRoutes,
+  },
+  {
+    id: 712,
+    name: "Not Found",
+    path: "*",
+    isNavItem: false,
+    component: <NotFound />,
   },
 ];
