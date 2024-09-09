@@ -16,8 +16,8 @@ export const Home = () => {
       <FeatureProduct />
       <Testimonials />
       <WhyChooseUs />
-      <Contact />
       <SpinWheel />
+      <Contact />
     </MainLayout>
   );
 };

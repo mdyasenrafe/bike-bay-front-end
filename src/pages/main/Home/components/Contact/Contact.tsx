@@ -51,13 +51,13 @@ export const Contact = () => {
       <Container>
         <Row>
           <Col md={12}>
-            <Fade cascade duration={2500} triggerOnce={true}>
+            <Fade duration={2500} triggerOnce={true} direction="left">
               <img src={ContactImage} className=" h-full" />
             </Fade>
           </Col>
 
           <Col md={12}>
-            <Fade cascade duration={2500} triggerOnce={true}>
+            <Fade duration={2500} triggerOnce={true} direction="right">
               <div className="mb-4">
                 <Text variant={"H1"}>Get in Touch</Text>
                 <Text

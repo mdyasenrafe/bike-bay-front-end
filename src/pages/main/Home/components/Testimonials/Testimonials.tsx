@@ -10,24 +10,29 @@ import {
   TestimonialCard,
   Text,
 } from "../../../../../components/atoms";
+import { Fade, Slide } from "react-awesome-reveal";
 
 export const Testimonials = () => {
   return (
     <section className="py-40 testimonial-section">
       <Container>
         <div className="div">
-          <Text variant="H1" className="text-center mb-4 text-white">
-            Hear What Our Riders Have to Say!
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-white pb-16"
-          >
-            Our bike rental service is revolutionizing the way people explore
-            their surroundings. Don't just take our word for it, see what our
-            satisfied customers have to say!
-          </Text>
+          <Slide triggerOnce={true}>
+            <Text variant="H1" className="text-center mb-4 text-white">
+              Hear What Our Riders Have to Say!
+            </Text>
+          </Slide>
+          <Fade delay={1e3} cascade damping={1e-1} triggerOnce={true}>
+            <Text
+              variant="P3"
+              style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+              className="text-white pb-16"
+            >
+              Our bike rental service is revolutionizing the way people explore
+              their surroundings. Don't just take our word for it, see what our
+              satisfied customers have to say!
+            </Text>
+          </Fade>
         </div>
       </Container>
       <Container>

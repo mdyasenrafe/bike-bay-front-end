@@ -10,7 +10,7 @@ import { useCurrentToken } from "../../../../../redux/features/auth";
 import { AuthModal, Container, Text } from "../../../../../components/atoms";
 import { MainLayout } from "../../../../../components/layouts";
 import { Col, Row } from "antd";
-import { Fade } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 export const SpinWheel: React.FC = () => {
   const { data: couponsData } = useGetCouponsQuery([]);
@@ -52,20 +52,25 @@ export const SpinWheel: React.FC = () => {
     <section className="py-20 testimonial-section">
       <Container>
         <div className="div">
-          <Text variant="H1" className="text-center mb-4 text-white">
-            Spin the Wheel and Win Amazing Rewards
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-white pb-16"
-          >
-            Feeling lucky? Take a spin on our Wheel of Fortune and win exclusive
-            discounts, coupons, and special offers for your next bike rental at
-            BikeBay. Simply hit the spin button, and let the magic happen!
-            You’ll have the chance to win big while enjoying an exciting
-            experience. Don’t forget to log in for your chance to play!
-          </Text>
+          <Slide triggerOnce={true}>
+            <Text variant="H1" className="text-center mb-4 text-white">
+              Spin the Wheel and Win Amazing Rewards
+            </Text>
+          </Slide>
+          <Fade delay={1e3} cascade damping={1e-1} triggerOnce={true}>
+            <Text
+              variant="P3"
+              style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+              className="text-white pb-16"
+            >
+              Feeling lucky? Take a spin on our Wheel of Fortune and win
+              exclusive discounts, coupons, and special offers for your next
+              bike rental at BikeBay. Simply hit the spin button, and let the
+              magic happen! You’ll have the chance to win big while enjoying an
+              exciting experience. Don’t forget to log in for your chance to
+              play!
+            </Text>
+          </Fade>
         </div>
       </Container>
       <Container>

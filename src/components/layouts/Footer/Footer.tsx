@@ -24,7 +24,7 @@ const socialIcons = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10 mt-10">
+    <footer className="bg-black text-white py-10 mt-10 dark:border-t">
       <div className="container mx-auto px-4 flex flex-wrap justify-between">
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
           <NavLink to="/" className="flex items-center">

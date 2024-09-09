@@ -9,6 +9,7 @@ import { useGetProductsQuery } from "../../../../../redux/features/product";
 import { useNavigate } from "react-router-dom";
 import { Col, Row } from "antd";
 import { ProductCard } from "../../../../../components/product";
+import { Fade, Slide } from "react-awesome-reveal";
 
 export const FeatureProduct = () => {
   const { data, isLoading } = useGetProductsQuery({
@@ -24,17 +25,21 @@ export const FeatureProduct = () => {
     <section className="py-40">
       <Container>
         <div>
-          <Text variant="H1" className="text-center mb-4 text-black">
-            Feature Products
-          </Text>
-          <Text
-            variant="P3"
-            style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
-            className="text-black pb-16"
-          >
-            Discover our latest featured bikes and explore their unique
-            features.
-          </Text>
+          <Slide triggerOnce={true}>
+            <Text variant="H1" className="text-center mb-4 text-black">
+              Feature Products
+            </Text>
+          </Slide>
+          <Fade delay={1e3} cascade damping={1e-1} triggerOnce={true}>
+            <Text
+              variant="P3"
+              style={{ textAlign: "center", maxWidth: 600, margin: "auto" }}
+              className="text-black pb-16"
+            >
+              Discover our latest featured bikes and explore their unique
+              features.
+            </Text>
+          </Fade>
         </div>
         {isLoading ? (
           <LoadingSpinner />
