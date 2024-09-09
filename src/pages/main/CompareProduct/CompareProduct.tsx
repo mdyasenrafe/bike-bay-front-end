@@ -127,10 +127,8 @@ export const CompareProduct = () => {
       <Container>
         <div className="my-8">
           <AdminSectionHeader
-            title="Compare Bike"
-            description={
-              "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id assumenda molestias libero nam? A, quod.  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id assumenda molestias libero nam? A, quod."
-            }
+            title="Compare Bikes"
+            description="Easily compare the features and pricing of different bikes available on BikeBay. Select up to three bikes to see their details side by side and make an informed decision."
           />
         </div>
 
@@ -163,21 +161,23 @@ export const CompareProduct = () => {
         ) : (
           <div className="text-center">
             <Text variant="P3">
-              Please select at least one bike to compare.
+              Select at least one bike to begin comparing features. Once
+              selected, you can view detailed specifications side by side to
+              help make an informed decision.
             </Text>
           </div>
         )}
-        <AdminSectionHeader
-          title="Bike Lists"
-          description={
-            "  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id assumenda molestias libero nam? A, quod.  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id assumenda molestias libero nam? A, quod."
-          }
-        />
-        <BikesLayout
-          editOption={false}
-          compareMode={true}
-          handleCompareSelect={handleBikeSelect}
-        />
+        <div className="mt-12">
+          <AdminSectionHeader
+            title="Available Bikes"
+            description="Browse through our collection of bikes and select the ones you'd like to compare. Use this tool to understand the differences between models, pricing, and availability."
+          />
+          <BikesLayout
+            editOption={false}
+            compareMode={true}
+            handleCompareSelect={handleBikeSelect}
+          />
+        </div>
       </Container>
     </MainLayout>
   );
