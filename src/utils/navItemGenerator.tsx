@@ -17,7 +17,11 @@ export const generateNavItems = (
   const navItems = routes.reduce((acc: NavItem[], route: TAppRoute) => {
     if (route.isNavItem && !route.children) {
       acc.push({
-        label: <Link to={route.path}>{route.name}</Link>,
+        label: (
+          <Link to={route.path} className="text-black dark:!text-white">
+            {route.name}
+          </Link>
+        ),
         key: route.path,
       });
     }
@@ -28,7 +32,11 @@ export const generateNavItems = (
         label: <span>{route.name}</span>,
         children: route.children.map((child) => ({
           key: child.path,
-          label: <Link to={child.path}>{child.name}</Link>,
+          label: (
+            <Link to={child.path} className="text-black dark:!text-white">
+              {child.name}
+            </Link>
+          ),
         })),
       });
     }

@@ -5,12 +5,15 @@ import { Button, Container, Text } from "../../../../../components/atoms";
 import { FormInput, FormWrapper } from "../../../../../components/form";
 import { SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../../../redux";
+import { getDarkMode } from "../../../../../redux/features/theme";
 
 type SearchFormData = {
   searchQuery: string;
 };
 
 export const Hero = () => {
+  const darkMode = useAppSelector(getDarkMode);
   const navigate = useNavigate();
   const handleSearch: SubmitHandler<SearchFormData> = async (data) => {
     navigate(`/bikes?search=${encodeURIComponent(data.searchQuery)}`);
@@ -39,7 +42,11 @@ export const Hero = () => {
                   name="searchQuery"
                   placeholder="Find your perfect bike..."
                   divStyle={{ marginBottom: 0, width: "85%" }}
-                  style={{ borderWidth: 0 }}
+                  style={{
+                    borderWidth: 0,
+                    backgroundColor: darkMode ? "black" : "white",
+                    color: darkMode ? "white" : "black",
+                  }}
                   type="text"
                 />
                 <Button

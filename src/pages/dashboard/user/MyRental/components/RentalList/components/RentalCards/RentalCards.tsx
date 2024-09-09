@@ -53,8 +53,8 @@ export const RentalCards: React.FC<RentalCardsProps> = ({
             hoverable
             cover={
               <img
-                alt={rental.bikeId.name}
-                src={rental.bikeId.thumb}
+                alt={rental?.bikeId?.name}
+                src={rental?.bikeId?.thumb}
                 className="h-48 object-cover w-full"
               />
             }

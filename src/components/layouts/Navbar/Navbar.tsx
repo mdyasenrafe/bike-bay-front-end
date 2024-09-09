@@ -11,6 +11,7 @@ import { appRoutes } from "../../../routes";
 import { useAppSelector } from "../../../redux";
 import { TUser, getCurrentUser } from "../../../redux/features/auth";
 import { FaUserCircle } from "react-icons/fa";
+import { getDarkMode } from "../../../redux/features/theme";
 
 export const Navbar = () => {
   // state
@@ -20,6 +21,7 @@ export const Navbar = () => {
   const location = useLocation();
   const currentUser = useAppSelector(getCurrentUser);
   const currentPath = location.pathname;
+  const darkMode = useAppSelector(getDarkMode);
 
   // nav items
   const navItems = generateNavItems(appRoutes);
@@ -47,16 +49,17 @@ export const Navbar = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="hidden lg:flex w-[50%]">
+            <div className="hidden lg:flex w-[50%] ">
               <Menu
                 style={{
                   width: "100%",
                   borderBottom: "0px solid",
+                  color: "white",
                 }}
                 mode="horizontal"
                 items={navItems}
                 selectedKeys={[currentPath]}
-                className="font-figtree"
+                className="font-figtree bg-white dark:bg-black dark:text-white"
               />
             </div>
             <div className="w-[20%] lg:flex hidden items-center">
@@ -90,7 +93,10 @@ export const Navbar = () => {
                   onClick={() => setMenuVisibility(true)}
                   className="ml-6"
                 >
-                  <AiOutlineMenu className="text-[30px]" />
+                  <AiOutlineMenu
+                    className="text-[30px]"
+                    color={darkMode ? "white" : "black"}
+                  />
                 </div>
               </div>
             )}
@@ -102,14 +108,17 @@ export const Navbar = () => {
       <div
         className={`${
           isMenuVisible ? "flex ease-in-out duration-300" : "hidden"
-        } lg:hidden absolute w-[100%] top-0 left-0 z-30 pt-[24px] bg-white h-screen`}
+        } lg:hidden absolute w-[100%] top-0 left-0 z-30 pt-[24px] bg-white h-screen dark:bg-black`}
       >
         <div className="container mx-auto px-8">
           <div
             onClick={() => setMenuVisibility(false)}
             className="mt-[16px] outline-none float-right ease-in-out duration-300 rounded"
           >
-            <HiOutlineX className="text-[30px]" />
+            <HiOutlineX
+              className="text-[30px]"
+              color={darkMode ? "white" : "black"}
+            />
           </div>
           <div data-aos="fade-down" className="grid mt-[50px]">
             <div>
@@ -117,7 +126,7 @@ export const Navbar = () => {
                 mode="inline"
                 items={mobileNavItems}
                 selectedKeys={[currentPath]}
-                className="font-figtree"
+                className="font-figtree bg-white dark:bg-black dark:text-white"
                 style={{
                   borderRight: "0px solid",
                 }}

@@ -8,7 +8,7 @@ import ChooseUs from "../../../../../assets/images/whyChoose.png";
 export const WhyChooseUs = () => {
   return (
     <Container>
-      <section className="py-32 bg-white">
+      <section className="py-32 ">
         <Row gutter={32} align="middle">
           <Col xs={24} lg={12}>
             <img src={ChooseUs} alt="Bikes" className="w-full h-full" />

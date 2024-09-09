@@ -5,8 +5,10 @@ import { NavbarDropdown } from "../../../../../constant";
 import { useAppDispatch, useAppSelector } from "../../../../../redux";
 import { TUser, useCurrentToken } from "../../../../../redux/features/auth";
 import { verifyToken } from "../../../../../utils";
+import { getDarkMode } from "../../../../../redux/features/theme";
 
 export const UserDropdown = () => {
+  const darkMode = useAppSelector(getDarkMode);
   // items
   const { userItems, adminItems } = NavbarDropdown();
   //   hooks
@@ -26,7 +28,10 @@ export const UserDropdown = () => {
     <div className="ml-4">
       <Dropdown menu={{ items }}>
         <a onClick={(e) => e.preventDefault()}>
-          <FaUserCircle className="text-[40px]" />
+          <FaUserCircle
+            className="text-[40px] dark:text-black"
+            color={darkMode ? "white" : "black"}
+          />
         </a>
       </Dropdown>
     </div>

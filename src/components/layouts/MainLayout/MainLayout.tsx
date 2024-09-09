@@ -22,7 +22,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   );
 
   return (
-    <section className={`${isDarkMode ? "dark" : ""}`}>
+    <section className={`${isDarkMode ? "dark bg-black" : "bg-white"}`}>
       {!shouldHideNavbar && <Navbar />}
       <React.Fragment>
         <div>{children}</div>

@@ -68,19 +68,35 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         >
           <div className="p-4">
             <Card.Meta
-              title={<Text variant={"H5"}>{product.name}</Text>}
+              title={
+                <Text variant={"H5"} className="dark:!text-black">
+                  {product.name}
+                </Text>
+              }
               description={
                 <>
-                  <Text variant={"P2"} className="text-gray-800">
+                  <Text
+                    variant={"P2"}
+                    className="text-gray-800 dark:!text-black"
+                  >
                     <strong>Model:</strong> {product.model}
                   </Text>
-                  <Text variant={"P2"} className="text-gray-800">
+                  <Text
+                    variant={"P2"}
+                    className="text-gray-800 dark:!text-black"
+                  >
                     <strong>Brand:</strong> {product.brand}
                   </Text>
-                  <Text variant={"P4"} className="text-gray-600 my-1">
+                  <Text
+                    variant={"P4"}
+                    className="text-gray-600 my-1 dark:!text-black"
+                  >
                     {truncateText(product.description, 40)}
                   </Text>
-                  <Text variant={"H4"} className="font-bold my-2">
+                  <Text
+                    variant={"H4"}
+                    className="font-bold my-2 dark:!text-black"
+                  >
                     <strong>Price Per Hour:</strong>{" "}
                     <span className="text-primary">
                       ৳{product.pricePerHour}
