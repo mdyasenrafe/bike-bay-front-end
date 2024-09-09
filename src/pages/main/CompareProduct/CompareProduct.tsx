@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Table, Button } from "antd";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import { AdminSectionHeader, Container, Text } from "../../../components/atoms";
 import {
@@ -12,15 +12,15 @@ import { BikesLayout } from "../../../components";
 import { ComparisonTable } from "./components";
 
 export const CompareProduct = () => {
+  const location = useLocation();
   const [selectedBikeIds, setSelectedBikeIds] = useState<string[]>([]);
   const [selectedBikes, setSelectedBikes] = useState<TProduct[]>([]);
   const [bikeIdToFetch, setBikeIdToFetch] = useState<string>("");
-  // hooks
-  const location = useLocation();
-  const navigate = useNavigate();
+
   const queryParams = new URLSearchParams(location.search);
   const initialBikeId = queryParams.get("bikeId");
 
+  // Fetch bike data based on the selected bikeIdToFetch
   const {
     data: bikeData,
     isLoading: isBikeLoading,
@@ -29,21 +29,24 @@ export const CompareProduct = () => {
     skip: !bikeIdToFetch || selectedBikeIds.includes(bikeIdToFetch),
   });
 
-  // Handle fetching initial bike if provided
+  // Add the initial bike from query param to comparison
   useEffect(() => {
     if (initialBikeId && !selectedBikeIds.includes(initialBikeId)) {
-      setBikeIdToFetch(initialBikeId);
+      setBikeIdToFetch(initialBikeId); // Set the bike to fetch its data
     }
   }, [initialBikeId, selectedBikeIds]);
 
+  // Add fetched bike data to the list
   useEffect(() => {
-    if (bikeData?.data && !selectedBikeIds.includes(bikeIdToFetch!)) {
+    if (bikeData?.data && !selectedBikeIds.includes(bikeData.data._id)) {
       setSelectedBikes((prevBikes) => [
         ...prevBikes,
         bikeData.data as TProduct,
       ]);
+      setSelectedBikeIds((prevIds) => [...prevIds, bikeData.data._id]);
+      setBikeIdToFetch(""); // Reset bikeIdToFetch to avoid refetching
     }
-  }, [bikeData, bikeIdToFetch, selectedBikeIds]);
+  }, [bikeData, selectedBikeIds]);
 
   // Handle bike selection
   const handleBikeSelect = useCallback(
@@ -59,20 +62,22 @@ export const CompareProduct = () => {
       }
 
       setBikeIdToFetch(bikeId);
-      setSelectedBikeIds((prevIds) => [...prevIds, bikeId]);
       toast.success("Bike is added to the comparison.");
     },
     [selectedBikeIds]
   );
 
-  // Handle bike removal
-  const removeBikeFromComparison = useCallback((bikeId: string) => {
-    setSelectedBikes((prevBikes) =>
-      prevBikes.filter((bike) => bike._id !== bikeId)
-    );
-    setSelectedBikeIds((prevIds) => prevIds.filter((id) => id !== bikeId));
-    toast.success("Bike is deleted to the comparison.");
-  }, []);
+  const removeBikeFromComparison = useCallback(
+    (bikeId: string) => {
+      setSelectedBikes((prevBikes) =>
+        prevBikes.filter((bike) => bike._id !== bikeId)
+      );
+      setSelectedBikeIds((prevIds) => prevIds.filter((id) => id !== bikeId));
+      toast.success("Bike is removed to the comparison.");
+      setBikeIdToFetch("");
+    },
+    [selectedBikes, bikeIdToFetch]
+  );
 
   return (
     <MainLayout>

@@ -67,13 +67,6 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
       [selectedBikes]
     );
 
-    useEffect(() => {
-      const selectedIds = selectedBikes.filter(
-        (bike) => bike?._id !== initialBikeId
-      );
-      console.log(selectedIds);
-    }, [selectedBikes]);
-
     return (
       <>
         <Table
@@ -90,8 +83,9 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = React.memo(
                 color="danger"
                 onClick={() => removeBikeFromComparison(bike._id)}
                 className="mx-2"
+                disabled={bike?._id === initialBikeId}
               >
-                Remove
+                Remove {bike?.name}
               </Button>
             </Col>
           ))}
