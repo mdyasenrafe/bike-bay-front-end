@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Text } from "../../../components/atoms";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { Modal } from "../../Modal";
 
 interface AuthModalProps {
@@ -13,6 +13,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   closeAuthModal,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Modal
@@ -30,14 +31,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <Button
             className="text-white w-[48%]"
             color="primary"
-            onClick={() => navigate("/signin")}
+            onClick={() =>
+              navigate("/signin", {
+                state: { from: location },
+              })
+            }
           >
             Login
           </Button>
           <Button
             className="text-white w-[48%]"
             color="secondary"
-            onClick={() => navigate("/signup")}
+            onClick={() =>
+              navigate("/signup", {
+                state: { from: location },
+              })
+            }
           >
             Register
           </Button>

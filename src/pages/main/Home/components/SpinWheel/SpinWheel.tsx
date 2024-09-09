@@ -30,6 +30,7 @@ export const SpinWheel: React.FC = () => {
     if (isSpinning) return;
     if (!token) {
       openAuthModal();
+      return;
     }
     setIsSpinning(true);
 
@@ -39,7 +40,9 @@ export const SpinWheel: React.FC = () => {
     setTimeout(() => {
       setSelectedCoupon(chosenCoupon);
       openModal();
-      toast.success(`Congratulations! You've won the coupon: ${chosenCoupon}`);
+      toast.success(
+        `Congratulations! You've won the coupon: ${chosenCoupon.code}`
+      );
       localStorage.setItem("savedCoupon", chosenCoupon.code);
       setIsSpinning(false);
     }, 3000);
@@ -66,7 +69,7 @@ export const SpinWheel: React.FC = () => {
         </div>
       </Container>
       <Container>
-        <Row align="middle">
+        <Row align="middle" justify={"center"}>
           <Col md={12}>
             <Fade cascade duration={2500} triggerOnce={true}>
               <div>
@@ -80,7 +83,7 @@ export const SpinWheel: React.FC = () => {
           </Col>
           <Col md={12}>
             <Fade cascade duration={2500} triggerOnce={true}>
-              <div className="relative w-[300px] h-[300px] rounded-full shadow-lg spin-wheel">
+              <div className="relative w-[300px] h-[300px] rounded-full shadow-lg spin-wheel justify-center">
                 <div
                   className={`absolute w-full h-full transform transition-all duration-1000 ease-out ${
                     isSpinning ? "spinning" : ""
