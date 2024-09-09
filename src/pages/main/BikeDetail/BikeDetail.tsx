@@ -68,23 +68,23 @@ export const BikeDetail = () => {
               </Col>
               <Col xs={24} md={12}>
                 <div className="mb-4 pt-8">
-                  <Text variant={"H1"} className="mb-2">
+                  <Text variant={"H1"} className="mb-2 dark:!text-black">
                     {productData?.data.name}
                   </Text>
 
                   <Text
                     variant={"H2"}
-                    className="mb-2"
+                    className="mb-2 "
                     style={{ color: Colors.primary }}
                   >
                     ৳{productData?.data.pricePerHour}
                   </Text>
                 </div>
                 <div>
-                  <Text variant={"P3"}>
+                  <Text variant={"P3"} className="dark:!text-black">
                     <strong>Model:</strong> {productData?.data.model}
                   </Text>
-                  <Text variant={"P3"}>
+                  <Text variant={"P3"} className="dark:!text-black">
                     <strong>Brand:</strong> {productData?.data.brand}
                   </Text>
                 </div>
@@ -120,8 +120,10 @@ export const BikeDetail = () => {
             </Row>
 
             <div className="bg-white border border-[#E1E1E1] rounded-lg p-4 mt-8">
-              <Text variant={"H4"}>Description</Text>
-              <Text variant={"P4"} className="mt-2">
+              <Text variant={"H4"} className="dark:!text-black">
+                Description
+              </Text>
+              <Text variant={"P4"} className="mt-2 dark:!text-black">
                 {productData?.data.description}
               </Text>
             </div>
