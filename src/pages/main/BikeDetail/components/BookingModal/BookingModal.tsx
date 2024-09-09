@@ -57,9 +57,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         const res = await createRental(rentalData).unwrap();
         setClientSecret(res.clientSecret);
         return res.clientSecret;
-      } catch (err) {
+      } catch (err: any) {
         console.error("Create Payment Intent Error:", err);
-        toast.error("Failed to create rental or payment intent.");
+        toast.error(err?.data?.message);
         return null;
       }
     },

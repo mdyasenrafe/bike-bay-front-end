@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
 import { z } from "zod";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
-// Extend Day.js with the plugin
+// Extend Day.js with the plugins
 dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 export const rentalCostSchema = (startTime: string) =>
   z
@@ -26,14 +28,23 @@ export const rentalCostSchema = (startTime: string) =>
         )
       ),
 
-      endTime: z.preprocess((arg) => {
-        if (typeof arg === "string" || arg instanceof Date) {
-          return new Date(arg);
-        } else if (arg && dayjs.isDayjs(arg)) {
-          return arg.toDate();
-        }
-        return undefined;
-      }, z.date()),
+      endTime: z.preprocess(
+        (arg) => {
+          if (typeof arg === "string" || arg instanceof Date) {
+            return new Date(arg);
+          } else if (arg && dayjs.isDayjs(arg)) {
+            return arg.toDate();
+          }
+          return undefined;
+        },
+        z.date().refine(
+          (time) => {
+            // Ensure endTime is not in the future
+            return dayjs(time).isSameOrBefore(dayjs(), "minute");
+          },
+          { message: "End time must be in the past or the current time" }
+        )
+      ),
     })
     .refine(
       (data) => {

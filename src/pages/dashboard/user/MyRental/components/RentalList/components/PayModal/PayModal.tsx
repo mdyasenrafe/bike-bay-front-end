@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Divider } from "antd";
 import { toast } from "sonner";
 import {
@@ -35,6 +35,7 @@ export const PayModal: React.FC<PayModalProps> = ({
 
   const advancePaymentAmount = 100;
 
+  // Function to validate and apply the coupon
   const handleApplyCoupon = useCallback(async () => {
     try {
       const response = await validateCoupon({
@@ -54,6 +55,23 @@ export const PayModal: React.FC<PayModalProps> = ({
     }
   }, [rental.totalCost, validateCoupon, couponCode]);
 
+  // Automatically set the coupon code from localStorage when the modal opens
+  useEffect(() => {
+    const savedCoupon = localStorage.getItem("savedCoupon");
+    if (savedCoupon) {
+      setCouponCode(savedCoupon);
+    }
+  }, [isModalOpen]);
+
+  // Automatically apply coupon when the modal opens if there's a coupon code
+  useEffect(() => {
+    const savedCoupon = localStorage.getItem("savedCoupon");
+    if (couponCode && savedCoupon) {
+      handleApplyCoupon();
+    }
+  }, [couponCode, handleApplyCoupon]);
+
+  // Function to handle payment
   const handlePayment = useCallback(async () => {
     try {
       const res = await completeRental({

@@ -47,12 +47,10 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
           .set("minute", dayjs(values.endTime).minute())
           .utc()
           .toISOString();
-
         const response = await calculateRentalCost({
           rentalId: selectedRental._id as string,
           endTime: combinedDateTime,
         }).unwrap();
-
         const totalCost = response?.data?.totalCost as number;
         console.log(totalCost);
         setTotalCost(totalCost);
@@ -68,7 +66,10 @@ export const RentalCostModal: React.FC<RentalCostModalProps> = ({
 
   const disabledDate = useCallback(
     (current: dayjs.Dayjs) => {
-      return current && current.isBefore(dayjs(startTime), "day");
+      const isBeforeStart =
+        current && current.isBefore(dayjs(startTime), "day");
+      const isAfterToday = current && current.isAfter(dayjs(), "day");
+      return isBeforeStart || isAfterToday;
     },
     [startTime]
   );

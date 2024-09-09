@@ -32,14 +32,14 @@ export const BikeDetail = () => {
     isModalOpen: isAuthModalOpen,
     openModal: openAuthModal,
     closeModal: closeAuthModal,
-  } = useModal(); // For auth modal
+  } = useModal();
 
   const isAvailable = productData?.data?.isAvailable;
   const token = useAppSelector(useCurrentToken); // Token to check if user is logged in
 
   const handleBookNow = () => {
     if (!token) {
-      openAuthModal(); // Open the auth modal if the user is not logged in
+      openAuthModal();
     } else {
       openModal(); // Open the booking modal if the user is logged in
     }

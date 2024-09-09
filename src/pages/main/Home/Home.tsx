@@ -4,6 +4,7 @@ import {
   Contact,
   FeatureProduct,
   Hero,
+  SpinWheel,
   Testimonials,
   WhyChooseUs,
 } from "./components";
@@ -16,6 +17,7 @@ export const Home = () => {
       <Testimonials />
       <WhyChooseUs />
       <Contact />
+      <SpinWheel />
     </MainLayout>
   );
 };
