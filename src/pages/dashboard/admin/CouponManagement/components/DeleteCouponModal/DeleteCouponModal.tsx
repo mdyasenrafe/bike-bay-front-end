@@ -2,6 +2,8 @@ import React from "react";
 import { Modal, Button } from "antd";
 import { TCoupon } from "../../../../../../redux/features/coupon/types";
 import { Text } from "../../../../../../components/atoms";
+import { toast } from "sonner";
+import { useDeleteCouponMutation } from "../../../../../../redux/features/coupon";
 
 type DeleteCouponModalProps = {
   isModalOpen: boolean;
@@ -14,8 +16,15 @@ export const DeleteCouponModal: React.FC<DeleteCouponModalProps> = ({
   closeModal,
   coupon,
 }) => {
+  const [deleteCoupon, { isLoading }] = useDeleteCouponMutation();
   const handleDelete = async () => {
-    closeModal();
+    try {
+      await deleteCoupon(coupon?._id as string).unwrap();
+      closeModal();
+      toast.success("Coupon deleted successfully");
+    } catch (error: any) {
+      toast.error(error?.data?.message);
+    }
   };
 
   return (
@@ -33,7 +42,13 @@ export const DeleteCouponModal: React.FC<DeleteCouponModalProps> = ({
         <Button className="mr-2" onClick={closeModal}>
           Cancel
         </Button>
-        <Button type="primary" danger onClick={handleDelete}>
+        <Button
+          type="primary"
+          danger
+          onClick={handleDelete}
+          disabled={isLoading}
+          loading={isLoading}
+        >
           Delete
         </Button>
       </div>

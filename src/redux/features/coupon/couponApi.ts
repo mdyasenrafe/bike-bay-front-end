@@ -40,6 +40,12 @@ export const couponApi = baseApi.injectEndpoints({
       },
       providesTags: ["Coupons"],
     }),
+    deleteCoupon: builder.mutation<TResponse<TCoupon>, string>({
+      query: (args) => {
+        return { url: `/coupons/${args}`, method: "DELETE" };
+      },
+      invalidatesTags: ["Coupons"],
+    }),
   }),
 });
 
@@ -47,4 +53,5 @@ export const {
   useCreateCouponMutation,
   useValidateCouponMutation,
   useGetCouponsQuery,
+  useDeleteCouponMutation,
 } = couponApi;

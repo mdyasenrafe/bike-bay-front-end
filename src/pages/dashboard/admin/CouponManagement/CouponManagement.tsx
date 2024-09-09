@@ -78,7 +78,7 @@ export const CouponManagement: React.FC = () => {
             color: status ? Colors.green : Colors.red,
           }}
         >
-          {status ? "Active" : "Inactive"}
+          {status ? "Active" : "Deleted"}
         </span>
       ),
     },
