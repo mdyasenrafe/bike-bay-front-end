@@ -16,17 +16,25 @@ import productSlice from "./features/product/productSlice";
 import themeSlice from "./features/theme/themeSlice";
 import rentalSlice from "./features/rental/rentalSlice";
 
-const persistConfig = {
+// Persist config for auth slice
+const authPersistConfig = {
   key: "auth",
   storage,
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authSlice);
+// Persist config for theme slice
+const themePersistConfig = {
+  key: "themeMode",
+  storage,
+};
+
+const persistedAuthReducer = persistReducer(authPersistConfig, authSlice);
+const persistedThemeReducer = persistReducer(themePersistConfig, themeSlice);
 
 export const store = configureStore({
   reducer: {
-    themeMode: themeSlice,
     auth: persistedAuthReducer,
+    themeMode: persistedThemeReducer, // Persisted theme slice
     product: productSlice,
     rental: rentalSlice,
     [baseApi.reducerPath]: baseApi.reducer,
@@ -41,4 +49,5 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
 export const persistor = persistStore(store);
